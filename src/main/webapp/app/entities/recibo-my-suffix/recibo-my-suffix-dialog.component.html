@@ -1,0 +1,86 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myReciboLabel">Create or edit a Recibo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!recibo.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="recibo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_codigo">Codigo</label>
+            <input type="text" class="form-control" name="codigo" id="field_codigo"
+                [(ngModel)]="recibo.codigo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_numero">Numero</label>
+            <input type="number" class="form-control" name="numero" id="field_numero"
+                [(ngModel)]="recibo.numero" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_estado">Estado</label>
+            <input type="text" class="form-control" name="estado" id="field_estado"
+                [(ngModel)]="recibo.estado" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_pagoanterior">Pagoanterior</label>
+            <input type="number" class="form-control" name="pagoanterior" id="field_pagoanterior"
+                [(ngModel)]="recibo.pagoanterior" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_pagoactual">Pagoactual</label>
+            <input type="number" class="form-control" name="pagoactual" id="field_pagoactual"
+                [(ngModel)]="recibo.pagoactual" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_total">Total</label>
+            <input type="number" class="form-control" name="total" id="field_total"
+                [(ngModel)]="recibo.total" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fecha">Fecha</label>
+            <div class="d-flex">
+                <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" [(ngModel)]="recibo.fecha"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_anio">Anio</label>
+            <input type="number" class="form-control" name="anio" id="field_anio"
+                [(ngModel)]="recibo.anio" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mes">Mes</label>
+            <input type="number" class="form-control" name="mes" id="field_mes"
+                [(ngModel)]="recibo.mes" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_usuario">Usuario</label>
+            <select class="form-control" id="field_usuario" name="usuario" [(ngModel)]="recibo.usuarioId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="usuarioOption.id" *ngFor="let usuarioOption of usuarios; trackBy: trackUsuarioById">{{usuarioOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lecturaMedidor">Lectura Medidor</label>
+            <select class="form-control" id="field_lecturaMedidor" name="lecturaMedidor" [(ngModel)]="recibo.lecturaMedidorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="lecturaMedidorOption.id" *ngFor="let lecturaMedidorOption of lecturamedidors; trackBy: trackLecturaMedidorById">{{lecturaMedidorOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

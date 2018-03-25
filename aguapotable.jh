@@ -1,0 +1,116 @@
+entity Usuario {
+	codigo String,
+    estado String,
+    documento String,
+    numero String,
+    nombres String,
+    apellidos String,
+    direccion String,
+    sexo String,
+    telefono String
+}
+
+entity Servicio {
+	codigo String,
+    nombre String,
+    norma String,
+    tipo Integer
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Clasificacion {
+	codigo String,
+	nombre String,
+	codigo String,
+	estado Boolean
+}
+
+entity EscalasDelMedidor {
+	codigo String,
+    inicio Integer,
+    fin Integer
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Costo {
+	codigo String,
+	servicio String,
+    cuota BigDecimal
+}
+
+/**
+ * The Employee entity.
+ */
+entity Sector {
+	/**
+	* The firstname attribute.
+	*/
+	codigo String,
+	nombre String,
+	descripcion String,
+}
+
+entity CostoMedidor {
+	codigo String,
+	fecha Instant,
+	estado Boolean
+}
+
+entity Medidor {
+	codigo String,
+    numero_medidor Integer,
+	fecha_obtuvo Instant,
+	fecha Instant
+}
+
+entity LecturaMedidor {
+	codigo String,
+    lectura_inicial Integer,
+	lectura_final Instant,
+    estado String,
+	fecha Instant,
+    anio Integer,
+    mes Integer
+}
+
+entity Recibo {
+	codigo String,
+    numero Integer,
+    estado String,
+    pago_anterior BigDecimal,
+    pago_actual BigDecimal,
+    total BigDecimal,
+	fecha Instant,
+    anio Integer,
+    mes Integer
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Usuario{usuario} to Recibo,
+	Usuario{usuario} to Medidor,
+	Servicio{servicio} to Costo,
+    Costo{costo} to CostoMedidor,
+    Sector{sector} to Costo,
+    Sector{sector} to Medidor,
+    Clasificacion{clasificacion} to Costo,
+    Clasificacion{clasificacion} to EscalasDelMedidor,
+    Clasificacion{clasificacion} to Medidor,
+    Medidor{medidor} to CostoMedidor,
+    Medidor{medidor} to LecturaMedidor,
+    LecturaMedidor{lectura_medidor} to Recibo
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix

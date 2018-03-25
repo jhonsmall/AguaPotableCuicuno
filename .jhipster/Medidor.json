@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "usuario",
+            "otherEntityName": "usuario",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "clasificacion",
+            "otherEntityName": "clasificacion",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "sector",
+            "otherEntityName": "sector",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "medidor",
+            "otherEntityName": "costoMedidor",
+            "otherEntityRelationshipName": "medidor"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "medidor",
+            "otherEntityName": "lecturaMedidor",
+            "otherEntityRelationshipName": "medidor"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeromedidor",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fechaobtuvo",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "fecha",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180325005158",
+    "entityTableName": "medidor",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mySuffix"
+}

@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "clasificacion",
+            "otherEntityName": "costo",
+            "otherEntityRelationshipName": "clasificacion"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "clasificacion",
+            "otherEntityName": "escalasDelMedidor",
+            "otherEntityRelationshipName": "clasificacion"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "clasificacion",
+            "otherEntityName": "medidor",
+            "otherEntityRelationshipName": "clasificacion"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estado",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180325005153",
+    "javadoc": "not an ignored comment",
+    "entityTableName": "clasificacion",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mySuffix"
+}

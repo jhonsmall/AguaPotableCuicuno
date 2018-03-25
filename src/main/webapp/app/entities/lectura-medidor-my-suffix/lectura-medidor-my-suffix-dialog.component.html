@@ -1,0 +1,71 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLecturaMedidorLabel">Create or edit a Lectura Medidor</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!lecturaMedidor.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="lecturaMedidor.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_codigo">Codigo</label>
+            <input type="text" class="form-control" name="codigo" id="field_codigo"
+                [(ngModel)]="lecturaMedidor.codigo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lecturainicial">Lecturainicial</label>
+            <input type="number" class="form-control" name="lecturainicial" id="field_lecturainicial"
+                [(ngModel)]="lecturaMedidor.lecturainicial" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lecturafinal">Lecturafinal</label>
+            <div class="d-flex">
+                <input id="field_lecturafinal" type="datetime-local" class="form-control" name="lecturafinal" [(ngModel)]="lecturaMedidor.lecturafinal"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_estado">Estado</label>
+            <input type="text" class="form-control" name="estado" id="field_estado"
+                [(ngModel)]="lecturaMedidor.estado" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fecha">Fecha</label>
+            <div class="d-flex">
+                <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" [(ngModel)]="lecturaMedidor.fecha"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_anio">Anio</label>
+            <input type="number" class="form-control" name="anio" id="field_anio"
+                [(ngModel)]="lecturaMedidor.anio" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mes">Mes</label>
+            <input type="number" class="form-control" name="mes" id="field_mes"
+                [(ngModel)]="lecturaMedidor.mes" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_medidor">Medidor</label>
+            <select class="form-control" id="field_medidor" name="medidor" [(ngModel)]="lecturaMedidor.medidorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="medidorOption.id" *ngFor="let medidorOption of medidors; trackBy: trackMedidorById">{{medidorOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

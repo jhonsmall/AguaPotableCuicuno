@@ -45,6 +45,23 @@ public class CacheConfiguration {
             cm.createCache(devs.team.net.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(devs.team.net.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(devs.team.net.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Usuario.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Usuario.class.getName() + ".usuarios", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Servicio.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Servicio.class.getName() + ".servicios", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Clasificacion.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Clasificacion.class.getName() + ".clasificacions", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.EscalasDelMedidor.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Costo.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Costo.class.getName() + ".costos", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Sector.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Sector.class.getName() + ".sectors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.CostoMedidor.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Medidor.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Medidor.class.getName() + ".medidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.LecturaMedidor.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.LecturaMedidor.class.getName() + ".lecturamedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Recibo.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
