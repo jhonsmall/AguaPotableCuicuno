@@ -32,10 +32,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "servicio",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "cuota",
             "fieldType": "BigDecimal"
         }

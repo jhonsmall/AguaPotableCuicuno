@@ -68,7 +68,7 @@ class CostoGatlingTest extends Simulation {
             .exec(http("Create new costo")
             .post("/api/costos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "servicio":"SAMPLE_TEXT", "cuota":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "cuota":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_costo_url"))).exitHereIfFailed
             .pause(10)

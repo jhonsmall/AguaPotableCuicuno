@@ -46,9 +46,6 @@ public class CostoResourceIntTest {
     private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
     private static final String UPDATED_CODIGO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SERVICIO = "AAAAAAAAAA";
-    private static final String UPDATED_SERVICIO = "BBBBBBBBBB";
-
     private static final BigDecimal DEFAULT_CUOTA = new BigDecimal(1);
     private static final BigDecimal UPDATED_CUOTA = new BigDecimal(2);
 
@@ -100,7 +97,6 @@ public class CostoResourceIntTest {
     public static Costo createEntity(EntityManager em) {
         Costo costo = new Costo()
             .codigo(DEFAULT_CODIGO)
-            .servicio(DEFAULT_SERVICIO)
             .cuota(DEFAULT_CUOTA);
         return costo;
     }
@@ -128,7 +124,6 @@ public class CostoResourceIntTest {
         assertThat(costoList).hasSize(databaseSizeBeforeCreate + 1);
         Costo testCosto = costoList.get(costoList.size() - 1);
         assertThat(testCosto.getCodigo()).isEqualTo(DEFAULT_CODIGO);
-        assertThat(testCosto.getServicio()).isEqualTo(DEFAULT_SERVICIO);
         assertThat(testCosto.getCuota()).isEqualTo(DEFAULT_CUOTA);
 
         // Validate the Costo in Elasticsearch
@@ -168,7 +163,6 @@ public class CostoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costo.getId().intValue())))
             .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
-            .andExpect(jsonPath("$.[*].servicio").value(hasItem(DEFAULT_SERVICIO.toString())))
             .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())));
     }
 
@@ -184,7 +178,6 @@ public class CostoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(costo.getId().intValue()))
             .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
-            .andExpect(jsonPath("$.servicio").value(DEFAULT_SERVICIO.toString()))
             .andExpect(jsonPath("$.cuota").value(DEFAULT_CUOTA.intValue()));
     }
 
@@ -210,7 +203,6 @@ public class CostoResourceIntTest {
         em.detach(updatedCosto);
         updatedCosto
             .codigo(UPDATED_CODIGO)
-            .servicio(UPDATED_SERVICIO)
             .cuota(UPDATED_CUOTA);
         CostoDTO costoDTO = costoMapper.toDto(updatedCosto);
 
@@ -224,7 +216,6 @@ public class CostoResourceIntTest {
         assertThat(costoList).hasSize(databaseSizeBeforeUpdate);
         Costo testCosto = costoList.get(costoList.size() - 1);
         assertThat(testCosto.getCodigo()).isEqualTo(UPDATED_CODIGO);
-        assertThat(testCosto.getServicio()).isEqualTo(UPDATED_SERVICIO);
         assertThat(testCosto.getCuota()).isEqualTo(UPDATED_CUOTA);
 
         // Validate the Costo in Elasticsearch
@@ -286,7 +277,6 @@ public class CostoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costo.getId().intValue())))
             .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
-            .andExpect(jsonPath("$.[*].servicio").value(hasItem(DEFAULT_SERVICIO.toString())))
             .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())));
     }
 

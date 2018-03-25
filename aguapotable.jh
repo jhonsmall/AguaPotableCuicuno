@@ -22,7 +22,6 @@ entity Servicio {
 entity Clasificacion {
 	codigo String,
 	nombre String,
-	codigo String,
 	estado Boolean
 }
 
@@ -38,7 +37,6 @@ entity EscalasDelMedidor {
  */
 entity Costo {
 	codigo String,
-	servicio String,
     cuota BigDecimal
 }
 
