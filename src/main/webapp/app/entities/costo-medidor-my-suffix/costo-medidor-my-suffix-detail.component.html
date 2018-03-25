@@ -16,16 +16,16 @@
         <dd>
             <span>{{costoMedidor.estado}}</span>
         </dd>
-        <dt><span>Costos Medidor</span></dt>
+        <dt><span>Costo</span></dt>
         <dd>
-            <div *ngIf="costoMedidor.costosMedidorId">
-                <a [routerLink]="['/costo-my-suffix', costoMedidor.costosMedidorId]">{{costoMedidor.costosMedidorId}}</a>
+            <div *ngIf="costoMedidor.costoId">
+                <a [routerLink]="['/costo-my-suffix', costoMedidor.costoId]">{{costoMedidor.costoId}}</a>
             </div>
         </dd>
-        <dt><span>Costos Medidores</span></dt>
+        <dt><span>Medidor</span></dt>
         <dd>
-            <div *ngIf="costoMedidor.costosMedidoresId">
-                <a [routerLink]="['/medidor-my-suffix', costoMedidor.costosMedidoresId]">{{costoMedidor.costosMedidoresId}}</a>
+            <div *ngIf="costoMedidor.medidorId">
+                <a [routerLink]="['/medidor-my-suffix', costoMedidor.medidorId]">{{costoMedidor.medidorId}}</a>
             </div>
         </dd>
     </dl>

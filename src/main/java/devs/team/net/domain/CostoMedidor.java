@@ -36,10 +36,10 @@ public class CostoMedidor implements Serializable {
     private Boolean estado;
 
     @ManyToOne
-    private Costo costosMedidor;
+    private Costo costo;
 
     @ManyToOne
-    private Medidor costosMedidores;
+    private Medidor medidor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -89,30 +89,30 @@ public class CostoMedidor implements Serializable {
         this.estado = estado;
     }
 
-    public Costo getCostosMedidor() {
-        return costosMedidor;
+    public Costo getCosto() {
+        return costo;
     }
 
-    public CostoMedidor costosMedidor(Costo costo) {
-        this.costosMedidor = costo;
+    public CostoMedidor costo(Costo costo) {
+        this.costo = costo;
         return this;
     }
 
-    public void setCostosMedidor(Costo costo) {
-        this.costosMedidor = costo;
+    public void setCosto(Costo costo) {
+        this.costo = costo;
     }
 
-    public Medidor getCostosMedidores() {
-        return costosMedidores;
+    public Medidor getMedidor() {
+        return medidor;
     }
 
-    public CostoMedidor costosMedidores(Medidor medidor) {
-        this.costosMedidores = medidor;
+    public CostoMedidor medidor(Medidor medidor) {
+        this.medidor = medidor;
         return this;
     }
 
-    public void setCostosMedidores(Medidor medidor) {
-        this.costosMedidores = medidor;
+    public void setMedidor(Medidor medidor) {
+        this.medidor = medidor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

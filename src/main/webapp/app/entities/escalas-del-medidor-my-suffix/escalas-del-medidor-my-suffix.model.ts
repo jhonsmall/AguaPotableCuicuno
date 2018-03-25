@@ -6,7 +6,7 @@ export class EscalasDelMedidorMySuffix implements BaseEntity {
         public codigo?: string,
         public inicio?: number,
         public fin?: number,
-        public escalasDelMedidorsId?: number,
+        public clasificacionId?: number,
     ) {
     }
 }

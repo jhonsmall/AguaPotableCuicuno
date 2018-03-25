@@ -19,7 +19,7 @@ public class EscalasDelMedidorDTO implements Serializable {
 
     private Integer fin;
 
-    private Long escalasDelMedidorsId;
+    private Long clasificacionId;
 
     public Long getId() {
         return id;
@@ -53,12 +53,12 @@ public class EscalasDelMedidorDTO implements Serializable {
         this.fin = fin;
     }
 
-    public Long getEscalasDelMedidorsId() {
-        return escalasDelMedidorsId;
+    public Long getClasificacionId() {
+        return clasificacionId;
     }
 
-    public void setEscalasDelMedidorsId(Long clasificacionId) {
-        this.escalasDelMedidorsId = clasificacionId;
+    public void setClasificacionId(Long clasificacionId) {
+        this.clasificacionId = clasificacionId;
     }
 
     @Override

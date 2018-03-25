@@ -8,21 +8,21 @@
     -->
     <changeSet id="20180325005155-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="costos_id"
+        <addForeignKeyConstraint baseColumnNames="servicio_id"
                                  baseTableName="costo"
-                                 constraintName="fk_costo_costos_id"
+                                 constraintName="fk_costo_servicio_id"
                                  referencedColumnNames="id"
                                  referencedTableName="servicio"/>
 
-        <addForeignKeyConstraint baseColumnNames="costos_id"
+        <addForeignKeyConstraint baseColumnNames="sector_id"
                                  baseTableName="costo"
-                                 constraintName="fk_costo_costos_id"
+                                 constraintName="fk_costo_sector_id"
                                  referencedColumnNames="id"
                                  referencedTableName="sector"/>
 
-        <addForeignKeyConstraint baseColumnNames="costos_id"
+        <addForeignKeyConstraint baseColumnNames="clasificacion_id"
                                  baseTableName="costo"
-                                 constraintName="fk_costo_costos_id"
+                                 constraintName="fk_costo_clasificacion_id"
                                  referencedColumnNames="id"
                                  referencedTableName="clasificacion"/>
 

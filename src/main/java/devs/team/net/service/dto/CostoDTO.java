@@ -20,11 +20,11 @@ public class CostoDTO implements Serializable {
 
     private BigDecimal cuota;
 
-    private Long costosId;
+    private Long servicioId;
 
-    private Long costosId;
+    private Long sectorId;
 
-    private Long costosId;
+    private Long clasificacionId;
 
     public Long getId() {
         return id;
@@ -58,28 +58,28 @@ public class CostoDTO implements Serializable {
         this.cuota = cuota;
     }
 
-    public Long getCostosId() {
-        return costosId;
+    public Long getServicioId() {
+        return servicioId;
     }
 
-    public void setCostosId(Long servicioId) {
-        this.costosId = servicioId;
+    public void setServicioId(Long servicioId) {
+        this.servicioId = servicioId;
     }
 
-    public Long getCostosId() {
-        return costosId;
+    public Long getSectorId() {
+        return sectorId;
     }
 
-    public void setCostosId(Long sectorId) {
-        this.costosId = sectorId;
+    public void setSectorId(Long sectorId) {
+        this.sectorId = sectorId;
     }
 
-    public Long getCostosId() {
-        return costosId;
+    public Long getClasificacionId() {
+        return clasificacionId;
     }
 
-    public void setCostosId(Long clasificacionId) {
-        this.costosId = clasificacionId;
+    public void setClasificacionId(Long clasificacionId) {
+        this.clasificacionId = clasificacionId;
     }
 
     @Override

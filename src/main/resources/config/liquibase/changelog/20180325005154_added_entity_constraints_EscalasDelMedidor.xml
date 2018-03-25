@@ -8,9 +8,9 @@
     -->
     <changeSet id="20180325005154-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="escalas_del_medidors_id"
+        <addForeignKeyConstraint baseColumnNames="clasificacion_id"
                                  baseTableName="escalas_del_medidor"
-                                 constraintName="fk_escalas_del_medidor_escalas_del_medidors_id"
+                                 constraintName="fk_escalas_del_medidor_clasificacion_id"
                                  referencedColumnNames="id"
                                  referencedTableName="clasificacion"/>
 

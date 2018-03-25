@@ -16,10 +16,10 @@
         <dd>
             <span>{{escalasDelMedidor.fin}}</span>
         </dd>
-        <dt><span>Escalas Del Medidors</span></dt>
+        <dt><span>Clasificacion</span></dt>
         <dd>
-            <div *ngIf="escalasDelMedidor.escalasDelMedidorsId">
-                <a [routerLink]="['/clasificacion-my-suffix', escalasDelMedidor.escalasDelMedidorsId]">{{escalasDelMedidor.escalasDelMedidorsId}}</a>
+            <div *ngIf="escalasDelMedidor.clasificacionId">
+                <a [routerLink]="['/clasificacion-my-suffix', escalasDelMedidor.clasificacionId]">{{escalasDelMedidor.clasificacionId}}</a>
             </div>
         </dd>
     </dl>

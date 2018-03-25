@@ -5,29 +5,29 @@
             "relationshipType": "one-to-many",
             "relationshipName": "medidor",
             "otherEntityName": "costoMedidor",
-            "otherEntityRelationshipName": "costosMedidores"
+            "otherEntityRelationshipName": "medidor"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "medidor",
             "otherEntityName": "lecturaMedidor",
-            "otherEntityRelationshipName": "lecturaMedidores"
+            "otherEntityRelationshipName": "medidor"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "medidores",
+            "relationshipName": "usuario",
             "otherEntityName": "usuario",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "medidores",
+            "relationshipName": "sector",
             "otherEntityName": "sector",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "medidores",
+            "relationshipName": "clasificacion",
             "otherEntityName": "clasificacion",
             "otherEntityField": "id"
         }

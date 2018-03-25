@@ -31,15 +31,15 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_costosMedidor">Costos Medidor</label>
-            <select class="form-control" id="field_costosMedidor" name="costosMedidor" [(ngModel)]="costoMedidor.costosMedidorId" >
+            <label class="form-control-label" for="field_costo">Costo</label>
+            <select class="form-control" id="field_costo" name="costo" [(ngModel)]="costoMedidor.costoId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="costoOption.id" *ngFor="let costoOption of costos; trackBy: trackCostoById">{{costoOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_costosMedidores">Costos Medidores</label>
-            <select class="form-control" id="field_costosMedidores" name="costosMedidores" [(ngModel)]="costoMedidor.costosMedidoresId" >
+            <label class="form-control-label" for="field_medidor">Medidor</label>
+            <select class="form-control" id="field_medidor" name="medidor" [(ngModel)]="costoMedidor.medidorId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="medidorOption.id" *ngFor="let medidorOption of medidors; trackBy: trackMedidorById">{{medidorOption.id}}</option>
             </select>

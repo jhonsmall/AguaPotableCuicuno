@@ -3,13 +3,13 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "recibos",
+            "relationshipName": "usuario",
             "otherEntityName": "usuario",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "recibos",
+            "relationshipName": "lecturamedidor",
             "otherEntityName": "lecturaMedidor",
             "otherEntityField": "id"
         }

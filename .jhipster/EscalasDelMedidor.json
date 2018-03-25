@@ -3,7 +3,7 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "escalasDelMedidors",
+            "relationshipName": "clasificacion",
             "otherEntityName": "clasificacion",
             "otherEntityField": "id"
         }

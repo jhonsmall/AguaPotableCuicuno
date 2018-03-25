@@ -11,10 +11,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {ClasificacionMapper.class})
 public interface EscalasDelMedidorMapper extends EntityMapper<EscalasDelMedidorDTO, EscalasDelMedidor> {
 
-    @Mapping(source = "escalasDelMedidors.id", target = "escalasDelMedidorsId")
+    @Mapping(source = "clasificacion.id", target = "clasificacionId")
     EscalasDelMedidorDTO toDto(EscalasDelMedidor escalasDelMedidor);
 
-    @Mapping(source = "escalasDelMedidorsId", target = "escalasDelMedidors")
+    @Mapping(source = "clasificacionId", target = "clasificacion")
     EscalasDelMedidor toEntity(EscalasDelMedidorDTO escalasDelMedidorDTO);
 
     default EscalasDelMedidor fromId(Long id) {

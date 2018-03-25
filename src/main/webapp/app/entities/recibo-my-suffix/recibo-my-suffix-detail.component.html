@@ -40,16 +40,16 @@
         <dd>
             <span>{{recibo.mes}}</span>
         </dd>
-        <dt><span>Recibos</span></dt>
+        <dt><span>Usuario</span></dt>
         <dd>
-            <div *ngIf="recibo.recibosId">
-                <a [routerLink]="['/usuario-my-suffix', recibo.recibosId]">{{recibo.recibosId}}</a>
+            <div *ngIf="recibo.usuarioId">
+                <a [routerLink]="['/usuario-my-suffix', recibo.usuarioId]">{{recibo.usuarioId}}</a>
             </div>
         </dd>
-        <dt><span>Recibos</span></dt>
+        <dt><span>Lecturamedidor</span></dt>
         <dd>
-            <div *ngIf="recibo.recibosId">
-                <a [routerLink]="['/lectura-medidor-my-suffix', recibo.recibosId]">{{recibo.recibosId}}</a>
+            <div *ngIf="recibo.lecturamedidorId">
+                <a [routerLink]="['/lectura-medidor-my-suffix', recibo.lecturamedidorId]">{{recibo.lecturamedidorId}}</a>
             </div>
         </dd>
     </dl>

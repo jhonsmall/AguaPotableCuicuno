@@ -8,21 +8,21 @@
     -->
     <changeSet id="20180325005158-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="medidores_id"
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
                                  baseTableName="medidor"
-                                 constraintName="fk_medidor_medidores_id"
+                                 constraintName="fk_medidor_usuario_id"
                                  referencedColumnNames="id"
                                  referencedTableName="usuario"/>
 
-        <addForeignKeyConstraint baseColumnNames="medidores_id"
+        <addForeignKeyConstraint baseColumnNames="sector_id"
                                  baseTableName="medidor"
-                                 constraintName="fk_medidor_medidores_id"
+                                 constraintName="fk_medidor_sector_id"
                                  referencedColumnNames="id"
                                  referencedTableName="sector"/>
 
-        <addForeignKeyConstraint baseColumnNames="medidores_id"
+        <addForeignKeyConstraint baseColumnNames="clasificacion_id"
                                  baseTableName="medidor"
-                                 constraintName="fk_medidor_medidores_id"
+                                 constraintName="fk_medidor_clasificacion_id"
                                  referencedColumnNames="id"
                                  referencedTableName="clasificacion"/>
 

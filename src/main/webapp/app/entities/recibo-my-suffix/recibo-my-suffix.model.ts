@@ -12,7 +12,8 @@ export class ReciboMySuffix implements BaseEntity {
         public fecha?: any,
         public anio?: number,
         public mes?: number,
-        public recibosId?: number,
+        public usuarioId?: number,
+        public lecturamedidorId?: number,
     ) {
     }
 }

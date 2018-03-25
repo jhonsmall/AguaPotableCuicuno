@@ -11,15 +11,15 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {ServicioMapper.class, SectorMapper.class, ClasificacionMapper.class})
 public interface CostoMapper extends EntityMapper<CostoDTO, Costo> {
 
-    @Mapping(source = "costos.id", target = "costosId")
-    @Mapping(source = "costos.id", target = "costosId")
-    @Mapping(source = "costos.id", target = "costosId")
+    @Mapping(source = "servicio.id", target = "servicioId")
+    @Mapping(source = "sector.id", target = "sectorId")
+    @Mapping(source = "clasificacion.id", target = "clasificacionId")
     CostoDTO toDto(Costo costo);
 
     @Mapping(target = "costos", ignore = true)
-    @Mapping(source = "costosId", target = "costos")
-    @Mapping(source = "costosId", target = "costos")
-    @Mapping(source = "costosId", target = "costos")
+    @Mapping(source = "servicioId", target = "servicio")
+    @Mapping(source = "sectorId", target = "sector")
+    @Mapping(source = "clasificacionId", target = "clasificacion")
     Costo toEntity(CostoDTO costoDTO);
 
     default Costo fromId(Long id) {
