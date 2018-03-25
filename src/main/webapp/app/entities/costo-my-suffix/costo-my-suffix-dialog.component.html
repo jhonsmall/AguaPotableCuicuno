@@ -29,24 +29,24 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_servicio">Servicio</label>
-            <select class="form-control" id="field_servicio" name="servicio" [(ngModel)]="costo.servicioId" >
+            <label class="form-control-label" for="field_costos">Costos</label>
+            <select class="form-control" id="field_costos" name="costos" [(ngModel)]="costo.costosId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="servicioOption.id" *ngFor="let servicioOption of servicios; trackBy: trackServicioById">{{servicioOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_clasificacion">Clasificacion</label>
-            <select class="form-control" id="field_clasificacion" name="clasificacion" [(ngModel)]="costo.clasificacionId" >
+            <label class="form-control-label" for="field_costos">Costos</label>
+            <select class="form-control" id="field_costos" name="costos" [(ngModel)]="costo.costosId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="clasificacionOption.id" *ngFor="let clasificacionOption of clasificacions; trackBy: trackClasificacionById">{{clasificacionOption.id}}</option>
+                <option [ngValue]="sectorOption.id" *ngFor="let sectorOption of sectors; trackBy: trackSectorById">{{sectorOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_sector">Sector</label>
-            <select class="form-control" id="field_sector" name="sector" [(ngModel)]="costo.sectorId" >
+            <label class="form-control-label" for="field_costos">Costos</label>
+            <select class="form-control" id="field_costos" name="costos" [(ngModel)]="costo.costosId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="sectorOption.id" *ngFor="let sectorOption of sectors; trackBy: trackSectorById">{{sectorOption.id}}</option>
+                <option [ngValue]="clasificacionOption.id" *ngFor="let clasificacionOption of clasificacions; trackBy: trackClasificacionById">{{clasificacionOption.id}}</option>
             </select>
         </div>
     </div>

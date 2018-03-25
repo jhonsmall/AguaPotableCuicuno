@@ -33,9 +33,9 @@ public class ReciboDTO implements Serializable {
 
     private Integer mes;
 
-    private Long usuarioId;
+    private Long recibosId;
 
-    private Long lecturaMedidorId;
+    private Long recibosId;
 
     public Long getId() {
         return id;
@@ -117,20 +117,20 @@ public class ReciboDTO implements Serializable {
         this.mes = mes;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Long getRecibosId() {
+        return recibosId;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setRecibosId(Long usuarioId) {
+        this.recibosId = usuarioId;
     }
 
-    public Long getLecturaMedidorId() {
-        return lecturaMedidorId;
+    public Long getRecibosId() {
+        return recibosId;
     }
 
-    public void setLecturaMedidorId(Long lecturaMedidorId) {
-        this.lecturaMedidorId = lecturaMedidorId;
+    public void setRecibosId(Long lecturaMedidorId) {
+        this.recibosId = lecturaMedidorId;
     }
 
     @Override

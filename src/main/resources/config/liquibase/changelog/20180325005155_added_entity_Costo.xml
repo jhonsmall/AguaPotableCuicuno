@@ -33,15 +33,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="servicio_id" type="bigint">
+            <column name="costos_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="clasificacion_id" type="bigint">
+            <column name="costos_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="sector_id" type="bigint">
+            <column name="costos_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

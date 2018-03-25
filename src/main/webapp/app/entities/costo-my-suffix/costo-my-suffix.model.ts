@@ -6,10 +6,8 @@ export class CostoMySuffix implements BaseEntity {
         public codigo?: string,
         public servicio?: string,
         public cuota?: number,
-        public servicioId?: number,
-        public clasificacionId?: number,
         public costos?: BaseEntity[],
-        public sectorId?: number,
+        public costosId?: number,
     ) {
     }
 }

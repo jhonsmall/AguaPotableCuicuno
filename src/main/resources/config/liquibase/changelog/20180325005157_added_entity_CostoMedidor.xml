@@ -33,11 +33,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="costo_id" type="bigint">
+            <column name="costos_medidor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="medidor_id" type="bigint">
+            <column name="costos_medidores_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

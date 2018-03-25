@@ -28,7 +28,7 @@ public class LecturaMedidorDTO implements Serializable {
 
     private Integer mes;
 
-    private Long medidorId;
+    private Long lecturaMedidoresId;
 
     public Long getId() {
         return id;
@@ -94,12 +94,12 @@ public class LecturaMedidorDTO implements Serializable {
         this.mes = mes;
     }
 
-    public Long getMedidorId() {
-        return medidorId;
+    public Long getLecturaMedidoresId() {
+        return lecturaMedidoresId;
     }
 
-    public void setMedidorId(Long medidorId) {
-        this.medidorId = medidorId;
+    public void setLecturaMedidoresId(Long medidorId) {
+        this.lecturaMedidoresId = medidorId;
     }
 
     @Override

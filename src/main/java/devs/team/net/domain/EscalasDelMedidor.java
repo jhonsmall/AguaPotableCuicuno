@@ -35,7 +35,7 @@ public class EscalasDelMedidor implements Serializable {
     private Integer fin;
 
     @ManyToOne
-    private Clasificacion clasificacion;
+    private Clasificacion escalasDelMedidors;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -85,17 +85,17 @@ public class EscalasDelMedidor implements Serializable {
         this.fin = fin;
     }
 
-    public Clasificacion getClasificacion() {
-        return clasificacion;
+    public Clasificacion getEscalasDelMedidors() {
+        return escalasDelMedidors;
     }
 
-    public EscalasDelMedidor clasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
+    public EscalasDelMedidor escalasDelMedidors(Clasificacion clasificacion) {
+        this.escalasDelMedidors = clasificacion;
         return this;
     }
 
-    public void setClasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
+    public void setEscalasDelMedidors(Clasificacion clasificacion) {
+        this.escalasDelMedidors = clasificacion;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

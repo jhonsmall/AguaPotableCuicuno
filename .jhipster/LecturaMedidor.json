@@ -2,16 +2,16 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "medidor",
-            "otherEntityName": "medidor",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "lecturamedidor",
             "otherEntityName": "recibo",
-            "otherEntityRelationshipName": "lecturaMedidor"
+            "otherEntityRelationshipName": "recibos"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "lecturaMedidores",
+            "otherEntityName": "medidor",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

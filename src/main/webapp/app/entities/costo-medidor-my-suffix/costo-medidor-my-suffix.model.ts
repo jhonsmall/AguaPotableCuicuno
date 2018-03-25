@@ -6,8 +6,8 @@ export class CostoMedidorMySuffix implements BaseEntity {
         public codigo?: string,
         public fecha?: any,
         public estado?: boolean,
-        public costoId?: number,
-        public medidorId?: number,
+        public costosMedidorId?: number,
+        public costosMedidoresId?: number,
     ) {
         this.estado = false;
     }

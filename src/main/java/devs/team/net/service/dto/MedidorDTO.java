@@ -22,11 +22,11 @@ public class MedidorDTO implements Serializable {
 
     private Instant fecha;
 
-    private Long usuarioId;
+    private Long medidoresId;
 
-    private Long clasificacionId;
+    private Long medidoresId;
 
-    private Long sectorId;
+    private Long medidoresId;
 
     public Long getId() {
         return id;
@@ -68,28 +68,28 @@ public class MedidorDTO implements Serializable {
         this.fecha = fecha;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Long getMedidoresId() {
+        return medidoresId;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setMedidoresId(Long usuarioId) {
+        this.medidoresId = usuarioId;
     }
 
-    public Long getClasificacionId() {
-        return clasificacionId;
+    public Long getMedidoresId() {
+        return medidoresId;
     }
 
-    public void setClasificacionId(Long clasificacionId) {
-        this.clasificacionId = clasificacionId;
+    public void setMedidoresId(Long sectorId) {
+        this.medidoresId = sectorId;
     }
 
-    public Long getSectorId() {
-        return sectorId;
+    public Long getMedidoresId() {
+        return medidoresId;
     }
 
-    public void setSectorId(Long sectorId) {
-        this.sectorId = sectorId;
+    public void setMedidoresId(Long clasificacionId) {
+        this.medidoresId = clasificacionId;
     }
 
     @Override

@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_clasificacion">Clasificacion</label>
-            <select class="form-control" id="field_clasificacion" name="clasificacion" [(ngModel)]="escalasDelMedidor.clasificacionId" >
+            <label class="form-control-label" for="field_escalasDelMedidors">Escalas Del Medidors</label>
+            <select class="form-control" id="field_escalasDelMedidors" name="escalasDelMedidors" [(ngModel)]="escalasDelMedidor.escalasDelMedidorsId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="clasificacionOption.id" *ngFor="let clasificacionOption of clasificacions; trackBy: trackClasificacionById">{{clasificacionOption.id}}</option>
             </select>

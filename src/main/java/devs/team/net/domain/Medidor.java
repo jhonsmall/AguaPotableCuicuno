@@ -41,24 +41,24 @@ public class Medidor implements Serializable {
     @Column(name = "fecha")
     private Instant fecha;
 
-    @ManyToOne
-    private Usuario usuario;
-
-    @ManyToOne
-    private Clasificacion clasificacion;
-
-    @ManyToOne
-    private Sector sector;
-
-    @OneToMany(mappedBy = "medidor")
+    @OneToMany(mappedBy = "costosMedidores")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CostoMedidor> medidors = new HashSet<>();
 
-    @OneToMany(mappedBy = "medidor")
+    @OneToMany(mappedBy = "lecturaMedidores")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LecturaMedidor> medidors = new HashSet<>();
+
+    @ManyToOne
+    private Usuario medidores;
+
+    @ManyToOne
+    private Sector medidores;
+
+    @ManyToOne
+    private Clasificacion medidores;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -121,45 +121,6 @@ public class Medidor implements Serializable {
         this.fecha = fecha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public Medidor usuario(Usuario usuario) {
-        this.usuario = usuario;
-        return this;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Clasificacion getClasificacion() {
-        return clasificacion;
-    }
-
-    public Medidor clasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-        return this;
-    }
-
-    public void setClasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
-    public Sector getSector() {
-        return sector;
-    }
-
-    public Medidor sector(Sector sector) {
-        this.sector = sector;
-        return this;
-    }
-
-    public void setSector(Sector sector) {
-        this.sector = sector;
-    }
-
     public Set<CostoMedidor> getMedidors() {
         return medidors;
     }
@@ -171,13 +132,13 @@ public class Medidor implements Serializable {
 
     public Medidor addMedidor(CostoMedidor costoMedidor) {
         this.medidors.add(costoMedidor);
-        costoMedidor.setMedidor(this);
+        costoMedidor.setCostosMedidores(this);
         return this;
     }
 
     public Medidor removeMedidor(CostoMedidor costoMedidor) {
         this.medidors.remove(costoMedidor);
-        costoMedidor.setMedidor(null);
+        costoMedidor.setCostosMedidores(null);
         return this;
     }
 
@@ -196,18 +157,57 @@ public class Medidor implements Serializable {
 
     public Medidor addMedidor(LecturaMedidor lecturaMedidor) {
         this.medidors.add(lecturaMedidor);
-        lecturaMedidor.setMedidor(this);
+        lecturaMedidor.setLecturaMedidores(this);
         return this;
     }
 
     public Medidor removeMedidor(LecturaMedidor lecturaMedidor) {
         this.medidors.remove(lecturaMedidor);
-        lecturaMedidor.setMedidor(null);
+        lecturaMedidor.setLecturaMedidores(null);
         return this;
     }
 
     public void setMedidors(Set<LecturaMedidor> lecturaMedidors) {
         this.medidors = lecturaMedidors;
+    }
+
+    public Usuario getMedidores() {
+        return medidores;
+    }
+
+    public Medidor medidores(Usuario usuario) {
+        this.medidores = usuario;
+        return this;
+    }
+
+    public void setMedidores(Usuario usuario) {
+        this.medidores = usuario;
+    }
+
+    public Sector getMedidores() {
+        return medidores;
+    }
+
+    public Medidor medidores(Sector sector) {
+        this.medidores = sector;
+        return this;
+    }
+
+    public void setMedidores(Sector sector) {
+        this.medidores = sector;
+    }
+
+    public Clasificacion getMedidores() {
+        return medidores;
+    }
+
+    public Medidor medidores(Clasificacion clasificacion) {
+        this.medidores = clasificacion;
+        return this;
+    }
+
+    public void setMedidores(Clasificacion clasificacion) {
+        this.medidores = clasificacion;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

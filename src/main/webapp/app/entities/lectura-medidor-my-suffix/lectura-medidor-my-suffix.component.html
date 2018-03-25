@@ -37,7 +37,7 @@
             <th jhiSortBy="fecha"><span>Fecha</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="anio"><span>Anio</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="mes"><span>Mes</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="medidorId"><span>Medidor</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lecturaMedidoresId"><span>Lectura Medidores</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -52,8 +52,8 @@
                 <td>{{lecturaMedidor.anio}}</td>
                 <td>{{lecturaMedidor.mes}}</td>
                 <td>
-                    <div *ngIf="lecturaMedidor.medidorId">
-                        <a [routerLink]="['../medidor-my-suffix', lecturaMedidor.medidorId  ]" >{{lecturaMedidor.medidorId}}</a>
+                    <div *ngIf="lecturaMedidor.lecturaMedidoresId">
+                        <a [routerLink]="['../medidor-my-suffix', lecturaMedidor.lecturaMedidoresId  ]" >{{lecturaMedidor.lecturaMedidoresId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

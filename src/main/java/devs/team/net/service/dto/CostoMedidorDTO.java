@@ -20,9 +20,9 @@ public class CostoMedidorDTO implements Serializable {
 
     private Boolean estado;
 
-    private Long costoId;
+    private Long costosMedidorId;
 
-    private Long medidorId;
+    private Long costosMedidoresId;
 
     public Long getId() {
         return id;
@@ -56,20 +56,20 @@ public class CostoMedidorDTO implements Serializable {
         this.estado = estado;
     }
 
-    public Long getCostoId() {
-        return costoId;
+    public Long getCostosMedidorId() {
+        return costosMedidorId;
     }
 
-    public void setCostoId(Long costoId) {
-        this.costoId = costoId;
+    public void setCostosMedidorId(Long costoId) {
+        this.costosMedidorId = costoId;
     }
 
-    public Long getMedidorId() {
-        return medidorId;
+    public Long getCostosMedidoresId() {
+        return costosMedidoresId;
     }
 
-    public void setMedidorId(Long medidorId) {
-        this.medidorId = medidorId;
+    public void setCostosMedidoresId(Long medidorId) {
+        this.costosMedidoresId = medidorId;
     }
 
     @Override

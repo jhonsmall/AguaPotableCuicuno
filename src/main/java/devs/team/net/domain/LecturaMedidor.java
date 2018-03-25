@@ -50,13 +50,13 @@ public class LecturaMedidor implements Serializable {
     @Column(name = "mes")
     private Integer mes;
 
-    @ManyToOne
-    private Medidor medidor;
-
-    @OneToMany(mappedBy = "lecturaMedidor")
+    @OneToMany(mappedBy = "recibos")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Recibo> lecturamedidors = new HashSet<>();
+
+    @ManyToOne
+    private Medidor lecturaMedidores;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -158,19 +158,6 @@ public class LecturaMedidor implements Serializable {
         this.mes = mes;
     }
 
-    public Medidor getMedidor() {
-        return medidor;
-    }
-
-    public LecturaMedidor medidor(Medidor medidor) {
-        this.medidor = medidor;
-        return this;
-    }
-
-    public void setMedidor(Medidor medidor) {
-        this.medidor = medidor;
-    }
-
     public Set<Recibo> getLecturamedidors() {
         return lecturamedidors;
     }
@@ -182,18 +169,31 @@ public class LecturaMedidor implements Serializable {
 
     public LecturaMedidor addLecturamedidor(Recibo recibo) {
         this.lecturamedidors.add(recibo);
-        recibo.setLecturaMedidor(this);
+        recibo.setRecibos(this);
         return this;
     }
 
     public LecturaMedidor removeLecturamedidor(Recibo recibo) {
         this.lecturamedidors.remove(recibo);
-        recibo.setLecturaMedidor(null);
+        recibo.setRecibos(null);
         return this;
     }
 
     public void setLecturamedidors(Set<Recibo> recibos) {
         this.lecturamedidors = recibos;
+    }
+
+    public Medidor getLecturaMedidores() {
+        return lecturaMedidores;
+    }
+
+    public LecturaMedidor lecturaMedidores(Medidor medidor) {
+        this.lecturaMedidores = medidor;
+        return this;
+    }
+
+    public void setLecturaMedidores(Medidor medidor) {
+        this.lecturaMedidores = medidor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

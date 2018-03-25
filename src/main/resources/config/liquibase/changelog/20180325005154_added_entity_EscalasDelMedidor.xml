@@ -33,7 +33,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="clasificacion_id" type="bigint">
+            <column name="escalas_del_medidors_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

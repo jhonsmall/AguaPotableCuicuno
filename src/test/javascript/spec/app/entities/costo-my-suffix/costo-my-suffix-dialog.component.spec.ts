@@ -10,8 +10,8 @@ import { CostoMySuffixDialogComponent } from '../../../../../../main/webapp/app/
 import { CostoMySuffixService } from '../../../../../../main/webapp/app/entities/costo-my-suffix/costo-my-suffix.service';
 import { CostoMySuffix } from '../../../../../../main/webapp/app/entities/costo-my-suffix/costo-my-suffix.model';
 import { ServicioMySuffixService } from '../../../../../../main/webapp/app/entities/servicio-my-suffix';
-import { ClasificacionMySuffixService } from '../../../../../../main/webapp/app/entities/clasificacion-my-suffix';
 import { SectorMySuffixService } from '../../../../../../main/webapp/app/entities/sector-my-suffix';
+import { ClasificacionMySuffixService } from '../../../../../../main/webapp/app/entities/clasificacion-my-suffix';
 
 describe('Component Tests', () => {
 
@@ -28,8 +28,8 @@ describe('Component Tests', () => {
                 declarations: [CostoMySuffixDialogComponent],
                 providers: [
                     ServicioMySuffixService,
-                    ClasificacionMySuffixService,
                     SectorMySuffixService,
+                    ClasificacionMySuffixService,
                     CostoMySuffixService
                 ]
             })

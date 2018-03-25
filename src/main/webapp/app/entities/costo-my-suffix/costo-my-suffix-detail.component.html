@@ -16,22 +16,22 @@
         <dd>
             <span>{{costo.cuota}}</span>
         </dd>
-        <dt><span>Servicio</span></dt>
+        <dt><span>Costos</span></dt>
         <dd>
-            <div *ngIf="costo.servicioId">
-                <a [routerLink]="['/servicio-my-suffix', costo.servicioId]">{{costo.servicioId}}</a>
+            <div *ngIf="costo.costosId">
+                <a [routerLink]="['/servicio-my-suffix', costo.costosId]">{{costo.costosId}}</a>
             </div>
         </dd>
-        <dt><span>Clasificacion</span></dt>
+        <dt><span>Costos</span></dt>
         <dd>
-            <div *ngIf="costo.clasificacionId">
-                <a [routerLink]="['/clasificacion-my-suffix', costo.clasificacionId]">{{costo.clasificacionId}}</a>
+            <div *ngIf="costo.costosId">
+                <a [routerLink]="['/sector-my-suffix', costo.costosId]">{{costo.costosId}}</a>
             </div>
         </dd>
-        <dt><span>Sector</span></dt>
+        <dt><span>Costos</span></dt>
         <dd>
-            <div *ngIf="costo.sectorId">
-                <a [routerLink]="['/sector-my-suffix', costo.sectorId]">{{costo.sectorId}}</a>
+            <div *ngIf="costo.costosId">
+                <a [routerLink]="['/clasificacion-my-suffix', costo.costosId]">{{costo.costosId}}</a>
             </div>
         </dd>
     </dl>

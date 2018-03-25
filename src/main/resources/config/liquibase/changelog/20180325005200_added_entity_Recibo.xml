@@ -57,11 +57,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="usuario_id" type="bigint">
+            <column name="recibos_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="lectura_medidor_id" type="bigint">
+            <column name="recibos_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

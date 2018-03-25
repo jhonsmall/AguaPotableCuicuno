@@ -5,19 +5,19 @@
             "relationshipType": "one-to-many",
             "relationshipName": "clasificacion",
             "otherEntityName": "costo",
-            "otherEntityRelationshipName": "clasificacion"
+            "otherEntityRelationshipName": "costos"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "clasificacion",
             "otherEntityName": "escalasDelMedidor",
-            "otherEntityRelationshipName": "clasificacion"
+            "otherEntityRelationshipName": "escalasDelMedidors"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "clasificacion",
             "otherEntityName": "medidor",
-            "otherEntityRelationshipName": "clasificacion"
+            "otherEntityRelationshipName": "medidores"
         }
     ],
     "fields": [

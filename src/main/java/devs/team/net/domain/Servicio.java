@@ -40,7 +40,7 @@ public class Servicio implements Serializable {
     @Column(name = "tipo")
     private Integer tipo;
 
-    @OneToMany(mappedBy = "servicio")
+    @OneToMany(mappedBy = "costos")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Costo> servicios = new HashSet<>();
@@ -117,13 +117,13 @@ public class Servicio implements Serializable {
 
     public Servicio addServicio(Costo costo) {
         this.servicios.add(costo);
-        costo.setServicio(this);
+        costo.setCostos(this);
         return this;
     }
 
     public Servicio removeServicio(Costo costo) {
         this.servicios.remove(costo);
-        costo.setServicio(null);
+        costo.setCostos(null);
         return this;
     }
 
