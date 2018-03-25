@@ -3,13 +3,13 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "costosMedidor",
+            "relationshipName": "costo",
             "otherEntityName": "costo",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "costosMedidores",
+            "relationshipName": "medidor",
             "otherEntityName": "medidor",
             "otherEntityField": "id"
         }

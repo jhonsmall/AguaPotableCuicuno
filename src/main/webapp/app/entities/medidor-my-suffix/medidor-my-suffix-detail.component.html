@@ -20,22 +20,22 @@
         <dd>
             <span>{{medidor.fecha | date:'medium'}}</span>
         </dd>
-        <dt><span>Medidores</span></dt>
+        <dt><span>Usuario</span></dt>
         <dd>
-            <div *ngIf="medidor.medidoresId">
-                <a [routerLink]="['/usuario-my-suffix', medidor.medidoresId]">{{medidor.medidoresId}}</a>
+            <div *ngIf="medidor.usuarioId">
+                <a [routerLink]="['/usuario-my-suffix', medidor.usuarioId]">{{medidor.usuarioId}}</a>
             </div>
         </dd>
-        <dt><span>Medidores</span></dt>
+        <dt><span>Sector</span></dt>
         <dd>
-            <div *ngIf="medidor.medidoresId">
-                <a [routerLink]="['/sector-my-suffix', medidor.medidoresId]">{{medidor.medidoresId}}</a>
+            <div *ngIf="medidor.sectorId">
+                <a [routerLink]="['/sector-my-suffix', medidor.sectorId]">{{medidor.sectorId}}</a>
             </div>
         </dd>
-        <dt><span>Medidores</span></dt>
+        <dt><span>Clasificacion</span></dt>
         <dd>
-            <div *ngIf="medidor.medidoresId">
-                <a [routerLink]="['/clasificacion-my-suffix', medidor.medidoresId]">{{medidor.medidoresId}}</a>
+            <div *ngIf="medidor.clasificacionId">
+                <a [routerLink]="['/clasificacion-my-suffix', medidor.clasificacionId]">{{medidor.clasificacionId}}</a>
             </div>
         </dd>
     </dl>

@@ -50,13 +50,13 @@ public class LecturaMedidor implements Serializable {
     @Column(name = "mes")
     private Integer mes;
 
-    @OneToMany(mappedBy = "recibos")
+    @OneToMany(mappedBy = "lectura_medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Recibo> lecturamedidors = new HashSet<>();
 
     @ManyToOne
-    private Medidor lecturaMedidores;
+    private Medidor medidor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -169,13 +169,13 @@ public class LecturaMedidor implements Serializable {
 
     public LecturaMedidor addLecturamedidor(Recibo recibo) {
         this.lecturamedidors.add(recibo);
-        recibo.setRecibos(this);
+        recibo.setLectura_medidor(this);
         return this;
     }
 
     public LecturaMedidor removeLecturamedidor(Recibo recibo) {
         this.lecturamedidors.remove(recibo);
-        recibo.setRecibos(null);
+        recibo.setLectura_medidor(null);
         return this;
     }
 
@@ -183,17 +183,17 @@ public class LecturaMedidor implements Serializable {
         this.lecturamedidors = recibos;
     }
 
-    public Medidor getLecturaMedidores() {
-        return lecturaMedidores;
+    public Medidor getMedidor() {
+        return medidor;
     }
 
-    public LecturaMedidor lecturaMedidores(Medidor medidor) {
-        this.lecturaMedidores = medidor;
+    public LecturaMedidor medidor(Medidor medidor) {
+        this.medidor = medidor;
         return this;
     }
 
-    public void setLecturaMedidores(Medidor medidor) {
-        this.lecturaMedidores = medidor;
+    public void setMedidor(Medidor medidor) {
+        this.medidor = medidor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

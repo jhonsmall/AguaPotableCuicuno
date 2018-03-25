@@ -33,9 +33,9 @@
             <th jhiSortBy="codigo"><span>Codigo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="servicio"><span>Servicio</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="cuota"><span>Cuota</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="costosId"><span>Costos</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="costosId"><span>Costos</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="costosId"><span>Costos</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="servicioId"><span>Servicio</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sectorId"><span>Sector</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="clasificacionId"><span>Clasificacion</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -46,18 +46,18 @@
                 <td>{{costo.servicio}}</td>
                 <td>{{costo.cuota}}</td>
                 <td>
-                    <div *ngIf="costo.costosId">
-                        <a [routerLink]="['../servicio-my-suffix', costo.costosId  ]" >{{costo.costosId}}</a>
+                    <div *ngIf="costo.servicioId">
+                        <a [routerLink]="['../servicio-my-suffix', costo.servicioId  ]" >{{costo.servicioId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="costo.costosId">
-                        <a [routerLink]="['../sector-my-suffix', costo.costosId  ]" >{{costo.costosId}}</a>
+                    <div *ngIf="costo.sectorId">
+                        <a [routerLink]="['../sector-my-suffix', costo.sectorId  ]" >{{costo.sectorId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="costo.costosId">
-                        <a [routerLink]="['../clasificacion-my-suffix', costo.costosId  ]" >{{costo.costosId}}</a>
+                    <div *ngIf="costo.clasificacionId">
+                        <a [routerLink]="['../clasificacion-my-suffix', costo.clasificacionId  ]" >{{costo.clasificacionId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

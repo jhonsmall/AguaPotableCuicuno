@@ -41,24 +41,24 @@ public class Medidor implements Serializable {
     @Column(name = "fecha")
     private Instant fecha;
 
-    @OneToMany(mappedBy = "costosMedidores")
+    @OneToMany(mappedBy = "medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CostoMedidor> medidors = new HashSet<>();
 
-    @OneToMany(mappedBy = "lecturaMedidores")
+    @OneToMany(mappedBy = "medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LecturaMedidor> medidors = new HashSet<>();
 
     @ManyToOne
-    private Usuario medidores;
+    private Usuario usuario;
 
     @ManyToOne
-    private Sector medidores;
+    private Sector sector;
 
     @ManyToOne
-    private Clasificacion medidores;
+    private Clasificacion clasificacion;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -132,13 +132,13 @@ public class Medidor implements Serializable {
 
     public Medidor addMedidor(CostoMedidor costoMedidor) {
         this.medidors.add(costoMedidor);
-        costoMedidor.setCostosMedidores(this);
+        costoMedidor.setMedidor(this);
         return this;
     }
 
     public Medidor removeMedidor(CostoMedidor costoMedidor) {
         this.medidors.remove(costoMedidor);
-        costoMedidor.setCostosMedidores(null);
+        costoMedidor.setMedidor(null);
         return this;
     }
 
@@ -157,13 +157,13 @@ public class Medidor implements Serializable {
 
     public Medidor addMedidor(LecturaMedidor lecturaMedidor) {
         this.medidors.add(lecturaMedidor);
-        lecturaMedidor.setLecturaMedidores(this);
+        lecturaMedidor.setMedidor(this);
         return this;
     }
 
     public Medidor removeMedidor(LecturaMedidor lecturaMedidor) {
         this.medidors.remove(lecturaMedidor);
-        lecturaMedidor.setLecturaMedidores(null);
+        lecturaMedidor.setMedidor(null);
         return this;
     }
 
@@ -171,43 +171,43 @@ public class Medidor implements Serializable {
         this.medidors = lecturaMedidors;
     }
 
-    public Usuario getMedidores() {
-        return medidores;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public Medidor medidores(Usuario usuario) {
-        this.medidores = usuario;
+    public Medidor usuario(Usuario usuario) {
+        this.usuario = usuario;
         return this;
     }
 
-    public void setMedidores(Usuario usuario) {
-        this.medidores = usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Sector getMedidores() {
-        return medidores;
+    public Sector getSector() {
+        return sector;
     }
 
-    public Medidor medidores(Sector sector) {
-        this.medidores = sector;
+    public Medidor sector(Sector sector) {
+        this.sector = sector;
         return this;
     }
 
-    public void setMedidores(Sector sector) {
-        this.medidores = sector;
+    public void setSector(Sector sector) {
+        this.sector = sector;
     }
 
-    public Clasificacion getMedidores() {
-        return medidores;
+    public Clasificacion getClasificacion() {
+        return clasificacion;
     }
 
-    public Medidor medidores(Clasificacion clasificacion) {
-        this.medidores = clasificacion;
+    public Medidor clasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
         return this;
     }
 
-    public void setMedidores(Clasificacion clasificacion) {
-        this.medidores = clasificacion;
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

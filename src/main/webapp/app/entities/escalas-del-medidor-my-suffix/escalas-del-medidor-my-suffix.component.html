@@ -33,7 +33,7 @@
             <th jhiSortBy="codigo"><span>Codigo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="inicio"><span>Inicio</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fin"><span>Fin</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="escalasDelMedidorsId"><span>Escalas Del Medidors</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="clasificacionId"><span>Clasificacion</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -44,8 +44,8 @@
                 <td>{{escalasDelMedidor.inicio}}</td>
                 <td>{{escalasDelMedidor.fin}}</td>
                 <td>
-                    <div *ngIf="escalasDelMedidor.escalasDelMedidorsId">
-                        <a [routerLink]="['../clasificacion-my-suffix', escalasDelMedidor.escalasDelMedidorsId  ]" >{{escalasDelMedidor.escalasDelMedidorsId}}</a>
+                    <div *ngIf="escalasDelMedidor.clasificacionId">
+                        <a [routerLink]="['../clasificacion-my-suffix', escalasDelMedidor.clasificacionId  ]" >{{escalasDelMedidor.clasificacionId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

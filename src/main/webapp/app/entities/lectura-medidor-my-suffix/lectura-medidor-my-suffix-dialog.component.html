@@ -53,8 +53,8 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_lecturaMedidores">Lectura Medidores</label>
-            <select class="form-control" id="field_lecturaMedidores" name="lecturaMedidores" [(ngModel)]="lecturaMedidor.lecturaMedidoresId" >
+            <label class="form-control-label" for="field_medidor">Medidor</label>
+            <select class="form-control" id="field_medidor" name="medidor" [(ngModel)]="lecturaMedidor.medidorId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="medidorOption.id" *ngFor="let medidorOption of medidors; trackBy: trackMedidorById">{{medidorOption.id}}</option>
             </select>

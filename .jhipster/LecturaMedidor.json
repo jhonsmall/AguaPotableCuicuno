@@ -5,11 +5,11 @@
             "relationshipType": "one-to-many",
             "relationshipName": "lecturamedidor",
             "otherEntityName": "recibo",
-            "otherEntityRelationshipName": "recibos"
+            "otherEntityRelationshipName": "lectura_medidor"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "lecturaMedidores",
+            "relationshipName": "medidor",
             "otherEntityName": "medidor",
             "otherEntityField": "id"
         }

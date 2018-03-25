@@ -38,22 +38,22 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="field_medidores">Medidores</label>
-            <select class="form-control" id="field_medidores" name="medidores" [(ngModel)]="medidor.medidoresId" >
+            <label class="form-control-label" for="field_usuario">Usuario</label>
+            <select class="form-control" id="field_usuario" name="usuario" [(ngModel)]="medidor.usuarioId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="usuarioOption.id" *ngFor="let usuarioOption of usuarios; trackBy: trackUsuarioById">{{usuarioOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_medidores">Medidores</label>
-            <select class="form-control" id="field_medidores" name="medidores" [(ngModel)]="medidor.medidoresId" >
+            <label class="form-control-label" for="field_sector">Sector</label>
+            <select class="form-control" id="field_sector" name="sector" [(ngModel)]="medidor.sectorId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="sectorOption.id" *ngFor="let sectorOption of sectors; trackBy: trackSectorById">{{sectorOption.id}}</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_medidores">Medidores</label>
-            <select class="form-control" id="field_medidores" name="medidores" [(ngModel)]="medidor.medidoresId" >
+            <label class="form-control-label" for="field_clasificacion">Clasificacion</label>
+            <select class="form-control" id="field_clasificacion" name="clasificacion" [(ngModel)]="medidor.clasificacionId" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="clasificacionOption.id" *ngFor="let clasificacionOption of clasificacions; trackBy: trackClasificacionById">{{clasificacionOption.id}}</option>
             </select>

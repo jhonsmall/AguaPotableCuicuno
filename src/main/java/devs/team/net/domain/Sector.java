@@ -44,12 +44,12 @@ public class Sector implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(mappedBy = "costos")
+    @OneToMany(mappedBy = "sector")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Costo> sectors = new HashSet<>();
 
-    @OneToMany(mappedBy = "medidores")
+    @OneToMany(mappedBy = "sector")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Medidor> sectors = new HashSet<>();
@@ -113,13 +113,13 @@ public class Sector implements Serializable {
 
     public Sector addSector(Costo costo) {
         this.sectors.add(costo);
-        costo.setCostos(this);
+        costo.setSector(this);
         return this;
     }
 
     public Sector removeSector(Costo costo) {
         this.sectors.remove(costo);
-        costo.setCostos(null);
+        costo.setSector(null);
         return this;
     }
 
@@ -138,13 +138,13 @@ public class Sector implements Serializable {
 
     public Sector addSector(Medidor medidor) {
         this.sectors.add(medidor);
-        medidor.setMedidores(this);
+        medidor.setSector(this);
         return this;
     }
 
     public Sector removeSector(Medidor medidor) {
         this.sectors.remove(medidor);
-        medidor.setMedidores(null);
+        medidor.setSector(null);
         return this;
     }
 

@@ -32,10 +32,10 @@
         <dd>
             <span>{{lecturaMedidor.mes}}</span>
         </dd>
-        <dt><span>Lectura Medidores</span></dt>
+        <dt><span>Medidor</span></dt>
         <dd>
-            <div *ngIf="lecturaMedidor.lecturaMedidoresId">
-                <a [routerLink]="['/medidor-my-suffix', lecturaMedidor.lecturaMedidoresId]">{{lecturaMedidor.lecturaMedidoresId}}</a>
+            <div *ngIf="lecturaMedidor.medidorId">
+                <a [routerLink]="['/medidor-my-suffix', lecturaMedidor.medidorId]">{{lecturaMedidor.medidorId}}</a>
             </div>
         </dd>
     </dl>

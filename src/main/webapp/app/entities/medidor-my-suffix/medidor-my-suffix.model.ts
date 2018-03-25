@@ -8,7 +8,9 @@ export class MedidorMySuffix implements BaseEntity {
         public fechaobtuvo?: any,
         public fecha?: any,
         public medidors?: BaseEntity[],
-        public medidoresId?: number,
+        public usuarioId?: number,
+        public sectorId?: number,
+        public clasificacionId?: number,
     ) {
     }
 }

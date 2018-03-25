@@ -55,12 +55,12 @@ public class Usuario implements Serializable {
     @Column(name = "telefono")
     private String telefono;
 
-    @OneToMany(mappedBy = "recibos")
+    @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Recibo> usuarios = new HashSet<>();
 
-    @OneToMany(mappedBy = "medidores")
+    @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Medidor> usuarios = new HashSet<>();
@@ -202,13 +202,13 @@ public class Usuario implements Serializable {
 
     public Usuario addUsuario(Recibo recibo) {
         this.usuarios.add(recibo);
-        recibo.setRecibos(this);
+        recibo.setUsuario(this);
         return this;
     }
 
     public Usuario removeUsuario(Recibo recibo) {
         this.usuarios.remove(recibo);
-        recibo.setRecibos(null);
+        recibo.setUsuario(null);
         return this;
     }
 
@@ -227,13 +227,13 @@ public class Usuario implements Serializable {
 
     public Usuario addUsuario(Medidor medidor) {
         this.usuarios.add(medidor);
-        medidor.setMedidores(this);
+        medidor.setUsuario(this);
         return this;
     }
 
     public Usuario removeUsuario(Medidor medidor) {
         this.usuarios.remove(medidor);
-        medidor.setMedidores(null);
+        medidor.setUsuario(null);
         return this;
     }
 

@@ -39,17 +39,17 @@ public class Clasificacion implements Serializable {
     @Column(name = "estado")
     private Boolean estado;
 
-    @OneToMany(mappedBy = "costos")
+    @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Costo> clasificacions = new HashSet<>();
 
-    @OneToMany(mappedBy = "escalasDelMedidors")
+    @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<EscalasDelMedidor> clasificacions = new HashSet<>();
 
-    @OneToMany(mappedBy = "medidores")
+    @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Medidor> clasificacions = new HashSet<>();
@@ -113,13 +113,13 @@ public class Clasificacion implements Serializable {
 
     public Clasificacion addClasificacion(Costo costo) {
         this.clasificacions.add(costo);
-        costo.setCostos(this);
+        costo.setClasificacion(this);
         return this;
     }
 
     public Clasificacion removeClasificacion(Costo costo) {
         this.clasificacions.remove(costo);
-        costo.setCostos(null);
+        costo.setClasificacion(null);
         return this;
     }
 
@@ -138,13 +138,13 @@ public class Clasificacion implements Serializable {
 
     public Clasificacion addClasificacion(EscalasDelMedidor escalasDelMedidor) {
         this.clasificacions.add(escalasDelMedidor);
-        escalasDelMedidor.setEscalasDelMedidors(this);
+        escalasDelMedidor.setClasificacion(this);
         return this;
     }
 
     public Clasificacion removeClasificacion(EscalasDelMedidor escalasDelMedidor) {
         this.clasificacions.remove(escalasDelMedidor);
-        escalasDelMedidor.setEscalasDelMedidors(null);
+        escalasDelMedidor.setClasificacion(null);
         return this;
     }
 
@@ -163,13 +163,13 @@ public class Clasificacion implements Serializable {
 
     public Clasificacion addClasificacion(Medidor medidor) {
         this.clasificacions.add(medidor);
-        medidor.setMedidores(this);
+        medidor.setClasificacion(this);
         return this;
     }
 
     public Clasificacion removeClasificacion(Medidor medidor) {
         this.clasificacions.remove(medidor);
-        medidor.setMedidores(null);
+        medidor.setClasificacion(null);
         return this;
     }
 

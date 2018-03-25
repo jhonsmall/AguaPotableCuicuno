@@ -55,10 +55,10 @@ public class Recibo implements Serializable {
     private Integer mes;
 
     @ManyToOne
-    private Usuario recibos;
+    private Usuario usuario;
 
     @ManyToOne
-    private LecturaMedidor recibos;
+    private LecturaMedidor lecturamedidor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -186,30 +186,30 @@ public class Recibo implements Serializable {
         this.mes = mes;
     }
 
-    public Usuario getRecibos() {
-        return recibos;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public Recibo recibos(Usuario usuario) {
-        this.recibos = usuario;
+    public Recibo usuario(Usuario usuario) {
+        this.usuario = usuario;
         return this;
     }
 
-    public void setRecibos(Usuario usuario) {
-        this.recibos = usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public LecturaMedidor getRecibos() {
-        return recibos;
+    public LecturaMedidor getLecturamedidor() {
+        return lecturamedidor;
     }
 
-    public Recibo recibos(LecturaMedidor lecturaMedidor) {
-        this.recibos = lecturaMedidor;
+    public Recibo lecturamedidor(LecturaMedidor lecturaMedidor) {
+        this.lecturamedidor = lecturaMedidor;
         return this;
     }
 
-    public void setRecibos(LecturaMedidor lecturaMedidor) {
-        this.recibos = lecturaMedidor;
+    public void setLecturamedidor(LecturaMedidor lecturaMedidor) {
+        this.lecturamedidor = lecturaMedidor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

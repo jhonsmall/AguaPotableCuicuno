@@ -5,23 +5,23 @@
             "relationshipType": "one-to-many",
             "relationshipName": "costo",
             "otherEntityName": "costoMedidor",
-            "otherEntityRelationshipName": "costosMedidor"
+            "otherEntityRelationshipName": "costo"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "costos",
+            "relationshipName": "servicio",
             "otherEntityName": "servicio",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "costos",
+            "relationshipName": "sector",
             "otherEntityName": "sector",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "costos",
+            "relationshipName": "clasificacion",
             "otherEntityName": "clasificacion",
             "otherEntityField": "id"
         }

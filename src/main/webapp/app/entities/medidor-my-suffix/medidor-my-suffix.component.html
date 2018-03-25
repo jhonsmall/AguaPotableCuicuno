@@ -34,9 +34,9 @@
             <th jhiSortBy="numeromedidor"><span>Numeromedidor</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fechaobtuvo"><span>Fechaobtuvo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fecha"><span>Fecha</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="medidoresId"><span>Medidores</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="medidoresId"><span>Medidores</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="medidoresId"><span>Medidores</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="usuarioId"><span>Usuario</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sectorId"><span>Sector</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="clasificacionId"><span>Clasificacion</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -48,18 +48,18 @@
                 <td>{{medidor.fechaobtuvo | date:'medium'}}</td>
                 <td>{{medidor.fecha | date:'medium'}}</td>
                 <td>
-                    <div *ngIf="medidor.medidoresId">
-                        <a [routerLink]="['../usuario-my-suffix', medidor.medidoresId  ]" >{{medidor.medidoresId}}</a>
+                    <div *ngIf="medidor.usuarioId">
+                        <a [routerLink]="['../usuario-my-suffix', medidor.usuarioId  ]" >{{medidor.usuarioId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="medidor.medidoresId">
-                        <a [routerLink]="['../sector-my-suffix', medidor.medidoresId  ]" >{{medidor.medidoresId}}</a>
+                    <div *ngIf="medidor.sectorId">
+                        <a [routerLink]="['../sector-my-suffix', medidor.sectorId  ]" >{{medidor.sectorId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="medidor.medidoresId">
-                        <a [routerLink]="['../clasificacion-my-suffix', medidor.medidoresId  ]" >{{medidor.medidoresId}}</a>
+                    <div *ngIf="medidor.clasificacionId">
+                        <a [routerLink]="['../clasificacion-my-suffix', medidor.clasificacionId  ]" >{{medidor.clasificacionId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
