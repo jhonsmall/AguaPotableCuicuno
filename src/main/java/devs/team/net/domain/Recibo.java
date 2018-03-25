@@ -58,7 +58,7 @@ public class Recibo implements Serializable {
     private Usuario usuario;
 
     @ManyToOne
-    private LecturaMedidor lecturamedidor;
+    private LecturaMedidor lecturaMedidor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -199,17 +199,17 @@ public class Recibo implements Serializable {
         this.usuario = usuario;
     }
 
-    public LecturaMedidor getLecturamedidor() {
-        return lecturamedidor;
+    public LecturaMedidor getLecturaMedidor() {
+        return lecturaMedidor;
     }
 
-    public Recibo lecturamedidor(LecturaMedidor lecturaMedidor) {
-        this.lecturamedidor = lecturaMedidor;
+    public Recibo lecturaMedidor(LecturaMedidor lecturaMedidor) {
+        this.lecturaMedidor = lecturaMedidor;
         return this;
     }
 
-    public void setLecturamedidor(LecturaMedidor lecturaMedidor) {
-        this.lecturamedidor = lecturaMedidor;
+    public void setLecturaMedidor(LecturaMedidor lecturaMedidor) {
+        this.lecturaMedidor = lecturaMedidor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

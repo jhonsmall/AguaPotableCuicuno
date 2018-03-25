@@ -13,7 +13,7 @@ export class ReciboMySuffix implements BaseEntity {
         public anio?: number,
         public mes?: number,
         public usuarioId?: number,
-        public lecturamedidorId?: number,
+        public lecturaMedidorId?: number,
     ) {
     }
 }

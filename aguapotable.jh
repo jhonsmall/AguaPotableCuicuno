@@ -97,7 +97,7 @@ relationship OneToMany {
     Sector{sectorCosto} to Costo{sector},
     Clasificacion{clasificacionCosto} to Costo{clasificacion},
     Medidor{medidorCostoMedidor} to CostoMedidor{medidor},
-    LecturaMedidor{lectura_medidorRecibo} to Recibo{lectura_medidor}
+    LecturaMedidor{lecturamedidorRecibo} to Recibo{lecturaMedidor}
 }
 
 relationship OneToMany {

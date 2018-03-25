@@ -35,7 +35,7 @@ public class ReciboDTO implements Serializable {
 
     private Long usuarioId;
 
-    private Long lecturamedidorId;
+    private Long lecturaMedidorId;
 
     public Long getId() {
         return id;
@@ -125,12 +125,12 @@ public class ReciboDTO implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Long getLecturamedidorId() {
-        return lecturamedidorId;
+    public Long getLecturaMedidorId() {
+        return lecturaMedidorId;
     }
 
-    public void setLecturamedidorId(Long lecturaMedidorId) {
-        this.lecturamedidorId = lecturaMedidorId;
+    public void setLecturaMedidorId(Long lecturaMedidorId) {
+        this.lecturaMedidorId = lecturaMedidorId;
     }
 
     @Override
