@@ -50,7 +50,7 @@ public class LecturaMedidor implements Serializable {
     @Column(name = "mes")
     private Integer mes;
 
-    @OneToMany(mappedBy = "lectura_medidor")
+    @OneToMany(mappedBy = "lecturaMedidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Recibo> lecturamedidorRecibos = new HashSet<>();
@@ -169,13 +169,13 @@ public class LecturaMedidor implements Serializable {
 
     public LecturaMedidor addLecturamedidorRecibo(Recibo recibo) {
         this.lecturamedidorRecibos.add(recibo);
-        recibo.setLectura_medidor(this);
+        recibo.setLecturaMedidor(this);
         return this;
     }
 
     public LecturaMedidor removeLecturamedidorRecibo(Recibo recibo) {
         this.lecturamedidorRecibos.remove(recibo);
-        recibo.setLectura_medidor(null);
+        recibo.setLecturaMedidor(null);
         return this;
     }
 

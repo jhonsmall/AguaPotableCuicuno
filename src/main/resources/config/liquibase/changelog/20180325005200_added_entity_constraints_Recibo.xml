@@ -14,9 +14,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="usuario"/>
 
-        <addForeignKeyConstraint baseColumnNames="lecturamedidor_id"
+        <addForeignKeyConstraint baseColumnNames="lectura_medidor_id"
                                  baseTableName="recibo"
-                                 constraintName="fk_recibo_lecturamedidor_id"
+                                 constraintName="fk_recibo_lectura_medidor_id"
                                  referencedColumnNames="id"
                                  referencedTableName="lectura_medidor"/>
 

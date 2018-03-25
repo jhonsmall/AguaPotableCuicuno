@@ -12,11 +12,11 @@ import org.mapstruct.*;
 public interface ReciboMapper extends EntityMapper<ReciboDTO, Recibo> {
 
     @Mapping(source = "usuario.id", target = "usuarioId")
-    @Mapping(source = "lecturamedidor.id", target = "lecturamedidorId")
+    @Mapping(source = "lecturaMedidor.id", target = "lecturaMedidorId")
     ReciboDTO toDto(Recibo recibo);
 
     @Mapping(source = "usuarioId", target = "usuario")
-    @Mapping(source = "lecturamedidorId", target = "lecturamedidor")
+    @Mapping(source = "lecturaMedidorId", target = "lecturaMedidor")
     Recibo toEntity(ReciboDTO reciboDTO);
 
     default Recibo fromId(Long id) {
