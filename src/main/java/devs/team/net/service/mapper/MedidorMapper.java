@@ -16,8 +16,8 @@ public interface MedidorMapper extends EntityMapper<MedidorDTO, Medidor> {
     @Mapping(source = "clasificacion.id", target = "clasificacionId")
     MedidorDTO toDto(Medidor medidor);
 
-    @Mapping(target = "medidors", ignore = true)
-    @Mapping(target = "medidors", ignore = true)
+    @Mapping(target = "medidorCostoMedidors", ignore = true)
+    @Mapping(target = "medidorLecturaMedidors", ignore = true)
     @Mapping(source = "usuarioId", target = "usuario")
     @Mapping(source = "sectorId", target = "sector")
     @Mapping(source = "clasificacionId", target = "clasificacion")

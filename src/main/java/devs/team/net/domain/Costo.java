@@ -44,7 +44,7 @@ public class Costo implements Serializable {
     @OneToMany(mappedBy = "costo")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<CostoMedidor> costos = new HashSet<>();
+    private Set<CostoMedidor> costoCostoMedidors = new HashSet<>();
 
     @ManyToOne
     private Servicio servicio;
@@ -103,29 +103,29 @@ public class Costo implements Serializable {
         this.cuota = cuota;
     }
 
-    public Set<CostoMedidor> getCostos() {
-        return costos;
+    public Set<CostoMedidor> getCostoCostoMedidors() {
+        return costoCostoMedidors;
     }
 
-    public Costo costos(Set<CostoMedidor> costoMedidors) {
-        this.costos = costoMedidors;
+    public Costo costoCostoMedidors(Set<CostoMedidor> costoMedidors) {
+        this.costoCostoMedidors = costoMedidors;
         return this;
     }
 
-    public Costo addCosto(CostoMedidor costoMedidor) {
-        this.costos.add(costoMedidor);
+    public Costo addCostoCostoMedidor(CostoMedidor costoMedidor) {
+        this.costoCostoMedidors.add(costoMedidor);
         costoMedidor.setCosto(this);
         return this;
     }
 
-    public Costo removeCosto(CostoMedidor costoMedidor) {
-        this.costos.remove(costoMedidor);
+    public Costo removeCostoCostoMedidor(CostoMedidor costoMedidor) {
+        this.costoCostoMedidors.remove(costoMedidor);
         costoMedidor.setCosto(null);
         return this;
     }
 
-    public void setCostos(Set<CostoMedidor> costoMedidors) {
-        this.costos = costoMedidors;
+    public void setCostoCostoMedidors(Set<CostoMedidor> costoMedidors) {
+        this.costoCostoMedidors = costoMedidors;
     }
 
     public Servicio getServicio() {

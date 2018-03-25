@@ -42,17 +42,17 @@ public class Clasificacion implements Serializable {
     @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Costo> clasificacions = new HashSet<>();
+    private Set<Costo> clasificacionCostos = new HashSet<>();
 
     @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<EscalasDelMedidor> clasificacions = new HashSet<>();
+    private Set<EscalasDelMedidor> clasificacionEscalasDelMedidors = new HashSet<>();
 
     @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Medidor> clasificacions = new HashSet<>();
+    private Set<Medidor> clasificacionMedidors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -102,79 +102,79 @@ public class Clasificacion implements Serializable {
         this.estado = estado;
     }
 
-    public Set<Costo> getClasificacions() {
-        return clasificacions;
+    public Set<Costo> getClasificacionCostos() {
+        return clasificacionCostos;
     }
 
-    public Clasificacion clasificacions(Set<Costo> costos) {
-        this.clasificacions = costos;
+    public Clasificacion clasificacionCostos(Set<Costo> costos) {
+        this.clasificacionCostos = costos;
         return this;
     }
 
-    public Clasificacion addClasificacion(Costo costo) {
-        this.clasificacions.add(costo);
+    public Clasificacion addClasificacionCosto(Costo costo) {
+        this.clasificacionCostos.add(costo);
         costo.setClasificacion(this);
         return this;
     }
 
-    public Clasificacion removeClasificacion(Costo costo) {
-        this.clasificacions.remove(costo);
+    public Clasificacion removeClasificacionCosto(Costo costo) {
+        this.clasificacionCostos.remove(costo);
         costo.setClasificacion(null);
         return this;
     }
 
-    public void setClasificacions(Set<Costo> costos) {
-        this.clasificacions = costos;
+    public void setClasificacionCostos(Set<Costo> costos) {
+        this.clasificacionCostos = costos;
     }
 
-    public Set<EscalasDelMedidor> getClasificacions() {
-        return clasificacions;
+    public Set<EscalasDelMedidor> getClasificacionEscalasDelMedidors() {
+        return clasificacionEscalasDelMedidors;
     }
 
-    public Clasificacion clasificacions(Set<EscalasDelMedidor> escalasDelMedidors) {
-        this.clasificacions = escalasDelMedidors;
+    public Clasificacion clasificacionEscalasDelMedidors(Set<EscalasDelMedidor> escalasDelMedidors) {
+        this.clasificacionEscalasDelMedidors = escalasDelMedidors;
         return this;
     }
 
-    public Clasificacion addClasificacion(EscalasDelMedidor escalasDelMedidor) {
-        this.clasificacions.add(escalasDelMedidor);
+    public Clasificacion addClasificacionEscalasDelMedidor(EscalasDelMedidor escalasDelMedidor) {
+        this.clasificacionEscalasDelMedidors.add(escalasDelMedidor);
         escalasDelMedidor.setClasificacion(this);
         return this;
     }
 
-    public Clasificacion removeClasificacion(EscalasDelMedidor escalasDelMedidor) {
-        this.clasificacions.remove(escalasDelMedidor);
+    public Clasificacion removeClasificacionEscalasDelMedidor(EscalasDelMedidor escalasDelMedidor) {
+        this.clasificacionEscalasDelMedidors.remove(escalasDelMedidor);
         escalasDelMedidor.setClasificacion(null);
         return this;
     }
 
-    public void setClasificacions(Set<EscalasDelMedidor> escalasDelMedidors) {
-        this.clasificacions = escalasDelMedidors;
+    public void setClasificacionEscalasDelMedidors(Set<EscalasDelMedidor> escalasDelMedidors) {
+        this.clasificacionEscalasDelMedidors = escalasDelMedidors;
     }
 
-    public Set<Medidor> getClasificacions() {
-        return clasificacions;
+    public Set<Medidor> getClasificacionMedidors() {
+        return clasificacionMedidors;
     }
 
-    public Clasificacion clasificacions(Set<Medidor> medidors) {
-        this.clasificacions = medidors;
+    public Clasificacion clasificacionMedidors(Set<Medidor> medidors) {
+        this.clasificacionMedidors = medidors;
         return this;
     }
 
-    public Clasificacion addClasificacion(Medidor medidor) {
-        this.clasificacions.add(medidor);
+    public Clasificacion addClasificacionMedidor(Medidor medidor) {
+        this.clasificacionMedidors.add(medidor);
         medidor.setClasificacion(this);
         return this;
     }
 
-    public Clasificacion removeClasificacion(Medidor medidor) {
-        this.clasificacions.remove(medidor);
+    public Clasificacion removeClasificacionMedidor(Medidor medidor) {
+        this.clasificacionMedidors.remove(medidor);
         medidor.setClasificacion(null);
         return this;
     }
 
-    public void setClasificacions(Set<Medidor> medidors) {
-        this.clasificacions = medidors;
+    public void setClasificacionMedidors(Set<Medidor> medidors) {
+        this.clasificacionMedidors = medidors;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

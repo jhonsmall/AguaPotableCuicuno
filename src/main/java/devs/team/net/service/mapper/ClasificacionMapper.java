@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface ClasificacionMapper extends EntityMapper<ClasificacionDTO, Clasificacion> {
 
 
-    @Mapping(target = "clasificacions", ignore = true)
-    @Mapping(target = "clasificacions", ignore = true)
-    @Mapping(target = "clasificacions", ignore = true)
+    @Mapping(target = "clasificacionCostos", ignore = true)
+    @Mapping(target = "clasificacionEscalasDelMedidors", ignore = true)
+    @Mapping(target = "clasificacionMedidors", ignore = true)
     Clasificacion toEntity(ClasificacionDTO clasificacionDTO);
 
     default Clasificacion fromId(Long id) {

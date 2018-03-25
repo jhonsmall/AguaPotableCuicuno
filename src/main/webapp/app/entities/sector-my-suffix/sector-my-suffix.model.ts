@@ -6,7 +6,8 @@ export class SectorMySuffix implements BaseEntity {
         public codigo?: string,
         public nombre?: string,
         public descripcion?: string,
-        public sectors?: BaseEntity[],
+        public sectorCostos?: BaseEntity[],
+        public sectorMedidors?: BaseEntity[],
     ) {
     }
 }

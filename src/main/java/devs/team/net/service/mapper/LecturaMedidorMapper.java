@@ -14,7 +14,7 @@ public interface LecturaMedidorMapper extends EntityMapper<LecturaMedidorDTO, Le
     @Mapping(source = "medidor.id", target = "medidorId")
     LecturaMedidorDTO toDto(LecturaMedidor lecturaMedidor);
 
-    @Mapping(target = "lecturamedidors", ignore = true)
+    @Mapping(target = "lecturamedidorRecibos", ignore = true)
     @Mapping(source = "medidorId", target = "medidor")
     LecturaMedidor toEntity(LecturaMedidorDTO lecturaMedidorDTO);
 

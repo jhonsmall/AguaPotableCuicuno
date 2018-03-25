@@ -44,12 +44,12 @@ public class Medidor implements Serializable {
     @OneToMany(mappedBy = "medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<CostoMedidor> medidors = new HashSet<>();
+    private Set<CostoMedidor> medidorCostoMedidors = new HashSet<>();
 
     @OneToMany(mappedBy = "medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<LecturaMedidor> medidors = new HashSet<>();
+    private Set<LecturaMedidor> medidorLecturaMedidors = new HashSet<>();
 
     @ManyToOne
     private Usuario usuario;
@@ -121,54 +121,54 @@ public class Medidor implements Serializable {
         this.fecha = fecha;
     }
 
-    public Set<CostoMedidor> getMedidors() {
-        return medidors;
+    public Set<CostoMedidor> getMedidorCostoMedidors() {
+        return medidorCostoMedidors;
     }
 
-    public Medidor medidors(Set<CostoMedidor> costoMedidors) {
-        this.medidors = costoMedidors;
+    public Medidor medidorCostoMedidors(Set<CostoMedidor> costoMedidors) {
+        this.medidorCostoMedidors = costoMedidors;
         return this;
     }
 
-    public Medidor addMedidor(CostoMedidor costoMedidor) {
-        this.medidors.add(costoMedidor);
+    public Medidor addMedidorCostoMedidor(CostoMedidor costoMedidor) {
+        this.medidorCostoMedidors.add(costoMedidor);
         costoMedidor.setMedidor(this);
         return this;
     }
 
-    public Medidor removeMedidor(CostoMedidor costoMedidor) {
-        this.medidors.remove(costoMedidor);
+    public Medidor removeMedidorCostoMedidor(CostoMedidor costoMedidor) {
+        this.medidorCostoMedidors.remove(costoMedidor);
         costoMedidor.setMedidor(null);
         return this;
     }
 
-    public void setMedidors(Set<CostoMedidor> costoMedidors) {
-        this.medidors = costoMedidors;
+    public void setMedidorCostoMedidors(Set<CostoMedidor> costoMedidors) {
+        this.medidorCostoMedidors = costoMedidors;
     }
 
-    public Set<LecturaMedidor> getMedidors() {
-        return medidors;
+    public Set<LecturaMedidor> getMedidorLecturaMedidors() {
+        return medidorLecturaMedidors;
     }
 
-    public Medidor medidors(Set<LecturaMedidor> lecturaMedidors) {
-        this.medidors = lecturaMedidors;
+    public Medidor medidorLecturaMedidors(Set<LecturaMedidor> lecturaMedidors) {
+        this.medidorLecturaMedidors = lecturaMedidors;
         return this;
     }
 
-    public Medidor addMedidor(LecturaMedidor lecturaMedidor) {
-        this.medidors.add(lecturaMedidor);
+    public Medidor addMedidorLecturaMedidor(LecturaMedidor lecturaMedidor) {
+        this.medidorLecturaMedidors.add(lecturaMedidor);
         lecturaMedidor.setMedidor(this);
         return this;
     }
 
-    public Medidor removeMedidor(LecturaMedidor lecturaMedidor) {
-        this.medidors.remove(lecturaMedidor);
+    public Medidor removeMedidorLecturaMedidor(LecturaMedidor lecturaMedidor) {
+        this.medidorLecturaMedidors.remove(lecturaMedidor);
         lecturaMedidor.setMedidor(null);
         return this;
     }
 
-    public void setMedidors(Set<LecturaMedidor> lecturaMedidors) {
-        this.medidors = lecturaMedidors;
+    public void setMedidorLecturaMedidors(Set<LecturaMedidor> lecturaMedidors) {
+        this.medidorLecturaMedidors = lecturaMedidors;
     }
 
     public Usuario getUsuario() {

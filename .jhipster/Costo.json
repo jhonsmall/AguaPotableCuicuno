@@ -3,7 +3,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "costo",
+            "relationshipName": "costoCostoMedidor",
             "otherEntityName": "costoMedidor",
             "otherEntityRelationshipName": "costo"
         },

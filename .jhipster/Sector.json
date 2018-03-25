@@ -3,13 +3,13 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "sector",
+            "relationshipName": "sectorCosto",
             "otherEntityName": "costo",
             "otherEntityRelationshipName": "sector"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "sector",
+            "relationshipName": "sectorMedidor",
             "otherEntityName": "medidor",
             "otherEntityRelationshipName": "sector"
         }

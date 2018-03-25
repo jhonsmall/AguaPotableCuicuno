@@ -58,12 +58,12 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Recibo> usuarios = new HashSet<>();
+    private Set<Recibo> usuarioRecibos = new HashSet<>();
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Medidor> usuarios = new HashSet<>();
+    private Set<Medidor> usuarioMedidors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -191,54 +191,54 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    public Set<Recibo> getUsuarios() {
-        return usuarios;
+    public Set<Recibo> getUsuarioRecibos() {
+        return usuarioRecibos;
     }
 
-    public Usuario usuarios(Set<Recibo> recibos) {
-        this.usuarios = recibos;
+    public Usuario usuarioRecibos(Set<Recibo> recibos) {
+        this.usuarioRecibos = recibos;
         return this;
     }
 
-    public Usuario addUsuario(Recibo recibo) {
-        this.usuarios.add(recibo);
+    public Usuario addUsuarioRecibo(Recibo recibo) {
+        this.usuarioRecibos.add(recibo);
         recibo.setUsuario(this);
         return this;
     }
 
-    public Usuario removeUsuario(Recibo recibo) {
-        this.usuarios.remove(recibo);
+    public Usuario removeUsuarioRecibo(Recibo recibo) {
+        this.usuarioRecibos.remove(recibo);
         recibo.setUsuario(null);
         return this;
     }
 
-    public void setUsuarios(Set<Recibo> recibos) {
-        this.usuarios = recibos;
+    public void setUsuarioRecibos(Set<Recibo> recibos) {
+        this.usuarioRecibos = recibos;
     }
 
-    public Set<Medidor> getUsuarios() {
-        return usuarios;
+    public Set<Medidor> getUsuarioMedidors() {
+        return usuarioMedidors;
     }
 
-    public Usuario usuarios(Set<Medidor> medidors) {
-        this.usuarios = medidors;
+    public Usuario usuarioMedidors(Set<Medidor> medidors) {
+        this.usuarioMedidors = medidors;
         return this;
     }
 
-    public Usuario addUsuario(Medidor medidor) {
-        this.usuarios.add(medidor);
+    public Usuario addUsuarioMedidor(Medidor medidor) {
+        this.usuarioMedidors.add(medidor);
         medidor.setUsuario(this);
         return this;
     }
 
-    public Usuario removeUsuario(Medidor medidor) {
-        this.usuarios.remove(medidor);
+    public Usuario removeUsuarioMedidor(Medidor medidor) {
+        this.usuarioMedidors.remove(medidor);
         medidor.setUsuario(null);
         return this;
     }
 
-    public void setUsuarios(Set<Medidor> medidors) {
-        this.usuarios = medidors;
+    public void setUsuarioMedidors(Set<Medidor> medidors) {
+        this.usuarioMedidors = medidors;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

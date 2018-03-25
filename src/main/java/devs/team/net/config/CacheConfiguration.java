@@ -62,6 +62,18 @@ public class CacheConfiguration {
             cm.createCache(devs.team.net.domain.LecturaMedidor.class.getName(), jcacheConfiguration);
             cm.createCache(devs.team.net.domain.LecturaMedidor.class.getName() + ".lecturamedidors", jcacheConfiguration);
             cm.createCache(devs.team.net.domain.Recibo.class.getName(), jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Usuario.class.getName() + ".usuarioRecibos", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Usuario.class.getName() + ".usuarioMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Servicio.class.getName() + ".servicioCostos", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Clasificacion.class.getName() + ".clasificacionCostos", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Clasificacion.class.getName() + ".clasificacionEscalasDelMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Clasificacion.class.getName() + ".clasificacionMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Costo.class.getName() + ".costoCostoMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Sector.class.getName() + ".sectorCostos", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Sector.class.getName() + ".sectorMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Medidor.class.getName() + ".medidorCostoMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.Medidor.class.getName() + ".medidorLecturaMedidors", jcacheConfiguration);
+            cm.createCache(devs.team.net.domain.LecturaMedidor.class.getName() + ".lecturamedidorRecibos", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

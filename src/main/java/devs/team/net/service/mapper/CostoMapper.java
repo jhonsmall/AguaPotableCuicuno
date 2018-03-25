@@ -16,7 +16,7 @@ public interface CostoMapper extends EntityMapper<CostoDTO, Costo> {
     @Mapping(source = "clasificacion.id", target = "clasificacionId")
     CostoDTO toDto(Costo costo);
 
-    @Mapping(target = "costos", ignore = true)
+    @Mapping(target = "costoCostoMedidors", ignore = true)
     @Mapping(source = "servicioId", target = "servicio")
     @Mapping(source = "sectorId", target = "sector")
     @Mapping(source = "clasificacionId", target = "clasificacion")

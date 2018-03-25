@@ -12,7 +12,8 @@ export class UsuarioMySuffix implements BaseEntity {
         public direccion?: string,
         public sexo?: string,
         public telefono?: string,
-        public usuarios?: BaseEntity[],
+        public usuarioRecibos?: BaseEntity[],
+        public usuarioMedidors?: BaseEntity[],
     ) {
     }
 }

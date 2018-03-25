@@ -53,7 +53,7 @@ public class LecturaMedidor implements Serializable {
     @OneToMany(mappedBy = "lectura_medidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Recibo> lecturamedidors = new HashSet<>();
+    private Set<Recibo> lecturamedidorRecibos = new HashSet<>();
 
     @ManyToOne
     private Medidor medidor;
@@ -158,29 +158,29 @@ public class LecturaMedidor implements Serializable {
         this.mes = mes;
     }
 
-    public Set<Recibo> getLecturamedidors() {
-        return lecturamedidors;
+    public Set<Recibo> getLecturamedidorRecibos() {
+        return lecturamedidorRecibos;
     }
 
-    public LecturaMedidor lecturamedidors(Set<Recibo> recibos) {
-        this.lecturamedidors = recibos;
+    public LecturaMedidor lecturamedidorRecibos(Set<Recibo> recibos) {
+        this.lecturamedidorRecibos = recibos;
         return this;
     }
 
-    public LecturaMedidor addLecturamedidor(Recibo recibo) {
-        this.lecturamedidors.add(recibo);
+    public LecturaMedidor addLecturamedidorRecibo(Recibo recibo) {
+        this.lecturamedidorRecibos.add(recibo);
         recibo.setLectura_medidor(this);
         return this;
     }
 
-    public LecturaMedidor removeLecturamedidor(Recibo recibo) {
-        this.lecturamedidors.remove(recibo);
+    public LecturaMedidor removeLecturamedidorRecibo(Recibo recibo) {
+        this.lecturamedidorRecibos.remove(recibo);
         recibo.setLectura_medidor(null);
         return this;
     }
 
-    public void setLecturamedidors(Set<Recibo> recibos) {
-        this.lecturamedidors = recibos;
+    public void setLecturamedidorRecibos(Set<Recibo> recibos) {
+        this.lecturamedidorRecibos = recibos;
     }
 
     public Medidor getMedidor() {

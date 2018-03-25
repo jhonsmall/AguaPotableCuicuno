@@ -6,7 +6,9 @@ export class ClasificacionMySuffix implements BaseEntity {
         public codigo?: string,
         public nombre?: string,
         public estado?: boolean,
-        public clasificacions?: BaseEntity[],
+        public clasificacionCostos?: BaseEntity[],
+        public clasificacionEscalasDelMedidors?: BaseEntity[],
+        public clasificacionMedidors?: BaseEntity[],
     ) {
         this.estado = false;
     }
