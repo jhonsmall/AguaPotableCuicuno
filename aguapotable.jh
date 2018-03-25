@@ -91,18 +91,18 @@ entity Recibo {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Usuario{usuario} to Recibo{recibos},
-	Usuario{usuario} to Medidor{medidores},
-	Servicio{servicio} to Costo{costos},
-    Costo{costo} to CostoMedidor{costosMedidor},
-    Sector{sector} to Costo{costos},
-    Sector{sector} to Medidor{medidores},
-    Clasificacion{clasificacion} to Costo{costos},
-    Clasificacion{clasificacion} to EscalasDelMedidor{escalasDelMedidors},
-    Clasificacion{clasificacion} to Medidor{medidores},
-    Medidor{medidor} to CostoMedidor{costosMedidores},
-    Medidor{medidor} to LecturaMedidor{lecturaMedidores},
-    LecturaMedidor{lectura_medidor} to Recibo{recibos}
+	Usuario{usuario} to Recibo{usuario},
+	Usuario{usuario} to Medidor{usuario},
+	Servicio{servicio} to Costo{servicio},
+    Costo{costo} to CostoMedidor{costo},
+    Sector{sector} to Costo{sector},
+    Sector{sector} to Medidor{sector},
+    Clasificacion{clasificacion} to Costo{clasificacion},
+    Clasificacion{clasificacion} to EscalasDelMedidor{clasificacion},
+    Clasificacion{clasificacion} to Medidor{clasificacion},
+    Medidor{medidor} to CostoMedidor{medidor},
+    Medidor{medidor} to LecturaMedidor{medidor},
+    LecturaMedidor{lectura_medidor} to Recibo{lectura_medidor}
 }
 
 // Set pagination options
