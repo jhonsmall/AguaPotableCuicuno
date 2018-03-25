@@ -5,13 +5,13 @@
             "relationshipType": "one-to-many",
             "relationshipName": "sector",
             "otherEntityName": "costo",
-            "otherEntityRelationshipName": "sector"
+            "otherEntityRelationshipName": "costos"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "sector",
             "otherEntityName": "medidor",
-            "otherEntityRelationshipName": "sector"
+            "otherEntityRelationshipName": "medidores"
         }
     ],
     "fields": [

@@ -11,11 +11,11 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {MedidorMapper.class})
 public interface LecturaMedidorMapper extends EntityMapper<LecturaMedidorDTO, LecturaMedidor> {
 
-    @Mapping(source = "medidor.id", target = "medidorId")
+    @Mapping(source = "lecturaMedidores.id", target = "lecturaMedidoresId")
     LecturaMedidorDTO toDto(LecturaMedidor lecturaMedidor);
 
-    @Mapping(source = "medidorId", target = "medidor")
     @Mapping(target = "lecturamedidors", ignore = true)
+    @Mapping(source = "lecturaMedidoresId", target = "lecturaMedidores")
     LecturaMedidor toEntity(LecturaMedidorDTO lecturaMedidorDTO);
 
     default LecturaMedidor fromId(Long id) {

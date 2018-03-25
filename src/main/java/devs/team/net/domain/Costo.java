@@ -41,19 +41,19 @@ public class Costo implements Serializable {
     @Column(name = "cuota", precision=10, scale=2)
     private BigDecimal cuota;
 
-    @ManyToOne
-    private Servicio servicio;
-
-    @ManyToOne
-    private Clasificacion clasificacion;
-
-    @OneToMany(mappedBy = "costo")
+    @OneToMany(mappedBy = "costosMedidor")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CostoMedidor> costos = new HashSet<>();
 
     @ManyToOne
-    private Sector sector;
+    private Servicio costos;
+
+    @ManyToOne
+    private Sector costos;
+
+    @ManyToOne
+    private Clasificacion costos;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -103,32 +103,6 @@ public class Costo implements Serializable {
         this.cuota = cuota;
     }
 
-    public Servicio getServicio() {
-        return servicio;
-    }
-
-    public Costo servicio(Servicio servicio) {
-        this.servicio = servicio;
-        return this;
-    }
-
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
-    }
-
-    public Clasificacion getClasificacion() {
-        return clasificacion;
-    }
-
-    public Costo clasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-        return this;
-    }
-
-    public void setClasificacion(Clasificacion clasificacion) {
-        this.clasificacion = clasificacion;
-    }
-
     public Set<CostoMedidor> getCostos() {
         return costos;
     }
@@ -140,13 +114,13 @@ public class Costo implements Serializable {
 
     public Costo addCosto(CostoMedidor costoMedidor) {
         this.costos.add(costoMedidor);
-        costoMedidor.setCosto(this);
+        costoMedidor.setCostosMedidor(this);
         return this;
     }
 
     public Costo removeCosto(CostoMedidor costoMedidor) {
         this.costos.remove(costoMedidor);
-        costoMedidor.setCosto(null);
+        costoMedidor.setCostosMedidor(null);
         return this;
     }
 
@@ -154,17 +128,43 @@ public class Costo implements Serializable {
         this.costos = costoMedidors;
     }
 
-    public Sector getSector() {
-        return sector;
+    public Servicio getCostos() {
+        return costos;
     }
 
-    public Costo sector(Sector sector) {
-        this.sector = sector;
+    public Costo costos(Servicio servicio) {
+        this.costos = servicio;
         return this;
     }
 
-    public void setSector(Sector sector) {
-        this.sector = sector;
+    public void setCostos(Servicio servicio) {
+        this.costos = servicio;
+    }
+
+    public Sector getCostos() {
+        return costos;
+    }
+
+    public Costo costos(Sector sector) {
+        this.costos = sector;
+        return this;
+    }
+
+    public void setCostos(Sector sector) {
+        this.costos = sector;
+    }
+
+    public Clasificacion getCostos() {
+        return costos;
+    }
+
+    public Costo costos(Clasificacion clasificacion) {
+        this.costos = clasificacion;
+        return this;
+    }
+
+    public void setCostos(Clasificacion clasificacion) {
+        this.costos = clasificacion;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

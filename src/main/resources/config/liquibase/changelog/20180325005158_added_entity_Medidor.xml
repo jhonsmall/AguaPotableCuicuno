@@ -37,15 +37,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="usuario_id" type="bigint">
+            <column name="medidores_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="clasificacion_id" type="bigint">
+            <column name="medidores_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="sector_id" type="bigint">
+            <column name="medidores_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

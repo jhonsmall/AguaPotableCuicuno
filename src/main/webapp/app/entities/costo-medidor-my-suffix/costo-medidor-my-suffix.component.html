@@ -33,8 +33,8 @@
             <th jhiSortBy="codigo"><span>Codigo</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fecha"><span>Fecha</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="estado"><span>Estado</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="costoId"><span>Costo</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="medidorId"><span>Medidor</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="costosMedidorId"><span>Costos Medidor</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="costosMedidoresId"><span>Costos Medidores</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -45,13 +45,13 @@
                 <td>{{costoMedidor.fecha | date:'medium'}}</td>
                 <td>{{costoMedidor.estado}}</td>
                 <td>
-                    <div *ngIf="costoMedidor.costoId">
-                        <a [routerLink]="['../costo-my-suffix', costoMedidor.costoId  ]" >{{costoMedidor.costoId}}</a>
+                    <div *ngIf="costoMedidor.costosMedidorId">
+                        <a [routerLink]="['../costo-my-suffix', costoMedidor.costosMedidorId  ]" >{{costoMedidor.costosMedidorId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="costoMedidor.medidorId">
-                        <a [routerLink]="['../medidor-my-suffix', costoMedidor.medidorId  ]" >{{costoMedidor.medidorId}}</a>
+                    <div *ngIf="costoMedidor.costosMedidoresId">
+                        <a [routerLink]="['../medidor-my-suffix', costoMedidor.costosMedidoresId  ]" >{{costoMedidor.costosMedidoresId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

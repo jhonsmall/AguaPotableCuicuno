@@ -2,9 +2,9 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "clasificacion",
-            "otherEntityName": "clasificacion",
             "relationshipType": "many-to-one",
+            "relationshipName": "escalasDelMedidors",
+            "otherEntityName": "clasificacion",
             "otherEntityField": "id"
         }
     ],

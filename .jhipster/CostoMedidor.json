@@ -2,15 +2,15 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "costo",
-            "otherEntityName": "costo",
             "relationshipType": "many-to-one",
+            "relationshipName": "costosMedidor",
+            "otherEntityName": "costo",
             "otherEntityField": "id"
         },
         {
-            "relationshipName": "medidor",
-            "otherEntityName": "medidor",
             "relationshipType": "many-to-one",
+            "relationshipName": "costosMedidores",
+            "otherEntityName": "medidor",
             "otherEntityField": "id"
         }
     ],

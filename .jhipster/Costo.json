@@ -2,27 +2,27 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "servicio",
-            "otherEntityName": "servicio",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "clasificacion",
-            "otherEntityName": "clasificacion",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "costo",
             "otherEntityName": "costoMedidor",
-            "otherEntityRelationshipName": "costo"
+            "otherEntityRelationshipName": "costosMedidor"
         },
         {
-            "relationshipName": "sector",
-            "otherEntityName": "sector",
             "relationshipType": "many-to-one",
+            "relationshipName": "costos",
+            "otherEntityName": "servicio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "costos",
+            "otherEntityName": "sector",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "costos",
+            "otherEntityName": "clasificacion",
             "otherEntityField": "id"
         }
     ],

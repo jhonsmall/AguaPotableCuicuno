@@ -10,8 +10,8 @@ import { CostoMySuffix } from './costo-my-suffix.model';
 import { CostoMySuffixPopupService } from './costo-my-suffix-popup.service';
 import { CostoMySuffixService } from './costo-my-suffix.service';
 import { ServicioMySuffix, ServicioMySuffixService } from '../servicio-my-suffix';
-import { ClasificacionMySuffix, ClasificacionMySuffixService } from '../clasificacion-my-suffix';
 import { SectorMySuffix, SectorMySuffixService } from '../sector-my-suffix';
+import { ClasificacionMySuffix, ClasificacionMySuffixService } from '../clasificacion-my-suffix';
 
 @Component({
     selector: 'jhi-costo-my-suffix-dialog',
@@ -24,17 +24,17 @@ export class CostoMySuffixDialogComponent implements OnInit {
 
     servicios: ServicioMySuffix[];
 
-    clasificacions: ClasificacionMySuffix[];
-
     sectors: SectorMySuffix[];
+
+    clasificacions: ClasificacionMySuffix[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private costoService: CostoMySuffixService,
         private servicioService: ServicioMySuffixService,
-        private clasificacionService: ClasificacionMySuffixService,
         private sectorService: SectorMySuffixService,
+        private clasificacionService: ClasificacionMySuffixService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -43,10 +43,10 @@ export class CostoMySuffixDialogComponent implements OnInit {
         this.isSaving = false;
         this.servicioService.query()
             .subscribe((res: HttpResponse<ServicioMySuffix[]>) => { this.servicios = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.clasificacionService.query()
-            .subscribe((res: HttpResponse<ClasificacionMySuffix[]>) => { this.clasificacions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.sectorService.query()
             .subscribe((res: HttpResponse<SectorMySuffix[]>) => { this.sectors = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.clasificacionService.query()
+            .subscribe((res: HttpResponse<ClasificacionMySuffix[]>) => { this.clasificacions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -87,11 +87,11 @@ export class CostoMySuffixDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackClasificacionById(index: number, item: ClasificacionMySuffix) {
+    trackSectorById(index: number, item: SectorMySuffix) {
         return item.id;
     }
 
-    trackSectorById(index: number, item: SectorMySuffix) {
+    trackClasificacionById(index: number, item: ClasificacionMySuffix) {
         return item.id;
     }
 }

@@ -11,12 +11,12 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {UsuarioMapper.class, LecturaMedidorMapper.class})
 public interface ReciboMapper extends EntityMapper<ReciboDTO, Recibo> {
 
-    @Mapping(source = "usuario.id", target = "usuarioId")
-    @Mapping(source = "lecturaMedidor.id", target = "lecturaMedidorId")
+    @Mapping(source = "recibos.id", target = "recibosId")
+    @Mapping(source = "recibos.id", target = "recibosId")
     ReciboDTO toDto(Recibo recibo);
 
-    @Mapping(source = "usuarioId", target = "usuario")
-    @Mapping(source = "lecturaMedidorId", target = "lecturaMedidor")
+    @Mapping(source = "recibosId", target = "recibos")
+    @Mapping(source = "recibosId", target = "recibos")
     Recibo toEntity(ReciboDTO reciboDTO);
 
     default Recibo fromId(Long id) {

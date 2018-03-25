@@ -8,18 +8,18 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Costo and its DTO CostoDTO.
  */
-@Mapper(componentModel = "spring", uses = {ServicioMapper.class, ClasificacionMapper.class, SectorMapper.class})
+@Mapper(componentModel = "spring", uses = {ServicioMapper.class, SectorMapper.class, ClasificacionMapper.class})
 public interface CostoMapper extends EntityMapper<CostoDTO, Costo> {
 
-    @Mapping(source = "servicio.id", target = "servicioId")
-    @Mapping(source = "clasificacion.id", target = "clasificacionId")
-    @Mapping(source = "sector.id", target = "sectorId")
+    @Mapping(source = "costos.id", target = "costosId")
+    @Mapping(source = "costos.id", target = "costosId")
+    @Mapping(source = "costos.id", target = "costosId")
     CostoDTO toDto(Costo costo);
 
-    @Mapping(source = "servicioId", target = "servicio")
-    @Mapping(source = "clasificacionId", target = "clasificacion")
     @Mapping(target = "costos", ignore = true)
-    @Mapping(source = "sectorId", target = "sector")
+    @Mapping(source = "costosId", target = "costos")
+    @Mapping(source = "costosId", target = "costos")
+    @Mapping(source = "costosId", target = "costos")
     Costo toEntity(CostoDTO costoDTO);
 
     default Costo fromId(Long id) {

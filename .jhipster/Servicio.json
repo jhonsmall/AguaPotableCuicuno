@@ -5,7 +5,7 @@
             "relationshipType": "one-to-many",
             "relationshipName": "servicio",
             "otherEntityName": "costo",
-            "otherEntityRelationshipName": "servicio"
+            "otherEntityRelationshipName": "costos"
         }
     ],
     "fields": [

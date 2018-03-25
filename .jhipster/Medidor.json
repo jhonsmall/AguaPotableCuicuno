@@ -2,34 +2,34 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "usuario",
-            "otherEntityName": "usuario",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "clasificacion",
-            "otherEntityName": "clasificacion",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "sector",
-            "otherEntityName": "sector",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "medidor",
             "otherEntityName": "costoMedidor",
-            "otherEntityRelationshipName": "medidor"
+            "otherEntityRelationshipName": "costosMedidores"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "medidor",
             "otherEntityName": "lecturaMedidor",
-            "otherEntityRelationshipName": "medidor"
+            "otherEntityRelationshipName": "lecturaMedidores"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "medidores",
+            "otherEntityName": "usuario",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "medidores",
+            "otherEntityName": "sector",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "medidores",
+            "otherEntityName": "clasificacion",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

@@ -5,13 +5,13 @@
             "relationshipType": "one-to-many",
             "relationshipName": "usuario",
             "otherEntityName": "recibo",
-            "otherEntityRelationshipName": "usuario"
+            "otherEntityRelationshipName": "recibos"
         },
         {
             "relationshipType": "one-to-many",
             "relationshipName": "usuario",
             "otherEntityName": "medidor",
-            "otherEntityRelationshipName": "usuario"
+            "otherEntityRelationshipName": "medidores"
         }
     ],
     "fields": [

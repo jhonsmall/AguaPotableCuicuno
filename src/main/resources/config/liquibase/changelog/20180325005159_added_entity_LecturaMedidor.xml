@@ -49,7 +49,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="medidor_id" type="bigint">
+            <column name="lectura_medidores_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
