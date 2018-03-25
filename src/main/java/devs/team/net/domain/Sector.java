@@ -47,12 +47,12 @@ public class Sector implements Serializable {
     @OneToMany(mappedBy = "sector")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Costo> sectors = new HashSet<>();
+    private Set<Costo> sectorCostos = new HashSet<>();
 
     @OneToMany(mappedBy = "sector")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Medidor> sectors = new HashSet<>();
+    private Set<Medidor> sectorMedidors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -102,54 +102,54 @@ public class Sector implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Set<Costo> getSectors() {
-        return sectors;
+    public Set<Costo> getSectorCostos() {
+        return sectorCostos;
     }
 
-    public Sector sectors(Set<Costo> costos) {
-        this.sectors = costos;
+    public Sector sectorCostos(Set<Costo> costos) {
+        this.sectorCostos = costos;
         return this;
     }
 
-    public Sector addSector(Costo costo) {
-        this.sectors.add(costo);
+    public Sector addSectorCosto(Costo costo) {
+        this.sectorCostos.add(costo);
         costo.setSector(this);
         return this;
     }
 
-    public Sector removeSector(Costo costo) {
-        this.sectors.remove(costo);
+    public Sector removeSectorCosto(Costo costo) {
+        this.sectorCostos.remove(costo);
         costo.setSector(null);
         return this;
     }
 
-    public void setSectors(Set<Costo> costos) {
-        this.sectors = costos;
+    public void setSectorCostos(Set<Costo> costos) {
+        this.sectorCostos = costos;
     }
 
-    public Set<Medidor> getSectors() {
-        return sectors;
+    public Set<Medidor> getSectorMedidors() {
+        return sectorMedidors;
     }
 
-    public Sector sectors(Set<Medidor> medidors) {
-        this.sectors = medidors;
+    public Sector sectorMedidors(Set<Medidor> medidors) {
+        this.sectorMedidors = medidors;
         return this;
     }
 
-    public Sector addSector(Medidor medidor) {
-        this.sectors.add(medidor);
+    public Sector addSectorMedidor(Medidor medidor) {
+        this.sectorMedidors.add(medidor);
         medidor.setSector(this);
         return this;
     }
 
-    public Sector removeSector(Medidor medidor) {
-        this.sectors.remove(medidor);
+    public Sector removeSectorMedidor(Medidor medidor) {
+        this.sectorMedidors.remove(medidor);
         medidor.setSector(null);
         return this;
     }
 
-    public void setSectors(Set<Medidor> medidors) {
-        this.sectors = medidors;
+    public void setSectorMedidors(Set<Medidor> medidors) {
+        this.sectorMedidors = medidors;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

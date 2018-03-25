@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface ServicioMapper extends EntityMapper<ServicioDTO, Servicio> {
 
 
-    @Mapping(target = "servicios", ignore = true)
+    @Mapping(target = "servicioCostos", ignore = true)
     Servicio toEntity(ServicioDTO servicioDTO);
 
     default Servicio fromId(Long id) {

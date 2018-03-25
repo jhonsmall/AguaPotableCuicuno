@@ -10,7 +10,7 @@ export class LecturaMedidorMySuffix implements BaseEntity {
         public fecha?: any,
         public anio?: number,
         public mes?: number,
-        public lecturamedidors?: BaseEntity[],
+        public lecturamedidorRecibos?: BaseEntity[],
         public medidorId?: number,
     ) {
     }

@@ -12,8 +12,8 @@ import org.mapstruct.*;
 public interface SectorMapper extends EntityMapper<SectorDTO, Sector> {
 
 
-    @Mapping(target = "sectors", ignore = true)
-    @Mapping(target = "sectors", ignore = true)
+    @Mapping(target = "sectorCostos", ignore = true)
+    @Mapping(target = "sectorMedidors", ignore = true)
     Sector toEntity(SectorDTO sectorDTO);
 
     default Sector fromId(Long id) {

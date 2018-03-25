@@ -3,7 +3,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "servicio",
+            "relationshipName": "servicioCosto",
             "otherEntityName": "costo",
             "otherEntityRelationshipName": "servicio"
         }

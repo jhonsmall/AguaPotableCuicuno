@@ -43,7 +43,7 @@ public class Servicio implements Serializable {
     @OneToMany(mappedBy = "servicio")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Costo> servicios = new HashSet<>();
+    private Set<Costo> servicioCostos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -106,29 +106,29 @@ public class Servicio implements Serializable {
         this.tipo = tipo;
     }
 
-    public Set<Costo> getServicios() {
-        return servicios;
+    public Set<Costo> getServicioCostos() {
+        return servicioCostos;
     }
 
-    public Servicio servicios(Set<Costo> costos) {
-        this.servicios = costos;
+    public Servicio servicioCostos(Set<Costo> costos) {
+        this.servicioCostos = costos;
         return this;
     }
 
-    public Servicio addServicio(Costo costo) {
-        this.servicios.add(costo);
+    public Servicio addServicioCosto(Costo costo) {
+        this.servicioCostos.add(costo);
         costo.setServicio(this);
         return this;
     }
 
-    public Servicio removeServicio(Costo costo) {
-        this.servicios.remove(costo);
+    public Servicio removeServicioCosto(Costo costo) {
+        this.servicioCostos.remove(costo);
         costo.setServicio(null);
         return this;
     }
 
-    public void setServicios(Set<Costo> costos) {
-        this.servicios = costos;
+    public void setServicioCostos(Set<Costo> costos) {
+        this.servicioCostos = costos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -3,7 +3,7 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "lecturamedidor",
+            "relationshipName": "lecturamedidorRecibo",
             "otherEntityName": "recibo",
             "otherEntityRelationshipName": "lectura_medidor"
         },

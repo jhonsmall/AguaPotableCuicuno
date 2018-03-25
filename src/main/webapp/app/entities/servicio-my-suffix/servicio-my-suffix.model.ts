@@ -7,7 +7,7 @@ export class ServicioMySuffix implements BaseEntity {
         public nombre?: string,
         public norma?: string,
         public tipo?: number,
-        public servicios?: BaseEntity[],
+        public servicioCostos?: BaseEntity[],
     ) {
     }
 }

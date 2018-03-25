@@ -3,13 +3,13 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "usuario",
+            "relationshipName": "usuarioRecibo",
             "otherEntityName": "recibo",
             "otherEntityRelationshipName": "usuario"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "usuario",
+            "relationshipName": "usuarioMedidor",
             "otherEntityName": "medidor",
             "otherEntityRelationshipName": "usuario"
         }

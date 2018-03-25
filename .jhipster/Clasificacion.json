@@ -3,19 +3,19 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "clasificacion",
+            "relationshipName": "clasificacionCosto",
             "otherEntityName": "costo",
             "otherEntityRelationshipName": "clasificacion"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "clasificacion",
+            "relationshipName": "clasificacionEscalasDelMedidor",
             "otherEntityName": "escalasDelMedidor",
             "otherEntityRelationshipName": "clasificacion"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "clasificacion",
+            "relationshipName": "clasificacionMedidor",
             "otherEntityName": "medidor",
             "otherEntityRelationshipName": "clasificacion"
         }
