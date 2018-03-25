@@ -1,0 +1,56 @@
+
+<div *ngIf="medidor">
+    <h2><span>Medidor</span> {{medidor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Codigo</span></dt>
+        <dd>
+            <span>{{medidor.codigo}}</span>
+        </dd>
+        <dt><span>Numeromedidor</span></dt>
+        <dd>
+            <span>{{medidor.numeromedidor}}</span>
+        </dd>
+        <dt><span>Fechaobtuvo</span></dt>
+        <dd>
+            <span>{{medidor.fechaobtuvo | date:'medium'}}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+            <span>{{medidor.fecha | date:'medium'}}</span>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+            <div *ngIf="medidor.usuarioId">
+                <a [routerLink]="['/usuario-my-suffix', medidor.usuarioId]">{{medidor.usuarioId}}</a>
+            </div>
+        </dd>
+        <dt><span>Clasificacion</span></dt>
+        <dd>
+            <div *ngIf="medidor.clasificacionId">
+                <a [routerLink]="['/clasificacion-my-suffix', medidor.clasificacionId]">{{medidor.clasificacionId}}</a>
+            </div>
+        </dd>
+        <dt><span>Sector</span></dt>
+        <dd>
+            <div *ngIf="medidor.sectorId">
+                <a [routerLink]="['/sector-my-suffix', medidor.sectorId]">{{medidor.sectorId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'medidor-my-suffix/'+ medidor.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

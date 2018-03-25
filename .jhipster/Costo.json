@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "servicio",
+            "otherEntityName": "servicio",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "clasificacion",
+            "otherEntityName": "clasificacion",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "costo",
+            "otherEntityName": "costoMedidor",
+            "otherEntityRelationshipName": "costo"
+        },
+        {
+            "relationshipName": "sector",
+            "otherEntityName": "sector",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "servicio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cuota",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180325005155",
+    "javadoc": "Task entity.\n@author The JHipster team.",
+    "entityTableName": "costo",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mySuffix"
+}

@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "clasificacion",
+            "otherEntityName": "clasificacion",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "inicio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fin",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180325005154",
+    "entityTableName": "escalas_del_medidor",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mySuffix"
+}

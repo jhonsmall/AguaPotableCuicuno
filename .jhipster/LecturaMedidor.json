@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "medidor",
+            "otherEntityName": "medidor",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "lecturamedidor",
+            "otherEntityName": "recibo",
+            "otherEntityRelationshipName": "lecturaMedidor"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "codigo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lecturainicial",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lecturafinal",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "estado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fecha",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "anio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mes",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180325005159",
+    "entityTableName": "lectura_medidor",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "angularJSSuffix": "mySuffix"
+}
