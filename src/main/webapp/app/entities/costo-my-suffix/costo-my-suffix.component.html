@@ -31,7 +31,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="codigo"><span>Codigo</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="servicio"><span>Servicio</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="cuota"><span>Cuota</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="servicioId"><span>Servicio</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="sectorId"><span>Sector</span> <span class="fa fa-sort"></span></th>
@@ -43,7 +42,6 @@
             <tr *ngFor="let costo of costos ;trackBy: trackId">
                 <td><a [routerLink]="['../costo-my-suffix', costo.id ]">{{costo.id}}</a></td>
                 <td>{{costo.codigo}}</td>
-                <td>{{costo.servicio}}</td>
                 <td>{{costo.cuota}}</td>
                 <td>
                     <div *ngIf="costo.servicioId">

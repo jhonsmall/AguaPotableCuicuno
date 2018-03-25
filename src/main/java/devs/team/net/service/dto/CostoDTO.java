@@ -16,8 +16,6 @@ public class CostoDTO implements Serializable {
 
     private String codigo;
 
-    private String servicio;
-
     private BigDecimal cuota;
 
     private Long servicioId;
@@ -40,14 +38,6 @@ public class CostoDTO implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public String getServicio() {
-        return servicio;
-    }
-
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
     }
 
     public BigDecimal getCuota() {
@@ -108,7 +98,6 @@ public class CostoDTO implements Serializable {
         return "CostoDTO{" +
             "id=" + getId() +
             ", codigo='" + getCodigo() + "'" +
-            ", servicio='" + getServicio() + "'" +
             ", cuota=" + getCuota() +
             "}";
     }

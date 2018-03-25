@@ -35,9 +35,6 @@ public class Costo implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-    @Column(name = "servicio")
-    private String servicio;
-
     @Column(name = "cuota", precision=10, scale=2)
     private BigDecimal cuota;
 
@@ -75,19 +72,6 @@ public class Costo implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public String getServicio() {
-        return servicio;
-    }
-
-    public Costo servicio(String servicio) {
-        this.servicio = servicio;
-        return this;
-    }
-
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
     }
 
     public BigDecimal getCuota() {
@@ -193,7 +177,6 @@ public class Costo implements Serializable {
         return "Costo{" +
             "id=" + getId() +
             ", codigo='" + getCodigo() + "'" +
-            ", servicio='" + getServicio() + "'" +
             ", cuota=" + getCuota() +
             "}";
     }
