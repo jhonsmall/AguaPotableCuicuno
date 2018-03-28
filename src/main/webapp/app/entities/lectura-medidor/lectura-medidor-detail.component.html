@@ -1,0 +1,52 @@
+
+<div *ngIf="lecturaMedidor">
+    <h2><span>Lectura Medidor</span> {{lecturaMedidor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Lecturainicial</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.lecturainicial}}</span>
+        </dd>
+        <dt><span>Lecturafinal</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.lecturafinal | date:'medium'}}</span>
+        </dd>
+        <dt><span>Estado</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.estado}}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.fecha | date:'medium'}}</span>
+        </dd>
+        <dt><span>Anio</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.anio}}</span>
+        </dd>
+        <dt><span>Mes</span></dt>
+        <dd>
+            <span>{{lecturaMedidor.mes}}</span>
+        </dd>
+        <dt><span>Medidor</span></dt>
+        <dd>
+            <div *ngIf="lecturaMedidor.medidorId">
+                <a [routerLink]="['/medidor', lecturaMedidor.medidorId]">{{lecturaMedidor.medidorId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'lectura-medidor/'+ lecturaMedidor.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

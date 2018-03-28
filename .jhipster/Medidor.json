@@ -34,20 +34,25 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "numeromedidor",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
-            "fieldName": "fechaobtuvo",
-            "fieldType": "Instant"
+            "fieldName": "fechaadquirio",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
-            "fieldName": "fecha",
-            "fieldType": "Instant"
+            "fieldName": "fechaactual",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180325005158",
@@ -55,6 +60,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

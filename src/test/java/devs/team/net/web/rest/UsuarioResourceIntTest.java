@@ -33,6 +33,9 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Estado;
+import devs.team.net.domain.enumeration.Documento;
+import devs.team.net.domain.enumeration.Sexo;
 /**
  * Test class for the UsuarioResource REST controller.
  *
@@ -42,14 +45,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class UsuarioResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
+    private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
+    private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
 
-    private static final String DEFAULT_ESTADO = "AAAAAAAAAA";
-    private static final String UPDATED_ESTADO = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DOCUMENTO = "AAAAAAAAAA";
-    private static final String UPDATED_DOCUMENTO = "BBBBBBBBBB";
+    private static final Documento DEFAULT_DOCUMENTO = Documento.CI;
+    private static final Documento UPDATED_DOCUMENTO = Documento.RUC;
 
     private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
     private static final String UPDATED_NUMERO = "BBBBBBBBBB";
@@ -63,11 +63,14 @@ public class UsuarioResourceIntTest {
     private static final String DEFAULT_DIRECCION = "AAAAAAAAAA";
     private static final String UPDATED_DIRECCION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SEXO = "AAAAAAAAAA";
-    private static final String UPDATED_SEXO = "BBBBBBBBBB";
+    private static final Sexo DEFAULT_SEXO = Sexo.MASCULINO;
+    private static final Sexo UPDATED_SEXO = Sexo.FEMENINO;
 
     private static final String DEFAULT_TELEFONO = "AAAAAAAAAA";
     private static final String UPDATED_TELEFONO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -116,7 +119,6 @@ public class UsuarioResourceIntTest {
      */
     public static Usuario createEntity(EntityManager em) {
         Usuario usuario = new Usuario()
-            .codigo(DEFAULT_CODIGO)
             .estado(DEFAULT_ESTADO)
             .documento(DEFAULT_DOCUMENTO)
             .numero(DEFAULT_NUMERO)
@@ -124,7 +126,8 @@ public class UsuarioResourceIntTest {
             .apellidos(DEFAULT_APELLIDOS)
             .direccion(DEFAULT_DIRECCION)
             .sexo(DEFAULT_SEXO)
-            .telefono(DEFAULT_TELEFONO);
+            .telefono(DEFAULT_TELEFONO)
+            .email(DEFAULT_EMAIL);
         return usuario;
     }
 
@@ -150,7 +153,6 @@ public class UsuarioResourceIntTest {
         List<Usuario> usuarioList = usuarioRepository.findAll();
         assertThat(usuarioList).hasSize(databaseSizeBeforeCreate + 1);
         Usuario testUsuario = usuarioList.get(usuarioList.size() - 1);
-        assertThat(testUsuario.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testUsuario.getEstado()).isEqualTo(DEFAULT_ESTADO);
         assertThat(testUsuario.getDocumento()).isEqualTo(DEFAULT_DOCUMENTO);
         assertThat(testUsuario.getNumero()).isEqualTo(DEFAULT_NUMERO);
@@ -159,6 +161,7 @@ public class UsuarioResourceIntTest {
         assertThat(testUsuario.getDireccion()).isEqualTo(DEFAULT_DIRECCION);
         assertThat(testUsuario.getSexo()).isEqualTo(DEFAULT_SEXO);
         assertThat(testUsuario.getTelefono()).isEqualTo(DEFAULT_TELEFONO);
+        assertThat(testUsuario.getEmail()).isEqualTo(DEFAULT_EMAIL);
 
         // Validate the Usuario in Elasticsearch
         Usuario usuarioEs = usuarioSearchRepository.findOne(testUsuario.getId());
@@ -187,6 +190,63 @@ public class UsuarioResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = usuarioRepository.findAll().size();
+        // set the field null
+        usuario.setNumero(null);
+
+        // Create the Usuario, which fails.
+        UsuarioDTO usuarioDTO = usuarioMapper.toDto(usuario);
+
+        restUsuarioMockMvc.perform(post("/api/usuarios")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(usuarioDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Usuario> usuarioList = usuarioRepository.findAll();
+        assertThat(usuarioList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNombresIsRequired() throws Exception {
+        int databaseSizeBeforeTest = usuarioRepository.findAll().size();
+        // set the field null
+        usuario.setNombres(null);
+
+        // Create the Usuario, which fails.
+        UsuarioDTO usuarioDTO = usuarioMapper.toDto(usuario);
+
+        restUsuarioMockMvc.perform(post("/api/usuarios")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(usuarioDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Usuario> usuarioList = usuarioRepository.findAll();
+        assertThat(usuarioList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkApellidosIsRequired() throws Exception {
+        int databaseSizeBeforeTest = usuarioRepository.findAll().size();
+        // set the field null
+        usuario.setApellidos(null);
+
+        // Create the Usuario, which fails.
+        UsuarioDTO usuarioDTO = usuarioMapper.toDto(usuario);
+
+        restUsuarioMockMvc.perform(post("/api/usuarios")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(usuarioDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Usuario> usuarioList = usuarioRepository.findAll();
+        assertThat(usuarioList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllUsuarios() throws Exception {
         // Initialize the database
         usuarioRepository.saveAndFlush(usuario);
@@ -196,7 +256,6 @@ public class UsuarioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(usuario.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].documento").value(hasItem(DEFAULT_DOCUMENTO.toString())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO.toString())))
@@ -204,7 +263,8 @@ public class UsuarioResourceIntTest {
             .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].direccion").value(hasItem(DEFAULT_DIRECCION.toString())))
             .andExpect(jsonPath("$.[*].sexo").value(hasItem(DEFAULT_SEXO.toString())))
-            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())));
+            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test
@@ -218,7 +278,6 @@ public class UsuarioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(usuario.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()))
             .andExpect(jsonPath("$.documento").value(DEFAULT_DOCUMENTO.toString()))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO.toString()))
@@ -226,7 +285,8 @@ public class UsuarioResourceIntTest {
             .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()))
             .andExpect(jsonPath("$.direccion").value(DEFAULT_DIRECCION.toString()))
             .andExpect(jsonPath("$.sexo").value(DEFAULT_SEXO.toString()))
-            .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO.toString()));
+            .andExpect(jsonPath("$.telefono").value(DEFAULT_TELEFONO.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
 
     @Test
@@ -250,7 +310,6 @@ public class UsuarioResourceIntTest {
         // Disconnect from session so that the updates on updatedUsuario are not directly saved in db
         em.detach(updatedUsuario);
         updatedUsuario
-            .codigo(UPDATED_CODIGO)
             .estado(UPDATED_ESTADO)
             .documento(UPDATED_DOCUMENTO)
             .numero(UPDATED_NUMERO)
@@ -258,7 +317,8 @@ public class UsuarioResourceIntTest {
             .apellidos(UPDATED_APELLIDOS)
             .direccion(UPDATED_DIRECCION)
             .sexo(UPDATED_SEXO)
-            .telefono(UPDATED_TELEFONO);
+            .telefono(UPDATED_TELEFONO)
+            .email(UPDATED_EMAIL);
         UsuarioDTO usuarioDTO = usuarioMapper.toDto(updatedUsuario);
 
         restUsuarioMockMvc.perform(put("/api/usuarios")
@@ -270,7 +330,6 @@ public class UsuarioResourceIntTest {
         List<Usuario> usuarioList = usuarioRepository.findAll();
         assertThat(usuarioList).hasSize(databaseSizeBeforeUpdate);
         Usuario testUsuario = usuarioList.get(usuarioList.size() - 1);
-        assertThat(testUsuario.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testUsuario.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testUsuario.getDocumento()).isEqualTo(UPDATED_DOCUMENTO);
         assertThat(testUsuario.getNumero()).isEqualTo(UPDATED_NUMERO);
@@ -279,6 +338,7 @@ public class UsuarioResourceIntTest {
         assertThat(testUsuario.getDireccion()).isEqualTo(UPDATED_DIRECCION);
         assertThat(testUsuario.getSexo()).isEqualTo(UPDATED_SEXO);
         assertThat(testUsuario.getTelefono()).isEqualTo(UPDATED_TELEFONO);
+        assertThat(testUsuario.getEmail()).isEqualTo(UPDATED_EMAIL);
 
         // Validate the Usuario in Elasticsearch
         Usuario usuarioEs = usuarioSearchRepository.findOne(testUsuario.getId());
@@ -338,7 +398,6 @@ public class UsuarioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(usuario.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].documento").value(hasItem(DEFAULT_DOCUMENTO.toString())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO.toString())))
@@ -346,7 +405,8 @@ public class UsuarioResourceIntTest {
             .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
             .andExpect(jsonPath("$.[*].direccion").value(hasItem(DEFAULT_DIRECCION.toString())))
             .andExpect(jsonPath("$.[*].sexo").value(hasItem(DEFAULT_SEXO.toString())))
-            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())));
+            .andExpect(jsonPath("$.[*].telefono").value(hasItem(DEFAULT_TELEFONO.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test

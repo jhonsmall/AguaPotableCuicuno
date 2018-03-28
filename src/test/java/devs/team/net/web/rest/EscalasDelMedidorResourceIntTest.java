@@ -25,6 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static devs.team.net.web.rest.TestUtil.createFormattingConversionService;
@@ -42,14 +44,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class EscalasDelMedidorResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final Integer DEFAULT_INICIO = 1;
     private static final Integer UPDATED_INICIO = 2;
 
     private static final Integer DEFAULT_FIN = 1;
     private static final Integer UPDATED_FIN = 2;
+
+    private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private EscalasDelMedidorRepository escalasDelMedidorRepository;
@@ -98,9 +100,9 @@ public class EscalasDelMedidorResourceIntTest {
      */
     public static EscalasDelMedidor createEntity(EntityManager em) {
         EscalasDelMedidor escalasDelMedidor = new EscalasDelMedidor()
-            .codigo(DEFAULT_CODIGO)
             .inicio(DEFAULT_INICIO)
-            .fin(DEFAULT_FIN);
+            .fin(DEFAULT_FIN)
+            .fecha(DEFAULT_FECHA);
         return escalasDelMedidor;
     }
 
@@ -126,9 +128,9 @@ public class EscalasDelMedidorResourceIntTest {
         List<EscalasDelMedidor> escalasDelMedidorList = escalasDelMedidorRepository.findAll();
         assertThat(escalasDelMedidorList).hasSize(databaseSizeBeforeCreate + 1);
         EscalasDelMedidor testEscalasDelMedidor = escalasDelMedidorList.get(escalasDelMedidorList.size() - 1);
-        assertThat(testEscalasDelMedidor.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testEscalasDelMedidor.getInicio()).isEqualTo(DEFAULT_INICIO);
         assertThat(testEscalasDelMedidor.getFin()).isEqualTo(DEFAULT_FIN);
+        assertThat(testEscalasDelMedidor.getFecha()).isEqualTo(DEFAULT_FECHA);
 
         // Validate the EscalasDelMedidor in Elasticsearch
         EscalasDelMedidor escalasDelMedidorEs = escalasDelMedidorSearchRepository.findOne(testEscalasDelMedidor.getId());
@@ -157,6 +159,63 @@ public class EscalasDelMedidorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkInicioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = escalasDelMedidorRepository.findAll().size();
+        // set the field null
+        escalasDelMedidor.setInicio(null);
+
+        // Create the EscalasDelMedidor, which fails.
+        EscalasDelMedidorDTO escalasDelMedidorDTO = escalasDelMedidorMapper.toDto(escalasDelMedidor);
+
+        restEscalasDelMedidorMockMvc.perform(post("/api/escalas-del-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(escalasDelMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<EscalasDelMedidor> escalasDelMedidorList = escalasDelMedidorRepository.findAll();
+        assertThat(escalasDelMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFinIsRequired() throws Exception {
+        int databaseSizeBeforeTest = escalasDelMedidorRepository.findAll().size();
+        // set the field null
+        escalasDelMedidor.setFin(null);
+
+        // Create the EscalasDelMedidor, which fails.
+        EscalasDelMedidorDTO escalasDelMedidorDTO = escalasDelMedidorMapper.toDto(escalasDelMedidor);
+
+        restEscalasDelMedidorMockMvc.perform(post("/api/escalas-del-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(escalasDelMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<EscalasDelMedidor> escalasDelMedidorList = escalasDelMedidorRepository.findAll();
+        assertThat(escalasDelMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = escalasDelMedidorRepository.findAll().size();
+        // set the field null
+        escalasDelMedidor.setFecha(null);
+
+        // Create the EscalasDelMedidor, which fails.
+        EscalasDelMedidorDTO escalasDelMedidorDTO = escalasDelMedidorMapper.toDto(escalasDelMedidor);
+
+        restEscalasDelMedidorMockMvc.perform(post("/api/escalas-del-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(escalasDelMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<EscalasDelMedidor> escalasDelMedidorList = escalasDelMedidorRepository.findAll();
+        assertThat(escalasDelMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllEscalasDelMedidors() throws Exception {
         // Initialize the database
         escalasDelMedidorRepository.saveAndFlush(escalasDelMedidor);
@@ -166,9 +225,9 @@ public class EscalasDelMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(escalasDelMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].inicio").value(hasItem(DEFAULT_INICIO)))
-            .andExpect(jsonPath("$.[*].fin").value(hasItem(DEFAULT_FIN)));
+            .andExpect(jsonPath("$.[*].fin").value(hasItem(DEFAULT_FIN)))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
     }
 
     @Test
@@ -182,9 +241,9 @@ public class EscalasDelMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(escalasDelMedidor.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.inicio").value(DEFAULT_INICIO))
-            .andExpect(jsonPath("$.fin").value(DEFAULT_FIN));
+            .andExpect(jsonPath("$.fin").value(DEFAULT_FIN))
+            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()));
     }
 
     @Test
@@ -208,9 +267,9 @@ public class EscalasDelMedidorResourceIntTest {
         // Disconnect from session so that the updates on updatedEscalasDelMedidor are not directly saved in db
         em.detach(updatedEscalasDelMedidor);
         updatedEscalasDelMedidor
-            .codigo(UPDATED_CODIGO)
             .inicio(UPDATED_INICIO)
-            .fin(UPDATED_FIN);
+            .fin(UPDATED_FIN)
+            .fecha(UPDATED_FECHA);
         EscalasDelMedidorDTO escalasDelMedidorDTO = escalasDelMedidorMapper.toDto(updatedEscalasDelMedidor);
 
         restEscalasDelMedidorMockMvc.perform(put("/api/escalas-del-medidors")
@@ -222,9 +281,9 @@ public class EscalasDelMedidorResourceIntTest {
         List<EscalasDelMedidor> escalasDelMedidorList = escalasDelMedidorRepository.findAll();
         assertThat(escalasDelMedidorList).hasSize(databaseSizeBeforeUpdate);
         EscalasDelMedidor testEscalasDelMedidor = escalasDelMedidorList.get(escalasDelMedidorList.size() - 1);
-        assertThat(testEscalasDelMedidor.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testEscalasDelMedidor.getInicio()).isEqualTo(UPDATED_INICIO);
         assertThat(testEscalasDelMedidor.getFin()).isEqualTo(UPDATED_FIN);
+        assertThat(testEscalasDelMedidor.getFecha()).isEqualTo(UPDATED_FECHA);
 
         // Validate the EscalasDelMedidor in Elasticsearch
         EscalasDelMedidor escalasDelMedidorEs = escalasDelMedidorSearchRepository.findOne(testEscalasDelMedidor.getId());
@@ -284,9 +343,9 @@ public class EscalasDelMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(escalasDelMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].inicio").value(hasItem(DEFAULT_INICIO)))
-            .andExpect(jsonPath("$.[*].fin").value(hasItem(DEFAULT_FIN)));
+            .andExpect(jsonPath("$.[*].fin").value(hasItem(DEFAULT_FIN)))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
     }
 
     @Test

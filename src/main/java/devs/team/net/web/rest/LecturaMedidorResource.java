@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class LecturaMedidorResource {
      */
     @PostMapping("/lectura-medidors")
     @Timed
-    public ResponseEntity<LecturaMedidorDTO> createLecturaMedidor(@RequestBody LecturaMedidorDTO lecturaMedidorDTO) throws URISyntaxException {
+    public ResponseEntity<LecturaMedidorDTO> createLecturaMedidor(@Valid @RequestBody LecturaMedidorDTO lecturaMedidorDTO) throws URISyntaxException {
         log.debug("REST request to save LecturaMedidor : {}", lecturaMedidorDTO);
         if (lecturaMedidorDTO.getId() != null) {
             throw new BadRequestAlertException("A new lecturaMedidor cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class LecturaMedidorResource {
      */
     @PutMapping("/lectura-medidors")
     @Timed
-    public ResponseEntity<LecturaMedidorDTO> updateLecturaMedidor(@RequestBody LecturaMedidorDTO lecturaMedidorDTO) throws URISyntaxException {
+    public ResponseEntity<LecturaMedidorDTO> updateLecturaMedidor(@Valid @RequestBody LecturaMedidorDTO lecturaMedidorDTO) throws URISyntaxException {
         log.debug("REST request to update LecturaMedidor : {}", lecturaMedidorDTO);
         if (lecturaMedidorDTO.getId() == null) {
             return createLecturaMedidor(lecturaMedidorDTO);

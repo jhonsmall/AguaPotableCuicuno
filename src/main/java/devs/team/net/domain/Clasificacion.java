@@ -6,12 +6,15 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * not an ignored comment
@@ -30,14 +33,13 @@ public class Clasificacion implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "nombre")
+    @NotNull
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private Boolean estado;
+    private Estado estado;
 
     @OneToMany(mappedBy = "clasificacion")
     @JsonIgnore
@@ -63,19 +65,6 @@ public class Clasificacion implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Clasificacion codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -89,16 +78,16 @@ public class Clasificacion implements Serializable {
         this.nombre = nombre;
     }
 
-    public Boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public Clasificacion estado(Boolean estado) {
+    public Clasificacion estado(Estado estado) {
         this.estado = estado;
         return this;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -202,9 +191,8 @@ public class Clasificacion implements Serializable {
     public String toString() {
         return "Clasificacion{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
-            ", estado='" + isEstado() + "'" +
+            ", estado='" + getEstado() + "'" +
             "}";
     }
 }

@@ -16,28 +16,35 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "estado",
-            "fieldType": "String"
+            "fieldType": "Estado",
+            "fieldValues": "ACTIVO,INACTIVO"
         },
         {
             "fieldName": "documento",
-            "fieldType": "String"
+            "fieldType": "Documento",
+            "fieldValues": "CI,RUC,PASAPORTE,OTRO"
         },
         {
             "fieldName": "numero",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "nombres",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "apellidos",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "direccion",
@@ -45,10 +52,15 @@
         },
         {
             "fieldName": "sexo",
-            "fieldType": "String"
+            "fieldType": "Sexo",
+            "fieldValues": "MASCULINO,FEMENINO,OTRO"
         },
         {
             "fieldName": "telefono",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
             "fieldType": "String"
         }
     ],
@@ -57,6 +69,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

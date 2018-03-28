@@ -2,10 +2,12 @@ package devs.team.net.service.dto;
 
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A DTO for the CostoMedidor entity.
@@ -14,11 +16,10 @@ public class CostoMedidorDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private Instant fecha;
 
-    private Boolean estado;
+    private Estado estado;
 
     private Long costoId;
 
@@ -32,14 +33,6 @@ public class CostoMedidorDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Instant getFecha() {
         return fecha;
     }
@@ -48,11 +41,11 @@ public class CostoMedidorDTO implements Serializable {
         this.fecha = fecha;
     }
 
-    public Boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -97,9 +90,8 @@ public class CostoMedidorDTO implements Serializable {
     public String toString() {
         return "CostoMedidorDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", fecha='" + getFecha() + "'" +
-            ", estado='" + isEstado() + "'" +
+            ", estado='" + getEstado() + "'" +
             "}";
     }
 }

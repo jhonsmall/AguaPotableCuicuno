@@ -4,12 +4,15 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A Recibo.
@@ -27,14 +30,13 @@ public class Recibo implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "numero")
+    @NotNull
+    @Column(name = "numero", nullable = false)
     private Integer numero;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
 
     @Column(name = "pagoanterior", precision=10, scale=2)
     private BigDecimal pagoanterior;
@@ -45,8 +47,11 @@ public class Recibo implements Serializable {
     @Column(name = "total", precision=10, scale=2)
     private BigDecimal total;
 
-    @Column(name = "fecha")
-    private Instant fecha;
+    @Column(name = "fechagenera")
+    private Instant fechagenera;
+
+    @Column(name = "fechapaga")
+    private Instant fechapaga;
 
     @Column(name = "anio")
     private Integer anio;
@@ -69,19 +74,6 @@ public class Recibo implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Recibo codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Integer getNumero() {
         return numero;
     }
@@ -95,16 +87,16 @@ public class Recibo implements Serializable {
         this.numero = numero;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public Recibo estado(String estado) {
+    public Recibo estado(Estado estado) {
         this.estado = estado;
         return this;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -147,17 +139,30 @@ public class Recibo implements Serializable {
         this.total = total;
     }
 
-    public Instant getFecha() {
-        return fecha;
+    public Instant getFechagenera() {
+        return fechagenera;
     }
 
-    public Recibo fecha(Instant fecha) {
-        this.fecha = fecha;
+    public Recibo fechagenera(Instant fechagenera) {
+        this.fechagenera = fechagenera;
         return this;
     }
 
-    public void setFecha(Instant fecha) {
-        this.fecha = fecha;
+    public void setFechagenera(Instant fechagenera) {
+        this.fechagenera = fechagenera;
+    }
+
+    public Instant getFechapaga() {
+        return fechapaga;
+    }
+
+    public Recibo fechapaga(Instant fechapaga) {
+        this.fechapaga = fechapaga;
+        return this;
+    }
+
+    public void setFechapaga(Instant fechapaga) {
+        this.fechapaga = fechapaga;
     }
 
     public Integer getAnio() {
@@ -237,13 +242,13 @@ public class Recibo implements Serializable {
     public String toString() {
         return "Recibo{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", numero=" + getNumero() +
             ", estado='" + getEstado() + "'" +
             ", pagoanterior=" + getPagoanterior() +
             ", pagoactual=" + getPagoactual() +
             ", total=" + getTotal() +
-            ", fecha='" + getFecha() + "'" +
+            ", fechagenera='" + getFechagenera() + "'" +
+            ", fechapaga='" + getFechapaga() + "'" +
             ", anio=" + getAnio() +
             ", mes=" + getMes() +
             "}";

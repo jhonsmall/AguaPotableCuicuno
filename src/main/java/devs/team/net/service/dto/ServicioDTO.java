@@ -1,10 +1,12 @@
 package devs.team.net.service.dto;
 
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Tipo;
 
 /**
  * A DTO for the Servicio entity.
@@ -13,13 +15,12 @@ public class ServicioDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private String nombre;
 
     private String norma;
 
-    private Integer tipo;
+    private Tipo tipo;
 
     public Long getId() {
         return id;
@@ -27,14 +28,6 @@ public class ServicioDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -53,11 +46,11 @@ public class ServicioDTO implements Serializable {
         this.norma = norma;
     }
 
-    public Integer getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -86,10 +79,9 @@ public class ServicioDTO implements Serializable {
     public String toString() {
         return "ServicioDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", norma='" + getNorma() + "'" +
-            ", tipo=" + getTipo() +
+            ", tipo='" + getTipo() + "'" +
             "}";
     }
 }

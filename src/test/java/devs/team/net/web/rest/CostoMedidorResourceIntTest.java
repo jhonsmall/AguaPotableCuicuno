@@ -35,6 +35,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Estado;
 /**
  * Test class for the CostoMedidorResource REST controller.
  *
@@ -44,14 +45,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class CostoMedidorResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Boolean DEFAULT_ESTADO = false;
-    private static final Boolean UPDATED_ESTADO = true;
+    private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
+    private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
 
     @Autowired
     private CostoMedidorRepository costoMedidorRepository;
@@ -100,7 +98,6 @@ public class CostoMedidorResourceIntTest {
      */
     public static CostoMedidor createEntity(EntityManager em) {
         CostoMedidor costoMedidor = new CostoMedidor()
-            .codigo(DEFAULT_CODIGO)
             .fecha(DEFAULT_FECHA)
             .estado(DEFAULT_ESTADO);
         return costoMedidor;
@@ -128,9 +125,8 @@ public class CostoMedidorResourceIntTest {
         List<CostoMedidor> costoMedidorList = costoMedidorRepository.findAll();
         assertThat(costoMedidorList).hasSize(databaseSizeBeforeCreate + 1);
         CostoMedidor testCostoMedidor = costoMedidorList.get(costoMedidorList.size() - 1);
-        assertThat(testCostoMedidor.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testCostoMedidor.getFecha()).isEqualTo(DEFAULT_FECHA);
-        assertThat(testCostoMedidor.isEstado()).isEqualTo(DEFAULT_ESTADO);
+        assertThat(testCostoMedidor.getEstado()).isEqualTo(DEFAULT_ESTADO);
 
         // Validate the CostoMedidor in Elasticsearch
         CostoMedidor costoMedidorEs = costoMedidorSearchRepository.findOne(testCostoMedidor.getId());
@@ -159,6 +155,25 @@ public class CostoMedidorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = costoMedidorRepository.findAll().size();
+        // set the field null
+        costoMedidor.setFecha(null);
+
+        // Create the CostoMedidor, which fails.
+        CostoMedidorDTO costoMedidorDTO = costoMedidorMapper.toDto(costoMedidor);
+
+        restCostoMedidorMockMvc.perform(post("/api/costo-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(costoMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<CostoMedidor> costoMedidorList = costoMedidorRepository.findAll();
+        assertThat(costoMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCostoMedidors() throws Exception {
         // Initialize the database
         costoMedidorRepository.saveAndFlush(costoMedidor);
@@ -168,9 +183,8 @@ public class CostoMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costoMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
-            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())));
     }
 
     @Test
@@ -184,9 +198,8 @@ public class CostoMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(costoMedidor.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()))
-            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()));
+            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()));
     }
 
     @Test
@@ -210,7 +223,6 @@ public class CostoMedidorResourceIntTest {
         // Disconnect from session so that the updates on updatedCostoMedidor are not directly saved in db
         em.detach(updatedCostoMedidor);
         updatedCostoMedidor
-            .codigo(UPDATED_CODIGO)
             .fecha(UPDATED_FECHA)
             .estado(UPDATED_ESTADO);
         CostoMedidorDTO costoMedidorDTO = costoMedidorMapper.toDto(updatedCostoMedidor);
@@ -224,9 +236,8 @@ public class CostoMedidorResourceIntTest {
         List<CostoMedidor> costoMedidorList = costoMedidorRepository.findAll();
         assertThat(costoMedidorList).hasSize(databaseSizeBeforeUpdate);
         CostoMedidor testCostoMedidor = costoMedidorList.get(costoMedidorList.size() - 1);
-        assertThat(testCostoMedidor.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testCostoMedidor.getFecha()).isEqualTo(UPDATED_FECHA);
-        assertThat(testCostoMedidor.isEstado()).isEqualTo(UPDATED_ESTADO);
+        assertThat(testCostoMedidor.getEstado()).isEqualTo(UPDATED_ESTADO);
 
         // Validate the CostoMedidor in Elasticsearch
         CostoMedidor costoMedidorEs = costoMedidorSearchRepository.findOne(testCostoMedidor.getId());
@@ -286,9 +297,8 @@ public class CostoMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costoMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
-            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())));
     }
 
     @Test

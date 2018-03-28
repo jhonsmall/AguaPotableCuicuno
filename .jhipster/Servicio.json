@@ -10,12 +10,11 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "nombre",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "norma",
@@ -23,7 +22,8 @@
         },
         {
             "fieldName": "tipo",
-            "fieldType": "Integer"
+            "fieldType": "Tipo",
+            "fieldValues": "MANUAL,MEDIDOR"
         }
     ],
     "changelogDate": "20180325005152",
@@ -31,6 +31,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

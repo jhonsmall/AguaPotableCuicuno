@@ -35,6 +35,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Estado;
 /**
  * Test class for the LecturaMedidorResource REST controller.
  *
@@ -44,17 +45,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class LecturaMedidorResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final Integer DEFAULT_LECTURAINICIAL = 1;
     private static final Integer UPDATED_LECTURAINICIAL = 2;
 
     private static final Instant DEFAULT_LECTURAFINAL = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LECTURAFINAL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_ESTADO = "AAAAAAAAAA";
-    private static final String UPDATED_ESTADO = "BBBBBBBBBB";
+    private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
+    private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
 
     private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -112,7 +110,6 @@ public class LecturaMedidorResourceIntTest {
      */
     public static LecturaMedidor createEntity(EntityManager em) {
         LecturaMedidor lecturaMedidor = new LecturaMedidor()
-            .codigo(DEFAULT_CODIGO)
             .lecturainicial(DEFAULT_LECTURAINICIAL)
             .lecturafinal(DEFAULT_LECTURAFINAL)
             .estado(DEFAULT_ESTADO)
@@ -144,7 +141,6 @@ public class LecturaMedidorResourceIntTest {
         List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
         assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeCreate + 1);
         LecturaMedidor testLecturaMedidor = lecturaMedidorList.get(lecturaMedidorList.size() - 1);
-        assertThat(testLecturaMedidor.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testLecturaMedidor.getLecturainicial()).isEqualTo(DEFAULT_LECTURAINICIAL);
         assertThat(testLecturaMedidor.getLecturafinal()).isEqualTo(DEFAULT_LECTURAFINAL);
         assertThat(testLecturaMedidor.getEstado()).isEqualTo(DEFAULT_ESTADO);
@@ -179,6 +175,101 @@ public class LecturaMedidorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkLecturainicialIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lecturaMedidorRepository.findAll().size();
+        // set the field null
+        lecturaMedidor.setLecturainicial(null);
+
+        // Create the LecturaMedidor, which fails.
+        LecturaMedidorDTO lecturaMedidorDTO = lecturaMedidorMapper.toDto(lecturaMedidor);
+
+        restLecturaMedidorMockMvc.perform(post("/api/lectura-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lecturaMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
+        assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLecturafinalIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lecturaMedidorRepository.findAll().size();
+        // set the field null
+        lecturaMedidor.setLecturafinal(null);
+
+        // Create the LecturaMedidor, which fails.
+        LecturaMedidorDTO lecturaMedidorDTO = lecturaMedidorMapper.toDto(lecturaMedidor);
+
+        restLecturaMedidorMockMvc.perform(post("/api/lectura-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lecturaMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
+        assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lecturaMedidorRepository.findAll().size();
+        // set the field null
+        lecturaMedidor.setFecha(null);
+
+        // Create the LecturaMedidor, which fails.
+        LecturaMedidorDTO lecturaMedidorDTO = lecturaMedidorMapper.toDto(lecturaMedidor);
+
+        restLecturaMedidorMockMvc.perform(post("/api/lectura-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lecturaMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
+        assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAnioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lecturaMedidorRepository.findAll().size();
+        // set the field null
+        lecturaMedidor.setAnio(null);
+
+        // Create the LecturaMedidor, which fails.
+        LecturaMedidorDTO lecturaMedidorDTO = lecturaMedidorMapper.toDto(lecturaMedidor);
+
+        restLecturaMedidorMockMvc.perform(post("/api/lectura-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lecturaMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
+        assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkMesIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lecturaMedidorRepository.findAll().size();
+        // set the field null
+        lecturaMedidor.setMes(null);
+
+        // Create the LecturaMedidor, which fails.
+        LecturaMedidorDTO lecturaMedidorDTO = lecturaMedidorMapper.toDto(lecturaMedidor);
+
+        restLecturaMedidorMockMvc.perform(post("/api/lectura-medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lecturaMedidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
+        assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLecturaMedidors() throws Exception {
         // Initialize the database
         lecturaMedidorRepository.saveAndFlush(lecturaMedidor);
@@ -188,7 +279,6 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lecturaMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].lecturainicial").value(hasItem(DEFAULT_LECTURAINICIAL)))
             .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL.toString())))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
@@ -208,7 +298,6 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(lecturaMedidor.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.lecturainicial").value(DEFAULT_LECTURAINICIAL))
             .andExpect(jsonPath("$.lecturafinal").value(DEFAULT_LECTURAFINAL.toString()))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()))
@@ -238,7 +327,6 @@ public class LecturaMedidorResourceIntTest {
         // Disconnect from session so that the updates on updatedLecturaMedidor are not directly saved in db
         em.detach(updatedLecturaMedidor);
         updatedLecturaMedidor
-            .codigo(UPDATED_CODIGO)
             .lecturainicial(UPDATED_LECTURAINICIAL)
             .lecturafinal(UPDATED_LECTURAFINAL)
             .estado(UPDATED_ESTADO)
@@ -256,7 +344,6 @@ public class LecturaMedidorResourceIntTest {
         List<LecturaMedidor> lecturaMedidorList = lecturaMedidorRepository.findAll();
         assertThat(lecturaMedidorList).hasSize(databaseSizeBeforeUpdate);
         LecturaMedidor testLecturaMedidor = lecturaMedidorList.get(lecturaMedidorList.size() - 1);
-        assertThat(testLecturaMedidor.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testLecturaMedidor.getLecturainicial()).isEqualTo(UPDATED_LECTURAINICIAL);
         assertThat(testLecturaMedidor.getLecturafinal()).isEqualTo(UPDATED_LECTURAFINAL);
         assertThat(testLecturaMedidor.getEstado()).isEqualTo(UPDATED_ESTADO);
@@ -322,7 +409,6 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lecturaMedidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].lecturainicial").value(hasItem(DEFAULT_LECTURAINICIAL)))
             .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL.toString())))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))

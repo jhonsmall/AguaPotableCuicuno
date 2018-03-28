@@ -1,10 +1,12 @@
 package devs.team.net.service.dto;
 
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A DTO for the Clasificacion entity.
@@ -13,11 +15,10 @@ public class ClasificacionDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private String nombre;
 
-    private Boolean estado;
+    private Estado estado;
 
     public Long getId() {
         return id;
@@ -25,14 +26,6 @@ public class ClasificacionDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -43,11 +36,11 @@ public class ClasificacionDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public Boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -76,9 +69,8 @@ public class ClasificacionDTO implements Serializable {
     public String toString() {
         return "ClasificacionDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
-            ", estado='" + isEstado() + "'" +
+            ", estado='" + getEstado() + "'" +
             "}";
     }
 }

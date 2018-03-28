@@ -1,0 +1,21 @@
+import { BaseEntity } from './../../shared';
+
+export const enum Estado {
+    'ACTIVO',
+    'INACTIVO'
+}
+
+export class LecturaMedidor implements BaseEntity {
+    constructor(
+        public id?: number,
+        public lecturainicial?: number,
+        public lecturafinal?: any,
+        public estado?: Estado,
+        public fecha?: any,
+        public anio?: number,
+        public mes?: number,
+        public lecturamedidorRecibos?: BaseEntity[],
+        public medidorId?: number,
+    ) {
+    }
+}

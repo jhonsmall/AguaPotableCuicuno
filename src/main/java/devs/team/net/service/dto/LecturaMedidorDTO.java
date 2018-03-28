@@ -2,10 +2,12 @@ package devs.team.net.service.dto;
 
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A DTO for the LecturaMedidor entity.
@@ -14,18 +16,21 @@ public class LecturaMedidorDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private Integer lecturainicial;
 
+    @NotNull
     private Instant lecturafinal;
 
-    private String estado;
+    private Estado estado;
 
+    @NotNull
     private Instant fecha;
 
+    @NotNull
     private Integer anio;
 
+    @NotNull
     private Integer mes;
 
     private Long medidorId;
@@ -36,14 +41,6 @@ public class LecturaMedidorDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Integer getLecturainicial() {
@@ -62,11 +59,11 @@ public class LecturaMedidorDTO implements Serializable {
         this.lecturafinal = lecturafinal;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -127,7 +124,6 @@ public class LecturaMedidorDTO implements Serializable {
     public String toString() {
         return "LecturaMedidorDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", lecturainicial=" + getLecturainicial() +
             ", lecturafinal='" + getLecturafinal() + "'" +
             ", estado='" + getEstado() + "'" +

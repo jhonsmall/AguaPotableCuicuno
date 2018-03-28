@@ -68,7 +68,7 @@ class EscalasDelMedidorGatlingTest extends Simulation {
             .exec(http("Create new escalasDelMedidor")
             .post("/api/escalas-del-medidors")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "inicio":"0", "fin":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "inicio":"0", "fin":"0", "fecha":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_escalasDelMedidor_url"))).exitHereIfFailed
             .pause(10)

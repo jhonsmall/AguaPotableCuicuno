@@ -7,6 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -34,11 +35,9 @@ public class Sector implements Serializable {
     /**
      * The firstname attribute.
      */
-    @ApiModelProperty(value = "The firstname attribute.")
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "nombre")
+    @NotNull
+    @ApiModelProperty(value = "The firstname attribute.", required = true)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @Column(name = "descripcion")
@@ -61,19 +60,6 @@ public class Sector implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Sector codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -177,7 +163,6 @@ public class Sector implements Serializable {
     public String toString() {
         return "Sector{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             "}";

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class MedidorResource {
      */
     @PostMapping("/medidors")
     @Timed
-    public ResponseEntity<MedidorDTO> createMedidor(@RequestBody MedidorDTO medidorDTO) throws URISyntaxException {
+    public ResponseEntity<MedidorDTO> createMedidor(@Valid @RequestBody MedidorDTO medidorDTO) throws URISyntaxException {
         log.debug("REST request to save Medidor : {}", medidorDTO);
         if (medidorDTO.getId() != null) {
             throw new BadRequestAlertException("A new medidor cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class MedidorResource {
      */
     @PutMapping("/medidors")
     @Timed
-    public ResponseEntity<MedidorDTO> updateMedidor(@RequestBody MedidorDTO medidorDTO) throws URISyntaxException {
+    public ResponseEntity<MedidorDTO> updateMedidor(@Valid @RequestBody MedidorDTO medidorDTO) throws URISyntaxException {
         log.debug("REST request to update Medidor : {}", medidorDTO);
         if (medidorDTO.getId() == null) {
             return createMedidor(medidorDTO);

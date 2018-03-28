@@ -36,6 +36,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Estado;
 /**
  * Test class for the ReciboResource REST controller.
  *
@@ -45,14 +46,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class ReciboResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final Integer DEFAULT_NUMERO = 1;
     private static final Integer UPDATED_NUMERO = 2;
 
-    private static final String DEFAULT_ESTADO = "AAAAAAAAAA";
-    private static final String UPDATED_ESTADO = "BBBBBBBBBB";
+    private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
+    private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
 
     private static final BigDecimal DEFAULT_PAGOANTERIOR = new BigDecimal(1);
     private static final BigDecimal UPDATED_PAGOANTERIOR = new BigDecimal(2);
@@ -63,8 +61,11 @@ public class ReciboResourceIntTest {
     private static final BigDecimal DEFAULT_TOTAL = new BigDecimal(1);
     private static final BigDecimal UPDATED_TOTAL = new BigDecimal(2);
 
-    private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_FECHAGENERA = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHAGENERA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_FECHAPAGA = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHAPAGA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Integer DEFAULT_ANIO = 1;
     private static final Integer UPDATED_ANIO = 2;
@@ -119,13 +120,13 @@ public class ReciboResourceIntTest {
      */
     public static Recibo createEntity(EntityManager em) {
         Recibo recibo = new Recibo()
-            .codigo(DEFAULT_CODIGO)
             .numero(DEFAULT_NUMERO)
             .estado(DEFAULT_ESTADO)
             .pagoanterior(DEFAULT_PAGOANTERIOR)
             .pagoactual(DEFAULT_PAGOACTUAL)
             .total(DEFAULT_TOTAL)
-            .fecha(DEFAULT_FECHA)
+            .fechagenera(DEFAULT_FECHAGENERA)
+            .fechapaga(DEFAULT_FECHAPAGA)
             .anio(DEFAULT_ANIO)
             .mes(DEFAULT_MES);
         return recibo;
@@ -153,13 +154,13 @@ public class ReciboResourceIntTest {
         List<Recibo> reciboList = reciboRepository.findAll();
         assertThat(reciboList).hasSize(databaseSizeBeforeCreate + 1);
         Recibo testRecibo = reciboList.get(reciboList.size() - 1);
-        assertThat(testRecibo.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testRecibo.getNumero()).isEqualTo(DEFAULT_NUMERO);
         assertThat(testRecibo.getEstado()).isEqualTo(DEFAULT_ESTADO);
         assertThat(testRecibo.getPagoanterior()).isEqualTo(DEFAULT_PAGOANTERIOR);
         assertThat(testRecibo.getPagoactual()).isEqualTo(DEFAULT_PAGOACTUAL);
         assertThat(testRecibo.getTotal()).isEqualTo(DEFAULT_TOTAL);
-        assertThat(testRecibo.getFecha()).isEqualTo(DEFAULT_FECHA);
+        assertThat(testRecibo.getFechagenera()).isEqualTo(DEFAULT_FECHAGENERA);
+        assertThat(testRecibo.getFechapaga()).isEqualTo(DEFAULT_FECHAPAGA);
         assertThat(testRecibo.getAnio()).isEqualTo(DEFAULT_ANIO);
         assertThat(testRecibo.getMes()).isEqualTo(DEFAULT_MES);
 
@@ -190,6 +191,25 @@ public class ReciboResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = reciboRepository.findAll().size();
+        // set the field null
+        recibo.setNumero(null);
+
+        // Create the Recibo, which fails.
+        ReciboDTO reciboDTO = reciboMapper.toDto(recibo);
+
+        restReciboMockMvc.perform(post("/api/recibos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(reciboDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Recibo> reciboList = reciboRepository.findAll();
+        assertThat(reciboList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRecibos() throws Exception {
         // Initialize the database
         reciboRepository.saveAndFlush(recibo);
@@ -199,13 +219,13 @@ public class ReciboResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(recibo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].pagoanterior").value(hasItem(DEFAULT_PAGOANTERIOR.intValue())))
             .andExpect(jsonPath("$.[*].pagoactual").value(hasItem(DEFAULT_PAGOACTUAL.intValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
+            .andExpect(jsonPath("$.[*].fechagenera").value(hasItem(DEFAULT_FECHAGENERA.toString())))
+            .andExpect(jsonPath("$.[*].fechapaga").value(hasItem(DEFAULT_FECHAPAGA.toString())))
             .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO)))
             .andExpect(jsonPath("$.[*].mes").value(hasItem(DEFAULT_MES)));
     }
@@ -221,13 +241,13 @@ public class ReciboResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(recibo.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()))
             .andExpect(jsonPath("$.pagoanterior").value(DEFAULT_PAGOANTERIOR.intValue()))
             .andExpect(jsonPath("$.pagoactual").value(DEFAULT_PAGOACTUAL.intValue()))
             .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.intValue()))
-            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()))
+            .andExpect(jsonPath("$.fechagenera").value(DEFAULT_FECHAGENERA.toString()))
+            .andExpect(jsonPath("$.fechapaga").value(DEFAULT_FECHAPAGA.toString()))
             .andExpect(jsonPath("$.anio").value(DEFAULT_ANIO))
             .andExpect(jsonPath("$.mes").value(DEFAULT_MES));
     }
@@ -253,13 +273,13 @@ public class ReciboResourceIntTest {
         // Disconnect from session so that the updates on updatedRecibo are not directly saved in db
         em.detach(updatedRecibo);
         updatedRecibo
-            .codigo(UPDATED_CODIGO)
             .numero(UPDATED_NUMERO)
             .estado(UPDATED_ESTADO)
             .pagoanterior(UPDATED_PAGOANTERIOR)
             .pagoactual(UPDATED_PAGOACTUAL)
             .total(UPDATED_TOTAL)
-            .fecha(UPDATED_FECHA)
+            .fechagenera(UPDATED_FECHAGENERA)
+            .fechapaga(UPDATED_FECHAPAGA)
             .anio(UPDATED_ANIO)
             .mes(UPDATED_MES);
         ReciboDTO reciboDTO = reciboMapper.toDto(updatedRecibo);
@@ -273,13 +293,13 @@ public class ReciboResourceIntTest {
         List<Recibo> reciboList = reciboRepository.findAll();
         assertThat(reciboList).hasSize(databaseSizeBeforeUpdate);
         Recibo testRecibo = reciboList.get(reciboList.size() - 1);
-        assertThat(testRecibo.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testRecibo.getNumero()).isEqualTo(UPDATED_NUMERO);
         assertThat(testRecibo.getEstado()).isEqualTo(UPDATED_ESTADO);
         assertThat(testRecibo.getPagoanterior()).isEqualTo(UPDATED_PAGOANTERIOR);
         assertThat(testRecibo.getPagoactual()).isEqualTo(UPDATED_PAGOACTUAL);
         assertThat(testRecibo.getTotal()).isEqualTo(UPDATED_TOTAL);
-        assertThat(testRecibo.getFecha()).isEqualTo(UPDATED_FECHA);
+        assertThat(testRecibo.getFechagenera()).isEqualTo(UPDATED_FECHAGENERA);
+        assertThat(testRecibo.getFechapaga()).isEqualTo(UPDATED_FECHAPAGA);
         assertThat(testRecibo.getAnio()).isEqualTo(UPDATED_ANIO);
         assertThat(testRecibo.getMes()).isEqualTo(UPDATED_MES);
 
@@ -341,13 +361,13 @@ public class ReciboResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(recibo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].pagoanterior").value(hasItem(DEFAULT_PAGOANTERIOR.intValue())))
             .andExpect(jsonPath("$.[*].pagoactual").value(hasItem(DEFAULT_PAGOACTUAL.intValue())))
             .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
+            .andExpect(jsonPath("$.[*].fechagenera").value(hasItem(DEFAULT_FECHAGENERA.toString())))
+            .andExpect(jsonPath("$.[*].fechapaga").value(hasItem(DEFAULT_FECHAPAGA.toString())))
             .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO)))
             .andExpect(jsonPath("$.[*].mes").value(hasItem(DEFAULT_MES)));
     }

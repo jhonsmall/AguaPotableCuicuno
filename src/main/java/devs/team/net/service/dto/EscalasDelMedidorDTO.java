@@ -1,6 +1,8 @@
 package devs.team.net.service.dto;
 
 
+import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,11 +15,14 @@ public class EscalasDelMedidorDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private Integer inicio;
 
+    @NotNull
     private Integer fin;
+
+    @NotNull
+    private Instant fecha;
 
     private Long clasificacionId;
 
@@ -27,14 +32,6 @@ public class EscalasDelMedidorDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Integer getInicio() {
@@ -51,6 +48,14 @@ public class EscalasDelMedidorDTO implements Serializable {
 
     public void setFin(Integer fin) {
         this.fin = fin;
+    }
+
+    public Instant getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Instant fecha) {
+        this.fecha = fecha;
     }
 
     public Long getClasificacionId() {
@@ -86,9 +91,9 @@ public class EscalasDelMedidorDTO implements Serializable {
     public String toString() {
         return "EscalasDelMedidorDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", inicio=" + getInicio() +
             ", fin=" + getFin() +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }

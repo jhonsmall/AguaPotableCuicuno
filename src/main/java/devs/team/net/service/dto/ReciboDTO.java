@@ -2,11 +2,13 @@ package devs.team.net.service.dto;
 
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A DTO for the Recibo entity.
@@ -15,11 +17,10 @@ public class ReciboDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private Integer numero;
 
-    private String estado;
+    private Estado estado;
 
     private BigDecimal pagoanterior;
 
@@ -27,7 +28,9 @@ public class ReciboDTO implements Serializable {
 
     private BigDecimal total;
 
-    private Instant fecha;
+    private Instant fechagenera;
+
+    private Instant fechapaga;
 
     private Integer anio;
 
@@ -45,14 +48,6 @@ public class ReciboDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Integer getNumero() {
         return numero;
     }
@@ -61,11 +56,11 @@ public class ReciboDTO implements Serializable {
         this.numero = numero;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -93,12 +88,20 @@ public class ReciboDTO implements Serializable {
         this.total = total;
     }
 
-    public Instant getFecha() {
-        return fecha;
+    public Instant getFechagenera() {
+        return fechagenera;
     }
 
-    public void setFecha(Instant fecha) {
-        this.fecha = fecha;
+    public void setFechagenera(Instant fechagenera) {
+        this.fechagenera = fechagenera;
+    }
+
+    public Instant getFechapaga() {
+        return fechapaga;
+    }
+
+    public void setFechapaga(Instant fechapaga) {
+        this.fechapaga = fechapaga;
     }
 
     public Integer getAnio() {
@@ -158,13 +161,13 @@ public class ReciboDTO implements Serializable {
     public String toString() {
         return "ReciboDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", numero=" + getNumero() +
             ", estado='" + getEstado() + "'" +
             ", pagoanterior=" + getPagoanterior() +
             ", pagoactual=" + getPagoactual() +
             ", total=" + getTotal() +
-            ", fecha='" + getFecha() + "'" +
+            ", fechagenera='" + getFechagenera() + "'" +
+            ", fechapaga='" + getFechapaga() + "'" +
             ", anio=" + getAnio() +
             ", mes=" + getMes() +
             "}";

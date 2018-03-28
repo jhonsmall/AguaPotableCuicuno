@@ -68,7 +68,7 @@ class CostoMedidorGatlingTest extends Simulation {
             .exec(http("Create new costoMedidor")
             .post("/api/costo-medidors")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "fecha":"2020-01-01T00:00:00.000Z", "estado":null}""")).asJSON
+            .body(StringBody("""{"id":null, "fecha":"2020-01-01T00:00:00.000Z", "estado":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_costoMedidor_url"))).exitHereIfFailed
             .pause(10)

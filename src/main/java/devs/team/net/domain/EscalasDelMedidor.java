@@ -4,9 +4,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -25,14 +27,17 @@ public class EscalasDelMedidor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "inicio")
+    @NotNull
+    @Column(name = "inicio", nullable = false)
     private Integer inicio;
 
-    @Column(name = "fin")
+    @NotNull
+    @Column(name = "fin", nullable = false)
     private Integer fin;
+
+    @NotNull
+    @Column(name = "fecha", nullable = false)
+    private Instant fecha;
 
     @ManyToOne
     private Clasificacion clasificacion;
@@ -44,19 +49,6 @@ public class EscalasDelMedidor implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public EscalasDelMedidor codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Integer getInicio() {
@@ -83,6 +75,19 @@ public class EscalasDelMedidor implements Serializable {
 
     public void setFin(Integer fin) {
         this.fin = fin;
+    }
+
+    public Instant getFecha() {
+        return fecha;
+    }
+
+    public EscalasDelMedidor fecha(Instant fecha) {
+        this.fecha = fecha;
+        return this;
+    }
+
+    public void setFecha(Instant fecha) {
+        this.fecha = fecha;
     }
 
     public Clasificacion getClasificacion() {
@@ -123,9 +128,9 @@ public class EscalasDelMedidor implements Serializable {
     public String toString() {
         return "EscalasDelMedidor{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", inicio=" + getInicio() +
             ", fin=" + getFin() +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }

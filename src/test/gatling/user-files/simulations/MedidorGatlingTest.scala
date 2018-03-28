@@ -68,7 +68,7 @@ class MedidorGatlingTest extends Simulation {
             .exec(http("Create new medidor")
             .post("/api/medidors")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "numeromedidor":"0", "fechaobtuvo":"2020-01-01T00:00:00.000Z", "fecha":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "numeromedidor":"0", "fechaadquirio":"2020-01-01T00:00:00.000Z", "fechaactual":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_medidor_url"))).exitHereIfFailed
             .pause(10)

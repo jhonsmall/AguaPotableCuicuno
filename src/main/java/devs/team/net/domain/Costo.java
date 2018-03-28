@@ -6,10 +6,12 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -32,11 +34,13 @@ public class Costo implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "cuota", precision=10, scale=2)
+    @NotNull
+    @Column(name = "cuota", precision=10, scale=2, nullable = false)
     private BigDecimal cuota;
+
+    @NotNull
+    @Column(name = "fecha", nullable = false)
+    private Instant fecha;
 
     @OneToMany(mappedBy = "costo")
     @JsonIgnore
@@ -61,19 +65,6 @@ public class Costo implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Costo codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public BigDecimal getCuota() {
         return cuota;
     }
@@ -85,6 +76,19 @@ public class Costo implements Serializable {
 
     public void setCuota(BigDecimal cuota) {
         this.cuota = cuota;
+    }
+
+    public Instant getFecha() {
+        return fecha;
+    }
+
+    public Costo fecha(Instant fecha) {
+        this.fecha = fecha;
+        return this;
+    }
+
+    public void setFecha(Instant fecha) {
+        this.fecha = fecha;
     }
 
     public Set<CostoMedidor> getCostoCostoMedidors() {
@@ -176,8 +180,8 @@ public class Costo implements Serializable {
     public String toString() {
         return "Costo{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", cuota=" + getCuota() +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }

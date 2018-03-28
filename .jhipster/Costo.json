@@ -28,12 +28,18 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
+            "fieldName": "cuota",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
-            "fieldName": "cuota",
-            "fieldType": "BigDecimal"
+            "fieldName": "fecha",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180325005155",
@@ -42,6 +48,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

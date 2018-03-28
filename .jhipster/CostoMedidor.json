@@ -16,16 +16,16 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "fecha",
-            "fieldType": "Instant"
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "estado",
-            "fieldType": "Boolean"
+            "fieldType": "Estado",
+            "fieldValues": "ACTIVO,INACTIVO"
         }
     ],
     "changelogDate": "20180325005157",
@@ -33,6 +33,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

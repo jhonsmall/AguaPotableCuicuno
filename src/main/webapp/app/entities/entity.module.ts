@@ -10,6 +10,16 @@ import { AguaPotableCuicunoCostoMedidorMySuffixModule } from './costo-medidor-my
 import { AguaPotableCuicunoMedidorMySuffixModule } from './medidor-my-suffix/medidor-my-suffix.module';
 import { AguaPotableCuicunoLecturaMedidorMySuffixModule } from './lectura-medidor-my-suffix/lectura-medidor-my-suffix.module';
 import { AguaPotableCuicunoReciboMySuffixModule } from './recibo-my-suffix/recibo-my-suffix.module';
+import { AguaPotableCuicunoUsuarioModule } from './usuario/usuario.module';
+import { AguaPotableCuicunoServicioModule } from './servicio/servicio.module';
+import { AguaPotableCuicunoClasificacionModule } from './clasificacion/clasificacion.module';
+import { AguaPotableCuicunoEscalasDelMedidorModule } from './escalas-del-medidor/escalas-del-medidor.module';
+import { AguaPotableCuicunoCostoModule } from './costo/costo.module';
+import { AguaPotableCuicunoSectorModule } from './sector/sector.module';
+import { AguaPotableCuicunoCostoMedidorModule } from './costo-medidor/costo-medidor.module';
+import { AguaPotableCuicunoMedidorModule } from './medidor/medidor.module';
+import { AguaPotableCuicunoLecturaMedidorModule } from './lectura-medidor/lectura-medidor.module';
+import { AguaPotableCuicunoReciboModule } from './recibo/recibo.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -24,6 +34,16 @@ import { AguaPotableCuicunoReciboMySuffixModule } from './recibo-my-suffix/recib
         AguaPotableCuicunoMedidorMySuffixModule,
         AguaPotableCuicunoLecturaMedidorMySuffixModule,
         AguaPotableCuicunoReciboMySuffixModule,
+        AguaPotableCuicunoUsuarioModule,
+        AguaPotableCuicunoServicioModule,
+        AguaPotableCuicunoClasificacionModule,
+        AguaPotableCuicunoEscalasDelMedidorModule,
+        AguaPotableCuicunoCostoModule,
+        AguaPotableCuicunoSectorModule,
+        AguaPotableCuicunoCostoMedidorModule,
+        AguaPotableCuicunoMedidorModule,
+        AguaPotableCuicunoLecturaMedidorModule,
+        AguaPotableCuicunoReciboModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -4,11 +4,14 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A CostoMedidor.
@@ -26,14 +29,13 @@ public class CostoMedidor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "fecha")
+    @NotNull
+    @Column(name = "fecha", nullable = false)
     private Instant fecha;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private Boolean estado;
+    private Estado estado;
 
     @ManyToOne
     private Costo costo;
@@ -50,19 +52,6 @@ public class CostoMedidor implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public CostoMedidor codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Instant getFecha() {
         return fecha;
     }
@@ -76,16 +65,16 @@ public class CostoMedidor implements Serializable {
         this.fecha = fecha;
     }
 
-    public Boolean isEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public CostoMedidor estado(Boolean estado) {
+    public CostoMedidor estado(Estado estado) {
         this.estado = estado;
         return this;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -140,9 +129,8 @@ public class CostoMedidor implements Serializable {
     public String toString() {
         return "CostoMedidor{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", fecha='" + getFecha() + "'" +
-            ", estado='" + isEstado() + "'" +
+            ", estado='" + getEstado() + "'" +
             "}";
     }
 }

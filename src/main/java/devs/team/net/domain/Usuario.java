@@ -5,12 +5,19 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Estado;
+
+import devs.team.net.domain.enumeration.Documento;
+
+import devs.team.net.domain.enumeration.Sexo;
 
 /**
  * A Usuario.
@@ -28,32 +35,38 @@ public class Usuario implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "documento")
-    private String documento;
+    private Documento documento;
 
-    @Column(name = "numero")
+    @NotNull
+    @Column(name = "numero", nullable = false)
     private String numero;
 
-    @Column(name = "nombres")
+    @NotNull
+    @Column(name = "nombres", nullable = false)
     private String nombres;
 
-    @Column(name = "apellidos")
+    @NotNull
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
     @Column(name = "direccion")
     private String direccion;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "sexo")
-    private String sexo;
+    private Sexo sexo;
 
     @Column(name = "telefono")
     private String telefono;
+
+    @Column(name = "email")
+    private String email;
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
@@ -74,42 +87,29 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Usuario codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public Usuario estado(String estado) {
+    public Usuario estado(Estado estado) {
         this.estado = estado;
         return this;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public String getDocumento() {
+    public Documento getDocumento() {
         return documento;
     }
 
-    public Usuario documento(String documento) {
+    public Usuario documento(Documento documento) {
         this.documento = documento;
         return this;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(Documento documento) {
         this.documento = documento;
     }
 
@@ -165,16 +165,16 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public Usuario sexo(String sexo) {
+    public Usuario sexo(Sexo sexo) {
         this.sexo = sexo;
         return this;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
@@ -189,6 +189,19 @@ public class Usuario implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Usuario email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Recibo> getUsuarioRecibos() {
@@ -266,7 +279,6 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", estado='" + getEstado() + "'" +
             ", documento='" + getDocumento() + "'" +
             ", numero='" + getNumero() + "'" +
@@ -275,6 +287,7 @@ public class Usuario implements Serializable {
             ", direccion='" + getDireccion() + "'" +
             ", sexo='" + getSexo() + "'" +
             ", telefono='" + getTelefono() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

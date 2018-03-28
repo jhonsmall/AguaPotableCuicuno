@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Estado;
 /**
  * Test class for the ClasificacionResource REST controller.
  *
@@ -42,14 +43,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class ClasificacionResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ESTADO = false;
-    private static final Boolean UPDATED_ESTADO = true;
+    private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
+    private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
 
     @Autowired
     private ClasificacionRepository clasificacionRepository;
@@ -98,7 +96,6 @@ public class ClasificacionResourceIntTest {
      */
     public static Clasificacion createEntity(EntityManager em) {
         Clasificacion clasificacion = new Clasificacion()
-            .codigo(DEFAULT_CODIGO)
             .nombre(DEFAULT_NOMBRE)
             .estado(DEFAULT_ESTADO);
         return clasificacion;
@@ -126,9 +123,8 @@ public class ClasificacionResourceIntTest {
         List<Clasificacion> clasificacionList = clasificacionRepository.findAll();
         assertThat(clasificacionList).hasSize(databaseSizeBeforeCreate + 1);
         Clasificacion testClasificacion = clasificacionList.get(clasificacionList.size() - 1);
-        assertThat(testClasificacion.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testClasificacion.getNombre()).isEqualTo(DEFAULT_NOMBRE);
-        assertThat(testClasificacion.isEstado()).isEqualTo(DEFAULT_ESTADO);
+        assertThat(testClasificacion.getEstado()).isEqualTo(DEFAULT_ESTADO);
 
         // Validate the Clasificacion in Elasticsearch
         Clasificacion clasificacionEs = clasificacionSearchRepository.findOne(testClasificacion.getId());
@@ -157,6 +153,25 @@ public class ClasificacionResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clasificacionRepository.findAll().size();
+        // set the field null
+        clasificacion.setNombre(null);
+
+        // Create the Clasificacion, which fails.
+        ClasificacionDTO clasificacionDTO = clasificacionMapper.toDto(clasificacion);
+
+        restClasificacionMockMvc.perform(post("/api/clasificacions")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clasificacionDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Clasificacion> clasificacionList = clasificacionRepository.findAll();
+        assertThat(clasificacionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllClasificacions() throws Exception {
         // Initialize the database
         clasificacionRepository.saveAndFlush(clasificacion);
@@ -166,9 +181,8 @@ public class ClasificacionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(clasificacion.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
-            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())));
     }
 
     @Test
@@ -182,9 +196,8 @@ public class ClasificacionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(clasificacion.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
-            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.booleanValue()));
+            .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()));
     }
 
     @Test
@@ -208,7 +221,6 @@ public class ClasificacionResourceIntTest {
         // Disconnect from session so that the updates on updatedClasificacion are not directly saved in db
         em.detach(updatedClasificacion);
         updatedClasificacion
-            .codigo(UPDATED_CODIGO)
             .nombre(UPDATED_NOMBRE)
             .estado(UPDATED_ESTADO);
         ClasificacionDTO clasificacionDTO = clasificacionMapper.toDto(updatedClasificacion);
@@ -222,9 +234,8 @@ public class ClasificacionResourceIntTest {
         List<Clasificacion> clasificacionList = clasificacionRepository.findAll();
         assertThat(clasificacionList).hasSize(databaseSizeBeforeUpdate);
         Clasificacion testClasificacion = clasificacionList.get(clasificacionList.size() - 1);
-        assertThat(testClasificacion.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testClasificacion.getNombre()).isEqualTo(UPDATED_NOMBRE);
-        assertThat(testClasificacion.isEstado()).isEqualTo(UPDATED_ESTADO);
+        assertThat(testClasificacion.getEstado()).isEqualTo(UPDATED_ESTADO);
 
         // Validate the Clasificacion in Elasticsearch
         Clasificacion clasificacionEs = clasificacionSearchRepository.findOne(testClasificacion.getId());
@@ -284,9 +295,8 @@ public class ClasificacionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(clasificacion.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
-            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())));
     }
 
     @Test

@@ -68,7 +68,7 @@ class ServicioGatlingTest extends Simulation {
             .exec(http("Create new servicio")
             .post("/api/servicios")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "nombre":"SAMPLE_TEXT", "norma":"SAMPLE_TEXT", "tipo":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "nombre":"SAMPLE_TEXT", "norma":"SAMPLE_TEXT", "tipo":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_servicio_url"))).exitHereIfFailed
             .pause(10)

@@ -1,6 +1,8 @@
 package devs.team.net.service.dto;
 
 
+import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -14,9 +16,11 @@ public class CostoDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private BigDecimal cuota;
+
+    @NotNull
+    private Instant fecha;
 
     private Long servicioId;
 
@@ -32,20 +36,20 @@ public class CostoDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public BigDecimal getCuota() {
         return cuota;
     }
 
     public void setCuota(BigDecimal cuota) {
         this.cuota = cuota;
+    }
+
+    public Instant getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Instant fecha) {
+        this.fecha = fecha;
     }
 
     public Long getServicioId() {
@@ -97,8 +101,8 @@ public class CostoDTO implements Serializable {
     public String toString() {
         return "CostoDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", cuota=" + getCuota() +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }

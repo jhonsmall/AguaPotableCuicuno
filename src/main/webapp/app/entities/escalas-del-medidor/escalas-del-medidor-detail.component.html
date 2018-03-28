@@ -1,0 +1,40 @@
+
+<div *ngIf="escalasDelMedidor">
+    <h2><span>Escalas Del Medidor</span> {{escalasDelMedidor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Inicio</span></dt>
+        <dd>
+            <span>{{escalasDelMedidor.inicio}}</span>
+        </dd>
+        <dt><span>Fin</span></dt>
+        <dd>
+            <span>{{escalasDelMedidor.fin}}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+            <span>{{escalasDelMedidor.fecha | date:'medium'}}</span>
+        </dd>
+        <dt><span>Clasificacion</span></dt>
+        <dd>
+            <div *ngIf="escalasDelMedidor.clasificacionId">
+                <a [routerLink]="['/clasificacion', escalasDelMedidor.clasificacionId]">{{escalasDelMedidor.clasificacionId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'escalas-del-medidor/'+ escalasDelMedidor.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

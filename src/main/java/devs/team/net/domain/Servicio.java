@@ -5,12 +5,15 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Tipo;
 
 /**
  * A Servicio.
@@ -28,17 +31,16 @@ public class Servicio implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "nombre")
+    @NotNull
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @Column(name = "norma")
     private String norma;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    private Integer tipo;
+    private Tipo tipo;
 
     @OneToMany(mappedBy = "servicio")
     @JsonIgnore
@@ -52,19 +54,6 @@ public class Servicio implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Servicio codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -93,16 +82,16 @@ public class Servicio implements Serializable {
         this.norma = norma;
     }
 
-    public Integer getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public Servicio tipo(Integer tipo) {
+    public Servicio tipo(Tipo tipo) {
         this.tipo = tipo;
         return this;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -156,10 +145,9 @@ public class Servicio implements Serializable {
     public String toString() {
         return "Servicio{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", norma='" + getNorma() + "'" +
-            ", tipo=" + getTipo() +
+            ", tipo='" + getTipo() + "'" +
             "}";
     }
 }
