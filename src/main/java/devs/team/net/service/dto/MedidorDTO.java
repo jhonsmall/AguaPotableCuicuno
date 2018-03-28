@@ -2,6 +2,7 @@ package devs.team.net.service.dto;
 
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +15,14 @@ public class MedidorDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private Integer numeromedidor;
 
-    private Instant fechaobtuvo;
+    @NotNull
+    private Instant fechaadquirio;
 
-    private Instant fecha;
+    @NotNull
+    private Instant fechaactual;
 
     private Long usuarioId;
 
@@ -36,14 +38,6 @@ public class MedidorDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Integer getNumeromedidor() {
         return numeromedidor;
     }
@@ -52,20 +46,20 @@ public class MedidorDTO implements Serializable {
         this.numeromedidor = numeromedidor;
     }
 
-    public Instant getFechaobtuvo() {
-        return fechaobtuvo;
+    public Instant getFechaadquirio() {
+        return fechaadquirio;
     }
 
-    public void setFechaobtuvo(Instant fechaobtuvo) {
-        this.fechaobtuvo = fechaobtuvo;
+    public void setFechaadquirio(Instant fechaadquirio) {
+        this.fechaadquirio = fechaadquirio;
     }
 
-    public Instant getFecha() {
-        return fecha;
+    public Instant getFechaactual() {
+        return fechaactual;
     }
 
-    public void setFecha(Instant fecha) {
-        this.fecha = fecha;
+    public void setFechaactual(Instant fechaactual) {
+        this.fechaactual = fechaactual;
     }
 
     public Long getUsuarioId() {
@@ -117,10 +111,9 @@ public class MedidorDTO implements Serializable {
     public String toString() {
         return "MedidorDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", numeromedidor=" + getNumeromedidor() +
-            ", fechaobtuvo='" + getFechaobtuvo() + "'" +
-            ", fecha='" + getFecha() + "'" +
+            ", fechaadquirio='" + getFechaadquirio() + "'" +
+            ", fechaactual='" + getFechaactual() + "'" +
             "}";
     }
 }

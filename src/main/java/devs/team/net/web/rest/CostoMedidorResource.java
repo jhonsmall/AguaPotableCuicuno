@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class CostoMedidorResource {
      */
     @PostMapping("/costo-medidors")
     @Timed
-    public ResponseEntity<CostoMedidorDTO> createCostoMedidor(@RequestBody CostoMedidorDTO costoMedidorDTO) throws URISyntaxException {
+    public ResponseEntity<CostoMedidorDTO> createCostoMedidor(@Valid @RequestBody CostoMedidorDTO costoMedidorDTO) throws URISyntaxException {
         log.debug("REST request to save CostoMedidor : {}", costoMedidorDTO);
         if (costoMedidorDTO.getId() != null) {
             throw new BadRequestAlertException("A new costoMedidor cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class CostoMedidorResource {
      */
     @PutMapping("/costo-medidors")
     @Timed
-    public ResponseEntity<CostoMedidorDTO> updateCostoMedidor(@RequestBody CostoMedidorDTO costoMedidorDTO) throws URISyntaxException {
+    public ResponseEntity<CostoMedidorDTO> updateCostoMedidor(@Valid @RequestBody CostoMedidorDTO costoMedidorDTO) throws URISyntaxException {
         log.debug("REST request to update CostoMedidor : {}", costoMedidorDTO);
         if (costoMedidorDTO.getId() == null) {
             return createCostoMedidor(costoMedidorDTO);

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class CostoResource {
      */
     @PostMapping("/costos")
     @Timed
-    public ResponseEntity<CostoDTO> createCosto(@RequestBody CostoDTO costoDTO) throws URISyntaxException {
+    public ResponseEntity<CostoDTO> createCosto(@Valid @RequestBody CostoDTO costoDTO) throws URISyntaxException {
         log.debug("REST request to save Costo : {}", costoDTO);
         if (costoDTO.getId() != null) {
             throw new BadRequestAlertException("A new costo cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class CostoResource {
      */
     @PutMapping("/costos")
     @Timed
-    public ResponseEntity<CostoDTO> updateCosto(@RequestBody CostoDTO costoDTO) throws URISyntaxException {
+    public ResponseEntity<CostoDTO> updateCosto(@Valid @RequestBody CostoDTO costoDTO) throws URISyntaxException {
         log.debug("REST request to update Costo : {}", costoDTO);
         if (costoDTO.getId() == null) {
             return createCosto(costoDTO);

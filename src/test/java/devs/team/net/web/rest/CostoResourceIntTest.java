@@ -26,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static devs.team.net.web.rest.TestUtil.createFormattingConversionService;
@@ -43,11 +45,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class CostoResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final BigDecimal DEFAULT_CUOTA = new BigDecimal(1);
     private static final BigDecimal UPDATED_CUOTA = new BigDecimal(2);
+
+    private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private CostoRepository costoRepository;
@@ -96,8 +98,8 @@ public class CostoResourceIntTest {
      */
     public static Costo createEntity(EntityManager em) {
         Costo costo = new Costo()
-            .codigo(DEFAULT_CODIGO)
-            .cuota(DEFAULT_CUOTA);
+            .cuota(DEFAULT_CUOTA)
+            .fecha(DEFAULT_FECHA);
         return costo;
     }
 
@@ -123,8 +125,8 @@ public class CostoResourceIntTest {
         List<Costo> costoList = costoRepository.findAll();
         assertThat(costoList).hasSize(databaseSizeBeforeCreate + 1);
         Costo testCosto = costoList.get(costoList.size() - 1);
-        assertThat(testCosto.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testCosto.getCuota()).isEqualTo(DEFAULT_CUOTA);
+        assertThat(testCosto.getFecha()).isEqualTo(DEFAULT_FECHA);
 
         // Validate the Costo in Elasticsearch
         Costo costoEs = costoSearchRepository.findOne(testCosto.getId());
@@ -153,6 +155,44 @@ public class CostoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCuotaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = costoRepository.findAll().size();
+        // set the field null
+        costo.setCuota(null);
+
+        // Create the Costo, which fails.
+        CostoDTO costoDTO = costoMapper.toDto(costo);
+
+        restCostoMockMvc.perform(post("/api/costos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(costoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Costo> costoList = costoRepository.findAll();
+        assertThat(costoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = costoRepository.findAll().size();
+        // set the field null
+        costo.setFecha(null);
+
+        // Create the Costo, which fails.
+        CostoDTO costoDTO = costoMapper.toDto(costo);
+
+        restCostoMockMvc.perform(post("/api/costos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(costoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Costo> costoList = costoRepository.findAll();
+        assertThat(costoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCostos() throws Exception {
         // Initialize the database
         costoRepository.saveAndFlush(costo);
@@ -162,8 +202,8 @@ public class CostoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
-            .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())));
+            .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
     }
 
     @Test
@@ -177,8 +217,8 @@ public class CostoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(costo.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
-            .andExpect(jsonPath("$.cuota").value(DEFAULT_CUOTA.intValue()));
+            .andExpect(jsonPath("$.cuota").value(DEFAULT_CUOTA.intValue()))
+            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()));
     }
 
     @Test
@@ -202,8 +242,8 @@ public class CostoResourceIntTest {
         // Disconnect from session so that the updates on updatedCosto are not directly saved in db
         em.detach(updatedCosto);
         updatedCosto
-            .codigo(UPDATED_CODIGO)
-            .cuota(UPDATED_CUOTA);
+            .cuota(UPDATED_CUOTA)
+            .fecha(UPDATED_FECHA);
         CostoDTO costoDTO = costoMapper.toDto(updatedCosto);
 
         restCostoMockMvc.perform(put("/api/costos")
@@ -215,8 +255,8 @@ public class CostoResourceIntTest {
         List<Costo> costoList = costoRepository.findAll();
         assertThat(costoList).hasSize(databaseSizeBeforeUpdate);
         Costo testCosto = costoList.get(costoList.size() - 1);
-        assertThat(testCosto.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testCosto.getCuota()).isEqualTo(UPDATED_CUOTA);
+        assertThat(testCosto.getFecha()).isEqualTo(UPDATED_FECHA);
 
         // Validate the Costo in Elasticsearch
         Costo costoEs = costoSearchRepository.findOne(testCosto.getId());
@@ -276,8 +316,8 @@ public class CostoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(costo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
-            .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())));
+            .andExpect(jsonPath("$.[*].cuota").value(hasItem(DEFAULT_CUOTA.intValue())))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
     }
 
     @Test

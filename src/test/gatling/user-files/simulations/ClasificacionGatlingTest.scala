@@ -68,7 +68,7 @@ class ClasificacionGatlingTest extends Simulation {
             .exec(http("Create new clasificacion")
             .post("/api/clasificacions")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "nombre":"SAMPLE_TEXT", "estado":null}""")).asJSON
+            .body(StringBody("""{"id":null, "nombre":"SAMPLE_TEXT", "estado":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_clasificacion_url"))).exitHereIfFailed
             .pause(10)

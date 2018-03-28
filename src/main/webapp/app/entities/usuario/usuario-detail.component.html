@@ -1,0 +1,58 @@
+
+<div *ngIf="usuario">
+    <h2><span>Usuario</span> {{usuario.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Estado</span></dt>
+        <dd>
+            <span>{{usuario.estado}}</span>
+        </dd>
+        <dt><span>Documento</span></dt>
+        <dd>
+            <span>{{usuario.documento}}</span>
+        </dd>
+        <dt><span>Numero</span></dt>
+        <dd>
+            <span>{{usuario.numero}}</span>
+        </dd>
+        <dt><span>Nombres</span></dt>
+        <dd>
+            <span>{{usuario.nombres}}</span>
+        </dd>
+        <dt><span>Apellidos</span></dt>
+        <dd>
+            <span>{{usuario.apellidos}}</span>
+        </dd>
+        <dt><span>Direccion</span></dt>
+        <dd>
+            <span>{{usuario.direccion}}</span>
+        </dd>
+        <dt><span>Sexo</span></dt>
+        <dd>
+            <span>{{usuario.sexo}}</span>
+        </dd>
+        <dt><span>Telefono</span></dt>
+        <dd>
+            <span>{{usuario.telefono}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{usuario.email}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'usuario/'+ usuario.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

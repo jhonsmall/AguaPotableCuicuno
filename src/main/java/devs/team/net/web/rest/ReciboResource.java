@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class ReciboResource {
      */
     @PostMapping("/recibos")
     @Timed
-    public ResponseEntity<ReciboDTO> createRecibo(@RequestBody ReciboDTO reciboDTO) throws URISyntaxException {
+    public ResponseEntity<ReciboDTO> createRecibo(@Valid @RequestBody ReciboDTO reciboDTO) throws URISyntaxException {
         log.debug("REST request to save Recibo : {}", reciboDTO);
         if (reciboDTO.getId() != null) {
             throw new BadRequestAlertException("A new recibo cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class ReciboResource {
      */
     @PutMapping("/recibos")
     @Timed
-    public ResponseEntity<ReciboDTO> updateRecibo(@RequestBody ReciboDTO reciboDTO) throws URISyntaxException {
+    public ResponseEntity<ReciboDTO> updateRecibo(@Valid @RequestBody ReciboDTO reciboDTO) throws URISyntaxException {
         log.debug("REST request to update Recibo : {}", reciboDTO);
         if (reciboDTO.getId() == null) {
             return createRecibo(reciboDTO);

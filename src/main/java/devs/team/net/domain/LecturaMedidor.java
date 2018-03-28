@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -12,6 +13,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import devs.team.net.domain.enumeration.Estado;
 
 /**
  * A LecturaMedidor.
@@ -29,25 +32,28 @@ public class LecturaMedidor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "lecturainicial")
+    @NotNull
+    @Column(name = "lecturainicial", nullable = false)
     private Integer lecturainicial;
 
-    @Column(name = "lecturafinal")
+    @NotNull
+    @Column(name = "lecturafinal", nullable = false)
     private Instant lecturafinal;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
 
-    @Column(name = "fecha")
+    @NotNull
+    @Column(name = "fecha", nullable = false)
     private Instant fecha;
 
-    @Column(name = "anio")
+    @NotNull
+    @Column(name = "anio", nullable = false)
     private Integer anio;
 
-    @Column(name = "mes")
+    @NotNull
+    @Column(name = "mes", nullable = false)
     private Integer mes;
 
     @OneToMany(mappedBy = "lecturaMedidor")
@@ -65,19 +71,6 @@ public class LecturaMedidor implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public LecturaMedidor codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Integer getLecturainicial() {
@@ -106,16 +99,16 @@ public class LecturaMedidor implements Serializable {
         this.lecturafinal = lecturafinal;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public LecturaMedidor estado(String estado) {
+    public LecturaMedidor estado(Estado estado) {
         this.estado = estado;
         return this;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -221,7 +214,6 @@ public class LecturaMedidor implements Serializable {
     public String toString() {
         return "LecturaMedidor{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", lecturainicial=" + getLecturainicial() +
             ", lecturafinal='" + getLecturafinal() + "'" +
             ", estado='" + getEstado() + "'" +

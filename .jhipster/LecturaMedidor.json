@@ -16,32 +16,44 @@
     ],
     "fields": [
         {
-            "fieldName": "codigo",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "lecturainicial",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "lecturafinal",
-            "fieldType": "Instant"
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "estado",
-            "fieldType": "String"
+            "fieldType": "Estado",
+            "fieldValues": "ACTIVO,INACTIVO"
         },
         {
             "fieldName": "fecha",
-            "fieldType": "Instant"
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "anio",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "mes",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180325005159",
@@ -49,6 +61,5 @@
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "angularJSSuffix": "mySuffix"
+    "jpaMetamodelFiltering": false
 }

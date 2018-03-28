@@ -1,0 +1,70 @@
+
+<div *ngIf="recibo">
+    <h2><span>Recibo</span> {{recibo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Numero</span></dt>
+        <dd>
+            <span>{{recibo.numero}}</span>
+        </dd>
+        <dt><span>Estado</span></dt>
+        <dd>
+            <span>{{recibo.estado}}</span>
+        </dd>
+        <dt><span>Pagoanterior</span></dt>
+        <dd>
+            <span>{{recibo.pagoanterior}}</span>
+        </dd>
+        <dt><span>Pagoactual</span></dt>
+        <dd>
+            <span>{{recibo.pagoactual}}</span>
+        </dd>
+        <dt><span>Total</span></dt>
+        <dd>
+            <span>{{recibo.total}}</span>
+        </dd>
+        <dt><span>Fechagenera</span></dt>
+        <dd>
+            <span>{{recibo.fechagenera | date:'medium'}}</span>
+        </dd>
+        <dt><span>Fechapaga</span></dt>
+        <dd>
+            <span>{{recibo.fechapaga | date:'medium'}}</span>
+        </dd>
+        <dt><span>Anio</span></dt>
+        <dd>
+            <span>{{recibo.anio}}</span>
+        </dd>
+        <dt><span>Mes</span></dt>
+        <dd>
+            <span>{{recibo.mes}}</span>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+            <div *ngIf="recibo.usuarioId">
+                <a [routerLink]="['/usuario', recibo.usuarioId]">{{recibo.usuarioId}}</a>
+            </div>
+        </dd>
+        <dt><span>Lectura Medidor</span></dt>
+        <dd>
+            <div *ngIf="recibo.lecturaMedidorId">
+                <a [routerLink]="['/lectura-medidor', recibo.lecturaMedidorId]">{{recibo.lecturaMedidorId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'recibo/'+ recibo.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

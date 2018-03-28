@@ -1,10 +1,14 @@
 package devs.team.net.service.dto;
 
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+import devs.team.net.domain.enumeration.Estado;
+import devs.team.net.domain.enumeration.Documento;
+import devs.team.net.domain.enumeration.Sexo;
 
 /**
  * A DTO for the Usuario entity.
@@ -13,23 +17,26 @@ public class UsuarioDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
+    private Estado estado;
 
-    private String estado;
+    private Documento documento;
 
-    private String documento;
-
+    @NotNull
     private String numero;
 
+    @NotNull
     private String nombres;
 
+    @NotNull
     private String apellidos;
 
     private String direccion;
 
-    private String sexo;
+    private Sexo sexo;
 
     private String telefono;
+
+    private String email;
 
     public Long getId() {
         return id;
@@ -39,27 +46,19 @@ public class UsuarioDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public String getDocumento() {
+    public Documento getDocumento() {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(Documento documento) {
         this.documento = documento;
     }
 
@@ -95,11 +94,11 @@ public class UsuarioDTO implements Serializable {
         this.direccion = direccion;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
@@ -109,6 +108,14 @@ public class UsuarioDTO implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -136,7 +143,6 @@ public class UsuarioDTO implements Serializable {
     public String toString() {
         return "UsuarioDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", estado='" + getEstado() + "'" +
             ", documento='" + getDocumento() + "'" +
             ", numero='" + getNumero() + "'" +
@@ -145,6 +151,7 @@ public class UsuarioDTO implements Serializable {
             ", direccion='" + getDireccion() + "'" +
             ", sexo='" + getSexo() + "'" +
             ", telefono='" + getTelefono() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

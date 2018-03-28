@@ -44,17 +44,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class MedidorResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final Integer DEFAULT_NUMEROMEDIDOR = 1;
     private static final Integer UPDATED_NUMEROMEDIDOR = 2;
 
-    private static final Instant DEFAULT_FECHAOBTUVO = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_FECHAOBTUVO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_FECHAADQUIRIO = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHAADQUIRIO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_FECHAACTUAL = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_FECHAACTUAL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private MedidorRepository medidorRepository;
@@ -103,10 +100,9 @@ public class MedidorResourceIntTest {
      */
     public static Medidor createEntity(EntityManager em) {
         Medidor medidor = new Medidor()
-            .codigo(DEFAULT_CODIGO)
             .numeromedidor(DEFAULT_NUMEROMEDIDOR)
-            .fechaobtuvo(DEFAULT_FECHAOBTUVO)
-            .fecha(DEFAULT_FECHA);
+            .fechaadquirio(DEFAULT_FECHAADQUIRIO)
+            .fechaactual(DEFAULT_FECHAACTUAL);
         return medidor;
     }
 
@@ -132,10 +128,9 @@ public class MedidorResourceIntTest {
         List<Medidor> medidorList = medidorRepository.findAll();
         assertThat(medidorList).hasSize(databaseSizeBeforeCreate + 1);
         Medidor testMedidor = medidorList.get(medidorList.size() - 1);
-        assertThat(testMedidor.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testMedidor.getNumeromedidor()).isEqualTo(DEFAULT_NUMEROMEDIDOR);
-        assertThat(testMedidor.getFechaobtuvo()).isEqualTo(DEFAULT_FECHAOBTUVO);
-        assertThat(testMedidor.getFecha()).isEqualTo(DEFAULT_FECHA);
+        assertThat(testMedidor.getFechaadquirio()).isEqualTo(DEFAULT_FECHAADQUIRIO);
+        assertThat(testMedidor.getFechaactual()).isEqualTo(DEFAULT_FECHAACTUAL);
 
         // Validate the Medidor in Elasticsearch
         Medidor medidorEs = medidorSearchRepository.findOne(testMedidor.getId());
@@ -164,6 +159,63 @@ public class MedidorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNumeromedidorIsRequired() throws Exception {
+        int databaseSizeBeforeTest = medidorRepository.findAll().size();
+        // set the field null
+        medidor.setNumeromedidor(null);
+
+        // Create the Medidor, which fails.
+        MedidorDTO medidorDTO = medidorMapper.toDto(medidor);
+
+        restMedidorMockMvc.perform(post("/api/medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(medidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Medidor> medidorList = medidorRepository.findAll();
+        assertThat(medidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFechaadquirioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = medidorRepository.findAll().size();
+        // set the field null
+        medidor.setFechaadquirio(null);
+
+        // Create the Medidor, which fails.
+        MedidorDTO medidorDTO = medidorMapper.toDto(medidor);
+
+        restMedidorMockMvc.perform(post("/api/medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(medidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Medidor> medidorList = medidorRepository.findAll();
+        assertThat(medidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFechaactualIsRequired() throws Exception {
+        int databaseSizeBeforeTest = medidorRepository.findAll().size();
+        // set the field null
+        medidor.setFechaactual(null);
+
+        // Create the Medidor, which fails.
+        MedidorDTO medidorDTO = medidorMapper.toDto(medidor);
+
+        restMedidorMockMvc.perform(post("/api/medidors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(medidorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Medidor> medidorList = medidorRepository.findAll();
+        assertThat(medidorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMedidors() throws Exception {
         // Initialize the database
         medidorRepository.saveAndFlush(medidor);
@@ -173,10 +225,9 @@ public class MedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(medidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].numeromedidor").value(hasItem(DEFAULT_NUMEROMEDIDOR)))
-            .andExpect(jsonPath("$.[*].fechaobtuvo").value(hasItem(DEFAULT_FECHAOBTUVO.toString())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
+            .andExpect(jsonPath("$.[*].fechaadquirio").value(hasItem(DEFAULT_FECHAADQUIRIO.toString())))
+            .andExpect(jsonPath("$.[*].fechaactual").value(hasItem(DEFAULT_FECHAACTUAL.toString())));
     }
 
     @Test
@@ -190,10 +241,9 @@ public class MedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(medidor.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.numeromedidor").value(DEFAULT_NUMEROMEDIDOR))
-            .andExpect(jsonPath("$.fechaobtuvo").value(DEFAULT_FECHAOBTUVO.toString()))
-            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()));
+            .andExpect(jsonPath("$.fechaadquirio").value(DEFAULT_FECHAADQUIRIO.toString()))
+            .andExpect(jsonPath("$.fechaactual").value(DEFAULT_FECHAACTUAL.toString()));
     }
 
     @Test
@@ -217,10 +267,9 @@ public class MedidorResourceIntTest {
         // Disconnect from session so that the updates on updatedMedidor are not directly saved in db
         em.detach(updatedMedidor);
         updatedMedidor
-            .codigo(UPDATED_CODIGO)
             .numeromedidor(UPDATED_NUMEROMEDIDOR)
-            .fechaobtuvo(UPDATED_FECHAOBTUVO)
-            .fecha(UPDATED_FECHA);
+            .fechaadquirio(UPDATED_FECHAADQUIRIO)
+            .fechaactual(UPDATED_FECHAACTUAL);
         MedidorDTO medidorDTO = medidorMapper.toDto(updatedMedidor);
 
         restMedidorMockMvc.perform(put("/api/medidors")
@@ -232,10 +281,9 @@ public class MedidorResourceIntTest {
         List<Medidor> medidorList = medidorRepository.findAll();
         assertThat(medidorList).hasSize(databaseSizeBeforeUpdate);
         Medidor testMedidor = medidorList.get(medidorList.size() - 1);
-        assertThat(testMedidor.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testMedidor.getNumeromedidor()).isEqualTo(UPDATED_NUMEROMEDIDOR);
-        assertThat(testMedidor.getFechaobtuvo()).isEqualTo(UPDATED_FECHAOBTUVO);
-        assertThat(testMedidor.getFecha()).isEqualTo(UPDATED_FECHA);
+        assertThat(testMedidor.getFechaadquirio()).isEqualTo(UPDATED_FECHAADQUIRIO);
+        assertThat(testMedidor.getFechaactual()).isEqualTo(UPDATED_FECHAACTUAL);
 
         // Validate the Medidor in Elasticsearch
         Medidor medidorEs = medidorSearchRepository.findOne(testMedidor.getId());
@@ -295,10 +343,9 @@ public class MedidorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(medidor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].numeromedidor").value(hasItem(DEFAULT_NUMEROMEDIDOR)))
-            .andExpect(jsonPath("$.[*].fechaobtuvo").value(hasItem(DEFAULT_FECHAOBTUVO.toString())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
+            .andExpect(jsonPath("$.[*].fechaadquirio").value(hasItem(DEFAULT_FECHAADQUIRIO.toString())))
+            .andExpect(jsonPath("$.[*].fechaactual").value(hasItem(DEFAULT_FECHAACTUAL.toString())));
     }
 
     @Test

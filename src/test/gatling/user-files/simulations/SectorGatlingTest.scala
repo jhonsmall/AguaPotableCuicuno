@@ -68,7 +68,7 @@ class SectorGatlingTest extends Simulation {
             .exec(http("Create new sector")
             .post("/api/sectors")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "nombre":"SAMPLE_TEXT", "descripcion":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "nombre":"SAMPLE_TEXT", "descripcion":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_sector_url"))).exitHereIfFailed
             .pause(10)

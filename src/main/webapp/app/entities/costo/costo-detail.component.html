@@ -1,0 +1,48 @@
+
+<div *ngIf="costo">
+    <h2><span>Costo</span> {{costo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Cuota</span></dt>
+        <dd>
+            <span>{{costo.cuota}}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+            <span>{{costo.fecha | date:'medium'}}</span>
+        </dd>
+        <dt><span>Servicio</span></dt>
+        <dd>
+            <div *ngIf="costo.servicioId">
+                <a [routerLink]="['/servicio', costo.servicioId]">{{costo.servicioId}}</a>
+            </div>
+        </dd>
+        <dt><span>Sector</span></dt>
+        <dd>
+            <div *ngIf="costo.sectorId">
+                <a [routerLink]="['/sector', costo.sectorId]">{{costo.sectorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Clasificacion</span></dt>
+        <dd>
+            <div *ngIf="costo.clasificacionId">
+                <a [routerLink]="['/clasificacion', costo.clasificacionId]">{{costo.clasificacionId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'costo/'+ costo.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

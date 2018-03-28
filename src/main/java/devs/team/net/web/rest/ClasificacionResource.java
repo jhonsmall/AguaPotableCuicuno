@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class ClasificacionResource {
      */
     @PostMapping("/clasificacions")
     @Timed
-    public ResponseEntity<ClasificacionDTO> createClasificacion(@RequestBody ClasificacionDTO clasificacionDTO) throws URISyntaxException {
+    public ResponseEntity<ClasificacionDTO> createClasificacion(@Valid @RequestBody ClasificacionDTO clasificacionDTO) throws URISyntaxException {
         log.debug("REST request to save Clasificacion : {}", clasificacionDTO);
         if (clasificacionDTO.getId() != null) {
             throw new BadRequestAlertException("A new clasificacion cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class ClasificacionResource {
      */
     @PutMapping("/clasificacions")
     @Timed
-    public ResponseEntity<ClasificacionDTO> updateClasificacion(@RequestBody ClasificacionDTO clasificacionDTO) throws URISyntaxException {
+    public ResponseEntity<ClasificacionDTO> updateClasificacion(@Valid @RequestBody ClasificacionDTO clasificacionDTO) throws URISyntaxException {
         log.debug("REST request to update Clasificacion : {}", clasificacionDTO);
         if (clasificacionDTO.getId() == null) {
             return createClasificacion(clasificacionDTO);

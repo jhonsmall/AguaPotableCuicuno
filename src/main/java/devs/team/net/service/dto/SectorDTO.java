@@ -1,6 +1,7 @@
 package devs.team.net.service.dto;
 
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +14,7 @@ public class SectorDTO implements Serializable {
 
     private Long id;
 
-    private String codigo;
-
+    @NotNull
     private String nombre;
 
     private String descripcion;
@@ -25,14 +25,6 @@ public class SectorDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -76,7 +68,6 @@ public class SectorDTO implements Serializable {
     public String toString() {
         return "SectorDTO{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             "}";

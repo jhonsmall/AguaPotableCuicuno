@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -29,17 +30,17 @@ public class Medidor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "codigo")
-    private String codigo;
-
-    @Column(name = "numeromedidor")
+    @NotNull
+    @Column(name = "numeromedidor", nullable = false)
     private Integer numeromedidor;
 
-    @Column(name = "fechaobtuvo")
-    private Instant fechaobtuvo;
+    @NotNull
+    @Column(name = "fechaadquirio", nullable = false)
+    private Instant fechaadquirio;
 
-    @Column(name = "fecha")
-    private Instant fecha;
+    @NotNull
+    @Column(name = "fechaactual", nullable = false)
+    private Instant fechaactual;
 
     @OneToMany(mappedBy = "medidor")
     @JsonIgnore
@@ -69,19 +70,6 @@ public class Medidor implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public Medidor codigo(String codigo) {
-        this.codigo = codigo;
-        return this;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Integer getNumeromedidor() {
         return numeromedidor;
     }
@@ -95,30 +83,30 @@ public class Medidor implements Serializable {
         this.numeromedidor = numeromedidor;
     }
 
-    public Instant getFechaobtuvo() {
-        return fechaobtuvo;
+    public Instant getFechaadquirio() {
+        return fechaadquirio;
     }
 
-    public Medidor fechaobtuvo(Instant fechaobtuvo) {
-        this.fechaobtuvo = fechaobtuvo;
+    public Medidor fechaadquirio(Instant fechaadquirio) {
+        this.fechaadquirio = fechaadquirio;
         return this;
     }
 
-    public void setFechaobtuvo(Instant fechaobtuvo) {
-        this.fechaobtuvo = fechaobtuvo;
+    public void setFechaadquirio(Instant fechaadquirio) {
+        this.fechaadquirio = fechaadquirio;
     }
 
-    public Instant getFecha() {
-        return fecha;
+    public Instant getFechaactual() {
+        return fechaactual;
     }
 
-    public Medidor fecha(Instant fecha) {
-        this.fecha = fecha;
+    public Medidor fechaactual(Instant fechaactual) {
+        this.fechaactual = fechaactual;
         return this;
     }
 
-    public void setFecha(Instant fecha) {
-        this.fecha = fecha;
+    public void setFechaactual(Instant fechaactual) {
+        this.fechaactual = fechaactual;
     }
 
     public Set<CostoMedidor> getMedidorCostoMedidors() {
@@ -235,10 +223,9 @@ public class Medidor implements Serializable {
     public String toString() {
         return "Medidor{" +
             "id=" + getId() +
-            ", codigo='" + getCodigo() + "'" +
             ", numeromedidor=" + getNumeromedidor() +
-            ", fechaobtuvo='" + getFechaobtuvo() + "'" +
-            ", fecha='" + getFecha() + "'" +
+            ", fechaadquirio='" + getFechaadquirio() + "'" +
+            ", fechaactual='" + getFechaactual() + "'" +
             "}";
     }
 }

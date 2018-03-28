@@ -68,7 +68,7 @@ class ReciboGatlingTest extends Simulation {
             .exec(http("Create new recibo")
             .post("/api/recibos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "codigo":"SAMPLE_TEXT", "numero":"0", "estado":"SAMPLE_TEXT", "pagoanterior":"0", "pagoactual":"0", "total":"0", "fecha":"2020-01-01T00:00:00.000Z", "anio":"0", "mes":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "numero":"0", "estado":null, "pagoanterior":"0", "pagoactual":"0", "total":"0", "fechagenera":"2020-01-01T00:00:00.000Z", "fechapaga":"2020-01-01T00:00:00.000Z", "anio":"0", "mes":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_recibo_url"))).exitHereIfFailed
             .pause(10)

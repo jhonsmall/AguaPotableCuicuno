@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import devs.team.net.domain.enumeration.Tipo;
 /**
  * Test class for the ServicioResource REST controller.
  *
@@ -42,17 +43,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class ServicioResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
     private static final String DEFAULT_NORMA = "AAAAAAAAAA";
     private static final String UPDATED_NORMA = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_TIPO = 1;
-    private static final Integer UPDATED_TIPO = 2;
+    private static final Tipo DEFAULT_TIPO = Tipo.MANUAL;
+    private static final Tipo UPDATED_TIPO = Tipo.MEDIDOR;
 
     @Autowired
     private ServicioRepository servicioRepository;
@@ -101,7 +99,6 @@ public class ServicioResourceIntTest {
      */
     public static Servicio createEntity(EntityManager em) {
         Servicio servicio = new Servicio()
-            .codigo(DEFAULT_CODIGO)
             .nombre(DEFAULT_NOMBRE)
             .norma(DEFAULT_NORMA)
             .tipo(DEFAULT_TIPO);
@@ -130,7 +127,6 @@ public class ServicioResourceIntTest {
         List<Servicio> servicioList = servicioRepository.findAll();
         assertThat(servicioList).hasSize(databaseSizeBeforeCreate + 1);
         Servicio testServicio = servicioList.get(servicioList.size() - 1);
-        assertThat(testServicio.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testServicio.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testServicio.getNorma()).isEqualTo(DEFAULT_NORMA);
         assertThat(testServicio.getTipo()).isEqualTo(DEFAULT_TIPO);
@@ -162,6 +158,25 @@ public class ServicioResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = servicioRepository.findAll().size();
+        // set the field null
+        servicio.setNombre(null);
+
+        // Create the Servicio, which fails.
+        ServicioDTO servicioDTO = servicioMapper.toDto(servicio);
+
+        restServicioMockMvc.perform(post("/api/servicios")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(servicioDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Servicio> servicioList = servicioRepository.findAll();
+        assertThat(servicioList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllServicios() throws Exception {
         // Initialize the database
         servicioRepository.saveAndFlush(servicio);
@@ -171,10 +186,9 @@ public class ServicioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(servicio.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].norma").value(hasItem(DEFAULT_NORMA.toString())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
 
     @Test
@@ -188,10 +202,9 @@ public class ServicioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(servicio.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.norma").value(DEFAULT_NORMA.toString()))
-            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO));
+            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()));
     }
 
     @Test
@@ -215,7 +228,6 @@ public class ServicioResourceIntTest {
         // Disconnect from session so that the updates on updatedServicio are not directly saved in db
         em.detach(updatedServicio);
         updatedServicio
-            .codigo(UPDATED_CODIGO)
             .nombre(UPDATED_NOMBRE)
             .norma(UPDATED_NORMA)
             .tipo(UPDATED_TIPO);
@@ -230,7 +242,6 @@ public class ServicioResourceIntTest {
         List<Servicio> servicioList = servicioRepository.findAll();
         assertThat(servicioList).hasSize(databaseSizeBeforeUpdate);
         Servicio testServicio = servicioList.get(servicioList.size() - 1);
-        assertThat(testServicio.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testServicio.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testServicio.getNorma()).isEqualTo(UPDATED_NORMA);
         assertThat(testServicio.getTipo()).isEqualTo(UPDATED_TIPO);
@@ -293,10 +304,9 @@ public class ServicioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(servicio.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].norma").value(hasItem(DEFAULT_NORMA.toString())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())));
     }
 
     @Test

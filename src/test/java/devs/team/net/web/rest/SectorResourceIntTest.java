@@ -42,9 +42,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AguaPotableCuicunoApp.class)
 public class SectorResourceIntTest {
 
-    private static final String DEFAULT_CODIGO = "AAAAAAAAAA";
-    private static final String UPDATED_CODIGO = "BBBBBBBBBB";
-
     private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
@@ -98,7 +95,6 @@ public class SectorResourceIntTest {
      */
     public static Sector createEntity(EntityManager em) {
         Sector sector = new Sector()
-            .codigo(DEFAULT_CODIGO)
             .nombre(DEFAULT_NOMBRE)
             .descripcion(DEFAULT_DESCRIPCION);
         return sector;
@@ -126,7 +122,6 @@ public class SectorResourceIntTest {
         List<Sector> sectorList = sectorRepository.findAll();
         assertThat(sectorList).hasSize(databaseSizeBeforeCreate + 1);
         Sector testSector = sectorList.get(sectorList.size() - 1);
-        assertThat(testSector.getCodigo()).isEqualTo(DEFAULT_CODIGO);
         assertThat(testSector.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testSector.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
 
@@ -157,6 +152,25 @@ public class SectorResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNombreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sectorRepository.findAll().size();
+        // set the field null
+        sector.setNombre(null);
+
+        // Create the Sector, which fails.
+        SectorDTO sectorDTO = sectorMapper.toDto(sector);
+
+        restSectorMockMvc.perform(post("/api/sectors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sectorDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Sector> sectorList = sectorRepository.findAll();
+        assertThat(sectorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSectors() throws Exception {
         // Initialize the database
         sectorRepository.saveAndFlush(sector);
@@ -166,7 +180,6 @@ public class SectorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sector.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())));
     }
@@ -182,7 +195,6 @@ public class SectorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sector.getId().intValue()))
-            .andExpect(jsonPath("$.codigo").value(DEFAULT_CODIGO.toString()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()));
     }
@@ -208,7 +220,6 @@ public class SectorResourceIntTest {
         // Disconnect from session so that the updates on updatedSector are not directly saved in db
         em.detach(updatedSector);
         updatedSector
-            .codigo(UPDATED_CODIGO)
             .nombre(UPDATED_NOMBRE)
             .descripcion(UPDATED_DESCRIPCION);
         SectorDTO sectorDTO = sectorMapper.toDto(updatedSector);
@@ -222,7 +233,6 @@ public class SectorResourceIntTest {
         List<Sector> sectorList = sectorRepository.findAll();
         assertThat(sectorList).hasSize(databaseSizeBeforeUpdate);
         Sector testSector = sectorList.get(sectorList.size() - 1);
-        assertThat(testSector.getCodigo()).isEqualTo(UPDATED_CODIGO);
         assertThat(testSector.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testSector.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
 
@@ -284,7 +294,6 @@ public class SectorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sector.getId().intValue())))
-            .andExpect(jsonPath("$.[*].codigo").value(hasItem(DEFAULT_CODIGO.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())));
     }
