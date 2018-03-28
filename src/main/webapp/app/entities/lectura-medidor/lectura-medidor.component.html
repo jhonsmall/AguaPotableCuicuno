@@ -44,7 +44,7 @@
             <tr *ngFor="let lecturaMedidor of lecturaMedidors ;trackBy: trackId">
                 <td><a [routerLink]="['../lectura-medidor', lecturaMedidor.id ]">{{lecturaMedidor.id}}</a></td>
                 <td>{{lecturaMedidor.lecturainicial}}</td>
-                <td>{{lecturaMedidor.lecturafinal | date:'medium'}}</td>
+                <td>{{lecturaMedidor.lecturafinal}}</td>
                 <td>{{lecturaMedidor.estado}}</td>
                 <td>{{lecturaMedidor.fecha | date:'medium'}}</td>
                 <td>{{lecturaMedidor.anio}}</td>

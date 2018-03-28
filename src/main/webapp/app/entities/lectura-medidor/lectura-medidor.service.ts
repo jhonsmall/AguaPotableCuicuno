@@ -70,8 +70,6 @@ export class LecturaMedidorService {
      */
     private convertItemFromServer(lecturaMedidor: LecturaMedidor): LecturaMedidor {
         const copy: LecturaMedidor = Object.assign({}, lecturaMedidor);
-        copy.lecturafinal = this.dateUtils
-            .convertDateTimeFromServer(lecturaMedidor.lecturafinal);
         copy.fecha = this.dateUtils
             .convertDateTimeFromServer(lecturaMedidor.fecha);
         return copy;
@@ -82,8 +80,6 @@ export class LecturaMedidorService {
      */
     private convert(lecturaMedidor: LecturaMedidor): LecturaMedidor {
         const copy: LecturaMedidor = Object.assign({}, lecturaMedidor);
-
-        copy.lecturafinal = this.dateUtils.toDate(lecturaMedidor.lecturafinal);
 
         copy.fecha = this.dateUtils.toDate(lecturaMedidor.fecha);
         return copy;

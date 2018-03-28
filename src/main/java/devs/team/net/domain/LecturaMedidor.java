@@ -38,7 +38,7 @@ public class LecturaMedidor implements Serializable {
 
     @NotNull
     @Column(name = "lecturafinal", nullable = false)
-    private Instant lecturafinal;
+    private Integer lecturafinal;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
@@ -86,16 +86,16 @@ public class LecturaMedidor implements Serializable {
         this.lecturainicial = lecturainicial;
     }
 
-    public Instant getLecturafinal() {
+    public Integer getLecturafinal() {
         return lecturafinal;
     }
 
-    public LecturaMedidor lecturafinal(Instant lecturafinal) {
+    public LecturaMedidor lecturafinal(Integer lecturafinal) {
         this.lecturafinal = lecturafinal;
         return this;
     }
 
-    public void setLecturafinal(Instant lecturafinal) {
+    public void setLecturafinal(Integer lecturafinal) {
         this.lecturafinal = lecturafinal;
     }
 
@@ -215,7 +215,7 @@ public class LecturaMedidor implements Serializable {
         return "LecturaMedidor{" +
             "id=" + getId() +
             ", lecturainicial=" + getLecturainicial() +
-            ", lecturafinal='" + getLecturafinal() + "'" +
+            ", lecturafinal=" + getLecturafinal() +
             ", estado='" + getEstado() + "'" +
             ", fecha='" + getFecha() + "'" +
             ", anio=" + getAnio() +
