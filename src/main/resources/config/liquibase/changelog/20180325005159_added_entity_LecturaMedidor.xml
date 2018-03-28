@@ -25,7 +25,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="lecturafinal" type="timestamp">
+            <column name="lecturafinal" type="integer">
                 <constraints nullable="false" />
             </column>
 
@@ -51,7 +51,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="lectura_medidor" columnName="lecturafinal" columnDataType="datetime"/>
         <dropDefaultValue tableName="lectura_medidor" columnName="fecha" columnDataType="datetime"/>
         
     </changeSet>

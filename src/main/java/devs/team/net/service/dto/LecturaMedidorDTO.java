@@ -20,7 +20,7 @@ public class LecturaMedidorDTO implements Serializable {
     private Integer lecturainicial;
 
     @NotNull
-    private Instant lecturafinal;
+    private Integer lecturafinal;
 
     private Estado estado;
 
@@ -51,11 +51,11 @@ public class LecturaMedidorDTO implements Serializable {
         this.lecturainicial = lecturainicial;
     }
 
-    public Instant getLecturafinal() {
+    public Integer getLecturafinal() {
         return lecturafinal;
     }
 
-    public void setLecturafinal(Instant lecturafinal) {
+    public void setLecturafinal(Integer lecturafinal) {
         this.lecturafinal = lecturafinal;
     }
 
@@ -125,7 +125,7 @@ public class LecturaMedidorDTO implements Serializable {
         return "LecturaMedidorDTO{" +
             "id=" + getId() +
             ", lecturainicial=" + getLecturainicial() +
-            ", lecturafinal='" + getLecturafinal() + "'" +
+            ", lecturafinal=" + getLecturafinal() +
             ", estado='" + getEstado() + "'" +
             ", fecha='" + getFecha() + "'" +
             ", anio=" + getAnio() +

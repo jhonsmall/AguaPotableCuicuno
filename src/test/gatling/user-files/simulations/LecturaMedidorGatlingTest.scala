@@ -68,7 +68,7 @@ class LecturaMedidorGatlingTest extends Simulation {
             .exec(http("Create new lecturaMedidor")
             .post("/api/lectura-medidors")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "lecturainicial":"0", "lecturafinal":"2020-01-01T00:00:00.000Z", "estado":null, "fecha":"2020-01-01T00:00:00.000Z", "anio":"0", "mes":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "lecturainicial":"0", "lecturafinal":"0", "estado":null, "fecha":"2020-01-01T00:00:00.000Z", "anio":"0", "mes":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_lecturaMedidor_url"))).exitHereIfFailed
             .pause(10)

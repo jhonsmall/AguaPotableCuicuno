@@ -31,8 +31,6 @@ export class LecturaMedidorPopupService {
                 this.lecturaMedidorService.find(id)
                     .subscribe((lecturaMedidorResponse: HttpResponse<LecturaMedidor>) => {
                         const lecturaMedidor: LecturaMedidor = lecturaMedidorResponse.body;
-                        lecturaMedidor.lecturafinal = this.datePipe
-                            .transform(lecturaMedidor.lecturafinal, 'yyyy-MM-ddTHH:mm:ss');
                         lecturaMedidor.fecha = this.datePipe
                             .transform(lecturaMedidor.fecha, 'yyyy-MM-ddTHH:mm:ss');
                         this.ngbModalRef = this.lecturaMedidorModalRef(component, lecturaMedidor);

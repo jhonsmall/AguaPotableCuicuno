@@ -9,7 +9,7 @@ export class LecturaMedidor implements BaseEntity {
     constructor(
         public id?: number,
         public lecturainicial?: number,
-        public lecturafinal?: any,
+        public lecturafinal?: number,
         public estado?: Estado,
         public fecha?: any,
         public anio?: number,

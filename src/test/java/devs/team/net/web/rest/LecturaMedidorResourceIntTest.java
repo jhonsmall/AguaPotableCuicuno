@@ -48,8 +48,8 @@ public class LecturaMedidorResourceIntTest {
     private static final Integer DEFAULT_LECTURAINICIAL = 1;
     private static final Integer UPDATED_LECTURAINICIAL = 2;
 
-    private static final Instant DEFAULT_LECTURAFINAL = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LECTURAFINAL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Integer DEFAULT_LECTURAFINAL = 1;
+    private static final Integer UPDATED_LECTURAFINAL = 2;
 
     private static final Estado DEFAULT_ESTADO = Estado.ACTIVO;
     private static final Estado UPDATED_ESTADO = Estado.INACTIVO;
@@ -280,7 +280,7 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lecturaMedidor.getId().intValue())))
             .andExpect(jsonPath("$.[*].lecturainicial").value(hasItem(DEFAULT_LECTURAINICIAL)))
-            .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL.toString())))
+            .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
             .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO)))
@@ -299,7 +299,7 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(lecturaMedidor.getId().intValue()))
             .andExpect(jsonPath("$.lecturainicial").value(DEFAULT_LECTURAINICIAL))
-            .andExpect(jsonPath("$.lecturafinal").value(DEFAULT_LECTURAFINAL.toString()))
+            .andExpect(jsonPath("$.lecturafinal").value(DEFAULT_LECTURAFINAL))
             .andExpect(jsonPath("$.estado").value(DEFAULT_ESTADO.toString()))
             .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()))
             .andExpect(jsonPath("$.anio").value(DEFAULT_ANIO))
@@ -410,7 +410,7 @@ public class LecturaMedidorResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(lecturaMedidor.getId().intValue())))
             .andExpect(jsonPath("$.[*].lecturainicial").value(hasItem(DEFAULT_LECTURAINICIAL)))
-            .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL.toString())))
+            .andExpect(jsonPath("$.[*].lecturafinal").value(hasItem(DEFAULT_LECTURAFINAL)))
             .andExpect(jsonPath("$.[*].estado").value(hasItem(DEFAULT_ESTADO.toString())))
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
             .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO)))

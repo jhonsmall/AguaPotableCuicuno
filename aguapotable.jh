@@ -78,7 +78,7 @@ entity Medidor {
 
 entity LecturaMedidor {
     lectura_inicial Integer required,
-	lectura_final Instant required,
+	lectura_final Integer required,
     estado Estado,
 	fecha Instant required,
     anio Integer required,
