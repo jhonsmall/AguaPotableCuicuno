@@ -1,34 +1,48 @@
+enum Estado {
+    ACTIVO, INACTIVO
+}
+
+enum Documento {
+    CI, RUC, PASAPORTE, OTRO
+}
+
+enum Sexo {
+	MASCULINO, FEMENINO, OTRO
+}
+
+enum Tipo {
+	MANUAL, MEDIDOR
+}
+
 entity Usuario {
-	codigo String,
-    estado String,
-    documento String,
-    numero String,
-    nombres String,
-    apellidos String,
+    estado Estado,
+    documento Documento,
+    numero String required,
+    nombres String required,
+    apellidos String required,
     direccion String,
-    sexo String,
-    telefono String
+    sexo Sexo,
+    telefono String,
+    email String
 }
 
 entity Servicio {
-	codigo String,
-    nombre String,
+    nombre String required,
     norma String,
-    tipo Integer
+    tipo Tipo
 }
 
 // an ignored comment
 /** not an ignored comment */
 entity Clasificacion {
-	codigo String,
-	nombre String,
-	estado Boolean
+	nombre String required,
+	estado Estado
 }
 
 entity EscalasDelMedidor {
-	codigo String,
-    inicio Integer,
-    fin Integer
+    inicio Integer required,
+    fin Integer required,
+    fecha Instant required
 }
 
 /**
@@ -36,8 +50,8 @@ entity EscalasDelMedidor {
  * @author The JHipster team.
  */
 entity Costo {
-	codigo String,
-    cuota BigDecimal
+    cuota BigDecimal required,
+    fecha Instant required
 }
 
 /**
@@ -47,42 +61,38 @@ entity Sector {
 	/**
 	* The firstname attribute.
 	*/
-	codigo String,
-	nombre String,
+	nombre String required,
 	descripcion String,
 }
 
 entity CostoMedidor {
-	codigo String,
-	fecha Instant,
-	estado Boolean
+	fecha Instant required,
+	estado Estado
 }
 
 entity Medidor {
-	codigo String,
-    numero_medidor Integer,
-	fecha_obtuvo Instant,
-	fecha Instant
+    numero_medidor Integer required,
+	fecha_adquirio Instant required,
+	fecha_actual Instant required
 }
 
 entity LecturaMedidor {
-	codigo String,
-    lectura_inicial Integer,
-	lectura_final Instant,
-    estado String,
-	fecha Instant,
-    anio Integer,
-    mes Integer
+    lectura_inicial Integer required,
+	lectura_final Instant required,
+    estado Estado,
+	fecha Instant required,
+    anio Integer required,
+    mes Integer required
 }
 
 entity Recibo {
-	codigo String,
-    numero Integer,
-    estado String,
+    numero Integer required,
+    estado Estado,
     pago_anterior BigDecimal,
     pago_actual BigDecimal,
     total BigDecimal,
-	fecha Instant,
+	fecha_genera Instant,
+    fecha_paga Instant,
     anio Integer,
     mes Integer
 }
@@ -117,4 +127,4 @@ dto * with mapstruct
 // Set service options to all except few
 service all with serviceImpl
 // Set an angular suffix
-angularSuffix * with mySuffix
+//angularSuffix * with mySuffix
